@@ -126,5 +126,9 @@ brew install ant
 brew install maven
 brew install gradle
 
+# Install Android related things.
+brew install android-sdk
+brew install android-ndk
+
 # Remove outdated versions from the cellar.
 brew cleanup

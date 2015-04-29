@@ -102,6 +102,7 @@ brew install lua
 brew install tree
 brew install webkit2png
 #brew install zopfli
+brew install z
 
 # Remove outdated versions from the cellar.
 brew cleanup

@@ -102,7 +102,26 @@ brew install lua
 brew install tree
 brew install webkit2png
 #brew install zopfli
+
 brew install z
+brew install git-flow-avh
+brew install doxygen
+brew install graphviz
+brew install tesseract
+brew install caskroom/cask/brew-cask
+
+# Install PHP related things.
+brew install php55-imagick
+brew install php55-mcrypt
+brew install phpunit
+brew install composer
+brew install beanstalk
+
+# Install Java related things.
+brew cask install java
+brew install ant
+brew install maven
+brew install gradle
 
 # Remove outdated versions from the cellar.
 brew cleanup

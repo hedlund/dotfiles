@@ -117,6 +117,9 @@ brew install phpunit
 brew install composer
 brew install beanstalk
 
+# Install Node related things.
+brew install node
+
 # Install Java related things.
 brew cask install java
 brew install ant

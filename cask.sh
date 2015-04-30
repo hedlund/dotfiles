@@ -14,6 +14,9 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade --all
 
+# Tap the versions repository (needed for Sublime Text 3)
+brew tap caskroom/versions
+
 # Install system tools.
 brew cask install alfred
 brew cask install dropbox
@@ -50,7 +53,7 @@ brew cask install vagrant
 brew cask install pgadmin3
 
 # Install IDEs and editors.
-brew cask install sublime-text
+brew cask install sublime-text3
 brew cask install android-studio
 #brew cask install intellij-idea-ce
 brew cask install mou

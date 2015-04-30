@@ -16,6 +16,7 @@ brew upgrade --all
 
 # Install system tools.
 brew cask install alfred
+brew cask install dropbox
 brew cask install spectacle
 brew cask install xtrafinder
 brew cask install iterm2

@@ -21,7 +21,8 @@ brew tap caskroom/versions
 brew cask install alfred
 brew cask install dropbox
 brew cask install spectacle
-brew cask install xtrafinder
+brew cask install totalfinder
+#brew cask install xtrafinder
 brew cask install iterm2
 brew cask install appzapper
 brew cask install caffeine

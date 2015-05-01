@@ -866,6 +866,19 @@ defaults write com.binaryage.totalfinder TotalFinderCutAndPasteShowContextMenuBu
 defaults write com.binaryage.totalfinder TotalFinderFoldersOnTop -bool true
 
 ###############################################################################
+# Caffeine                                                                    #
+###############################################################################
+
+# Do not activate on launch
+defaults write com.lightheadsw.caffeine ActivateOnLaunch -bool false
+
+# Set the default duration to one hour
+defaults write com.lightheadsw.caffeine DefaultDuration -int 60
+
+# Do not show launch message
+defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

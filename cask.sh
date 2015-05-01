@@ -65,3 +65,7 @@ brew cask install mou
 
 # Install misc additional applications.
 #brew cask install adobe-creative-cloud
+
+# Start Dropbox immediately, as there's a bunch of applications
+# down the line that's dependent on it's existence
+open -a dropbox

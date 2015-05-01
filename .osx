@@ -879,6 +879,22 @@ defaults write com.lightheadsw.caffeine DefaultDuration -int 60
 defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
 
 ###############################################################################
+# MAMP                                                                        #
+###############################################################################
+
+# Do not check for MAMP Pro
+defaults write de.appsolute.MAMP checkForMampPro -bool false
+
+# Do not open the welcome page on start
+defaults write de.appsolute.MAMP openPage -bool false
+
+# Start server on start-up
+defaults write de.appsolute.MAMP startServers -bool true
+
+# Stop server on shut-down
+defaults write de.appsolute.MAMP stopServers -bool true
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

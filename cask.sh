@@ -55,6 +55,7 @@ brew cask install pgadmin3
 
 # Install IDEs and editors.
 brew cask install sublime-text3
+brew cask install visual-studio-code
 brew cask install android-studio
 #brew cask install intellij-idea-ce
 brew cask install mou

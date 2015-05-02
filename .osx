@@ -895,6 +895,19 @@ defaults write de.appsolute.MAMP startServers -bool true
 defaults write de.appsolute.MAMP stopServers -bool true
 
 ###############################################################################
+# Transmit                                                                    #
+###############################################################################
+
+# Enable automatic updates
+defaults write com.panic.Transmit SUAutomaticallyUpdate -bool true
+
+# Hide icon in menu bar
+defaults write com.panic.Transmit ShowTransmitMenu -bool false
+
+# Show hidden files
+defaults write com.panic.Transmit ShowHiddenFiles2 -bool true
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

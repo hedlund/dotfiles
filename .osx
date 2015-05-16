@@ -908,6 +908,25 @@ defaults write com.panic.Transmit ShowTransmitMenu -bool false
 defaults write com.panic.Transmit ShowHiddenFiles2 -bool true
 
 ###############################################################################
+# Dash                                                                        #
+###############################################################################
+
+# Start at login
+defaults write com.kapeli.dash shouldStartAtLogin -bool true
+
+# Show icon in menu bar
+defaults write com.kapeli.dash shouldShowStatusIcon -bool true
+
+# Menu bar icon click toggles menu
+defaults write com.kapeli.dash shouldToggleMethods -bool true
+
+# Do not show in dock
+defaults write com.kapeli.dash showInDock -bool false
+
+# Set the Snippets library path
+defaults write com.kapeli.dash snippetSQLPath -string  "~/Dropbox/Library/Dash/library.dash"
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

@@ -26,7 +26,7 @@ brew cask install totalfinder
 brew cask install iterm2
 brew cask install appzapper
 brew cask install caffeine
-brew cask install dropshare
+#brew cask install dropshare
 brew cask install the-unarchiver
 brew cask install chronosync
 brew cask install jotta

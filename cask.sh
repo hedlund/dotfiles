@@ -73,3 +73,7 @@ open -a dropbox
 
 # Uninstall MAMP Pro and just keep MAMP.
 open -a "Mamp Pro Uninstaller"
+
+# Make sure iTerm has been started once to ensure that it associates
+# it's config files (necessary for .osx)
+open -a iTerm

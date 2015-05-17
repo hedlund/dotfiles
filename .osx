@@ -929,6 +929,20 @@ defaults write com.kapeli.dash showInDock -bool false
 defaults write com.kapeli.dash snippetSQLPath -string  "~/Dropbox/Library/Dash/library.dash"
 
 ###############################################################################
+# Login Items                                                                 #
+###############################################################################
+
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Alfred 2.app", name:"Alfred 2", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Caffeine.app", name:"Caffeine", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Dash.app", name:"Dash", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Dropbox.app", name:"Dropbox", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Jotta.app", name:"Jottacloud", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Spectacle.app", name:"Spectacle", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Evernote.app/Contents/Library/LoginItems/EvernoteHelper.app", name:"EvernoteHelper", hidden:false}'
+
+#osascript -e 'tell application "System Events" to delete login item "Google Chrome"'
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

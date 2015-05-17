@@ -108,6 +108,7 @@ brew install git-flow-avh
 brew install doxygen
 brew install graphviz
 brew install tesseract
+brew install mackup
 brew install caskroom/cask/brew-cask
 
 # Install PHP related things.

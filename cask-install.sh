@@ -38,6 +38,7 @@ brew cask install google-chrome
 brew cask install firefox
 brew cask install adium
 brew cask install transmit
+brew cask install evernote
 #brew cask install fantastical
 
 # Install virtualisation applications.

@@ -929,6 +929,19 @@ defaults write com.kapeli.dash showInDock -bool false
 defaults write com.kapeli.dash snippetSQLPath -string  "~/Dropbox/Library/Dash/library.dash"
 
 ###############################################################################
+# Alfred 2                                                                    #
+###############################################################################
+
+# Set the theme
+defaults write com.runningwithcrayons.Alfred-Preferences "appearance.theme" -string "alfred.theme.darkandsmooth"
+
+# Set the sync folder
+defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string "~/Dropbox/Library/Alfred"
+
+# Set the hotkey to Ctrl + Space
+defaults write com.runningwithcrayons.Alfred-Preferences "hotkey.default" '{ key = 49; mod = 262144; string = Space; }'
+
+###############################################################################
 # Login Items                                                                 #
 ###############################################################################
 

@@ -1,0 +1,1 @@
+EXCLUDES="README.md LICENSE-MIT.txt init bootstrap.sh brew-install.sh cask-install.sh osx-setup.sh"

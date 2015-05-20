@@ -9,4 +9,5 @@ git pull origin master;
 env RCRC=$HOME/.dotfiles/rcrc rcup
 
 # Use mackup to put the Dropboxed config files into place
-#mackup restore
+ln -s $HOME/.dotfiles/mackup.cfg $HOME/.mackup.cfg
+mackup restore

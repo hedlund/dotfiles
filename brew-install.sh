@@ -108,7 +108,6 @@ brew install git-flow-avh
 brew install doxygen
 brew install graphviz
 brew install tesseract
-brew install mackup
 brew install caskroom/cask/brew-cask
 
 # Install PHP related things.
@@ -130,6 +129,11 @@ brew install gradle
 # Install Android related things.
 brew install android-sdk
 brew install android-ndk
+
+# Install some backup management
+brew install mackup
+brew tap thoughtbot/formulae
+brew install rcm
 
 # Remove outdated versions from the cellar.
 brew cleanup

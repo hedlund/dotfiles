@@ -72,6 +72,12 @@
 		fi \
 	}; f"
 
+	# Status shorthand
+	st = status
+
+	# Commit shorthand
+	ci = commit
+
 [apply]
 
 	# Detect whitespace errors when applying a patch

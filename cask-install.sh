@@ -60,6 +60,7 @@ brew cask install visual-studio-code
 brew cask install android-studio
 #brew cask install intellij-idea-ce
 brew cask install mou
+brew cask install eclipse-jee
 
 # Install entertainment applications.
 #brew cask install spotify

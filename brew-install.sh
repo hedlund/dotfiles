@@ -122,6 +122,8 @@ brew install node
 
 # Install Java related things.
 brew cask install java
+brew cask install java7
+brew cask install java6
 brew install ant
 brew install maven
 brew install gradle
@@ -129,6 +131,7 @@ brew install gradle
 # Install Android related things.
 brew install android-sdk
 brew install android-ndk
+android update sdk --no-ui --filter 'platform-tools' --accept-license
 
 # Install some backup management
 brew install mackup

@@ -208,6 +208,10 @@ defaults write NSGlobalDomain AppleLocale -string "en_SE"
 # Stop iTunes from responding to the keyboard media keys
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
+# Change "Move focus to next window" shortcut to Alt + Tab
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:51:value:parameters:0 39" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################

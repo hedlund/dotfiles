@@ -15,7 +15,7 @@ brew update
 brew upgrade --all
 
 # Tap the versions repository (needed for Sublime Text 3)
-brew tap caskroom/versions
+#brew tap caskroom/versions
 
 # Install system tools.
 brew cask install alfred

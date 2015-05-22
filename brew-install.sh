@@ -108,7 +108,10 @@ brew install git-flow-avh
 brew install doxygen
 brew install graphviz
 brew install tesseract
+
+# Install Homebrew Cask (needed for java)
 brew install caskroom/cask/brew-cask
+brew tap caskroom/versions
 
 # Install PHP related things.
 brew install php55-imagick
@@ -131,7 +134,7 @@ brew install gradle
 # Install Android related things.
 brew install android-sdk
 brew install android-ndk
-android update sdk --no-ui --filter 'platform-tools' --accept-license
+echo "y" | android update sdk --no-ui --filter 'platform-tools'
 
 # Install some backup management
 brew install mackup

@@ -130,6 +130,8 @@ brew cask install java6
 brew install ant
 brew install maven
 brew install gradle
+brew tap pivotal/tap
+brew install springboot
 
 # Install Android related things.
 brew install android-sdk

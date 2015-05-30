@@ -16,6 +16,6 @@ mackup restore
 if ! grep -q "boot2docker" /etc/hosts; then
     read -r -p "Install boot2docker IP in /etc/hosts? [y/N] " response
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-        sudo bash -c 'echo "192.168.59.103      boot2docker" >> /etc/hosts'
+        sudo bash -c 'echo "192.168.59.103	boot2docker" >> /etc/hosts'
     fi
 fi

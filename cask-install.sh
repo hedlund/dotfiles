@@ -52,7 +52,11 @@ brew cask install sourcetree
 brew cask install postgres
 brew cask install mamp
 brew cask install vagrant
+
+# Install database tools
 brew cask install pgadmin3
+brew cask install sequel-pro
+brew cask install dbeaver-enterprise
 
 # Install IDEs and editors.
 brew cask install sublime-text3

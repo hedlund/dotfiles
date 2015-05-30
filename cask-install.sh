@@ -42,7 +42,6 @@ brew cask install evernote
 #brew cask install fantastical
 
 # Install virtualisation applications.
-brew cask install virtualbox
 #brew cask install parallels-desktop
 
 # Install developments tools.
@@ -51,7 +50,6 @@ brew cask install dash
 brew cask install sourcetree
 brew cask install postgres
 brew cask install mamp
-brew cask install vagrant
 
 # Install database tools
 brew cask install pgadmin3

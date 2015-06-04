@@ -7,3 +7,13 @@ export PATH=~/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
 
 # Adding Android
 export ANDROID_HOME=/usr/local/opt/android-sdk
+
+# Adding Java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/
+
+# Adding Tomcat
+export CATALINA_BASE=/usr/local/Cellar/tomcat/8.0.22/libexec
+export CATALINA_HOME=$CATALINA_BASE
+
+# Adding Ant
+export ANT_HOME=/usr/local/Cellar/ant/1.9.4/libexec

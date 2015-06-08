@@ -146,6 +146,7 @@ brew install rcm
 # Install some Docker & virtualization things.
 brew cask install virtualbox
 brew install docker
+brew install docker-compose
 brew install boot2docker
 brew cask install vagrant
 

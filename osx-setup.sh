@@ -129,6 +129,14 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
+# Set the clock settings (System Preferences → Date & Time → Clock)
+defaults write com.apple.menuextra.clock DateFormat -string "d MMM  HH:mm"
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+
+# Show the battery percentage
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
@@ -203,7 +211,7 @@ defaults write NSGlobalDomain AppleLocale -string "en_SE"
 #sudo systemsetup -settimezone "Europe/Brussels" > /dev/null
 
 # Disable auto-correct
-#defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Stop iTunes from responding to the keyboard media keys
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null

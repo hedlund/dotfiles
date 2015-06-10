@@ -782,6 +782,7 @@ defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 SUBLIME_DIR="${HOME}/Library/Application Support/Sublime Text 3"
 mkdir -p "${SUBLIME_DIR}/Installed Packages"
 mkdir -p "${SUBLIME_DIR}/Packages/User"
+mkdir -p "${SUBLIME_DIR}/Local"
 
 # Download Package Control
 wget -O "${SUBLIME_DIR}/Installed Packages/Package Control.sublime-package" https://packagecontrol.io/Package%20Control.sublime-package
@@ -789,12 +790,15 @@ wget -O "${SUBLIME_DIR}/Installed Packages/Package Control.sublime-package" http
 # Download material theme
 wget -O /tmp/sublime-material.zip https://github.com/equinusocio/material-theme/archive/v0.9.0.zip && \
 	unzip /tmp/sublime-material.zip -d "${SUBLIME_DIR}/Packages" && \
-	mv "${SUBLIME_DIR}/Packages/material-theme-0.9.0" "${SUBLIME_DIR}/Packages/material-theme"
-	rm ~/Temp/sublime-material.zip
+	mv "${SUBLIME_DIR}/Packages/material-theme-0.9.0" "${SUBLIME_DIR}/Packages/material-theme" && \
+	rm /tmp/sublime-material.zip
 
 # Install Sublime Text settings
-ln -sf init/Preferences.sublime-settings "${SUBLIME_DIR}/Packages/User/Preferences.sublime-settings"
-ln -sf init/Package\ Control.sublime-settings "${SUBLIME_DIR}/Packages/User/Package\ Control.sublime-settings"
+ln -sf "${HOME}/.dotfiles/init/Preferences.sublime-settings" "${SUBLIME_DIR}/Packages/User/Preferences.sublime-settings"
+ln -sf "${HOME}/.dotfiles/init/Package Control.sublime-settings" "${SUBLIME_DIR}/Packages/User/Package Control.sublime-settings"
+
+# Install license (from Dropbox)
+cp ~/Dropbox/Library/Licenses/License.sublime_license "${SUBLIME_DIR}/Local" &2>/dev/null
 
 ###############################################################################
 # Transmission.app                                                            #

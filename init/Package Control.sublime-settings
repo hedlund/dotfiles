@@ -1,0 +1,16 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"DashDoc",
+		"ExportHtml",
+		"Javatar",
+		"Modific",
+		"Package Control",
+		"Pretty JSON",
+		"RESTer HTTP Client",
+		"Sass"
+	]
+}

@@ -779,8 +779,22 @@ defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 # Sublime Text                                                                #
 ###############################################################################
 
+SUBLIME_DIR="${HOME}/Library/Application Support/Sublime Text 3"
+mkdir -p "${SUBLIME_DIR}/Installed Packages"
+mkdir -p "${SUBLIME_DIR}/Packages/User"
+
+# Download Package Control
+wget -O "${SUBLIME_DIR}/Installed Packages/Package Control.sublime-package" https://packagecontrol.io/Package%20Control.sublime-package
+
+# Download material theme
+wget -O /tmp/sublime-material.zip https://github.com/equinusocio/material-theme/archive/v0.9.0.zip && \
+	unzip /tmp/sublime-material.zip -d "${SUBLIME_DIR}/Packages" && \
+	mv "${SUBLIME_DIR}/Packages/material-theme-0.9.0" "${SUBLIME_DIR}/Packages/material-theme"
+	rm ~/Temp/sublime-material.zip
+
 # Install Sublime Text settings
-cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+ln -sf init/Preferences.sublime-settings "${SUBLIME_DIR}/Packages/User/Preferences.sublime-settings"
+ln -sf init/Package\ Control.sublime-settings "${SUBLIME_DIR}/Packages/User/Package\ Control.sublime-settings"
 
 ###############################################################################
 # Transmission.app                                                            #

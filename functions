@@ -244,3 +244,51 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+function dockeradd() {
+	if [ $# -eq 3 ]; then
+		tar -cf - $1|docker exec -i $2 /bin/tar -C $3 -xf -
+	else
+		printf "Usage:\tdockeradd <folder/file> <docker name/hash> <target dir>\n"
+	fi
+}
+
+function dockerbash() {
+	if [ $# -eq 1 ]; then
+		docker exec -it $1 bash
+	else
+		printf "Usage:\tdockerbash <docker name/hash>\n"
+	fi
+}
+
+function dockerclean() {
+	containers=""
+	images=""
+	while test $# -gt 0; do
+		case "$1" in
+			--help) printf "Available options:\n"
+					printf "   -c Clean all unused containers\n"
+					printf "   -i Clean all unused images\n"
+					printf "No arguments will do both\n"
+					return 0
+				;;
+			-c) containers=true
+				;;
+			-i) images=true
+				;;
+			-a) containers=true
+				images=true
+				;;
+		esac
+		shift
+	done
+
+	if [ "$containers" == true -o "$images" != true ]; then
+		#docker rm $(docker ps -a -q)
+		docker rm $(docker ps -a -q --filter "status=exit")
+	fi
+
+	if [ "$images" == true -o "$containers" != true ]; then
+		docker rmi $(docker images -q --filter "dangling=true")
+	fi
+}

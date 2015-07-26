@@ -14,3 +14,7 @@ brew cask install intellij-idea
 
 # Run rcup with the work settings
 rcup -t work
+
+# Generate SSH key
+printf "\nGenerating a new SSH key..."
+ssh-keygen -t rsa -b 4096 -C "henrik.hedlund@knowit.no"

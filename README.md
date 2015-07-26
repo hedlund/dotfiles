@@ -53,6 +53,8 @@ And then finish up by setting up the system as *either* a personal machine:
 
 	./setup-work.sh
 
+This step will install a few additional softwares (depeding on the type of system), and generate a new SSH key which you'll be prompted about.
+
 Finally, reboot to ensure everything takes effect.
 
 
@@ -136,6 +138,16 @@ There's also a few applications that needs to be installed via the damn App Stor
 
 ### Github
 
+#### SSH key
+
+Copy the public SSH key to the clipboard:
+
+	pbcopy < ~/.ssh/id_rsa.pub
+
+Then open the [Github SSH key page](https://github.com/settings/ssh) and press **Add SSH key**. Simply paste the key and store it with a good name.
+
+#### Tokens 
+
 Open the [Github tokens page](https://github.com/settings/tokens) and generate 
 two new tokens: one for general Git usage, and one for Homebrew (name them accordlingly).
 
@@ -147,6 +159,13 @@ Use the Homebrew token to create a new local dotfile which will contain code onl
 
 Replace the *<TOKEN>* with the new token of course...
 
+### Bitbucket
+
+Copy the public SSH key to the clipboard:
+
+	pbcopy < ~/.ssh/id_rsa.pub
+
+Then open the [Bitbucket SSH keys page](https://bitbucket.org/account/user/hedlund/ssh-keys/) and press **Add key**. Simply paste the key and store it with a good name.
 
 
 

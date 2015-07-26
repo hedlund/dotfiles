@@ -24,3 +24,7 @@ brew cask install steam
 
 # Run rcup with the personal settings
 rcup -t personal
+
+# Generate SSH key
+printf "\nGenerating a new SSH key..."
+ssh-keygen -t rsa -b 4096 -C "henrik@hedlund.im"

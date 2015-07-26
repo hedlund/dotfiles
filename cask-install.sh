@@ -65,6 +65,12 @@ brew cask install android-studio
 brew cask install mou
 brew cask install eclipse-jee
 
+# Install Atom and some dependencies
+brew cask install atom
+apm install atom-typescript
+apm install atom-material-ui atom-material-syntax
+apm install dash
+
 # Install entertainment applications.
 #brew cask install spotify
 #brew cask install steam

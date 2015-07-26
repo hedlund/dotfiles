@@ -15,7 +15,7 @@ brew update
 brew upgrade --all
 
 # Tap the versions repository (needed for Sublime Text 3)
-#brew tap caskroom/versions
+brew tap caskroom/versions
 
 # Install system tools.
 brew cask install alfred
@@ -86,5 +86,5 @@ open -a dropbox
 open -a "Mamp Pro Uninstaller"
 
 # Make sure iTerm has been started once to ensure that it associates
-# it's config files (necessary for .osx)
+# it's config files (necessary for osx-setup.sh)
 open -a iTerm

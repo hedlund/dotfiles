@@ -12,6 +12,9 @@ env RCRC=$HOME/.dotfiles/rcrc rcup
 ln -s $HOME/.dotfiles/mackup.cfg $HOME/.mackup.cfg
 mackup restore
 
+# Create a Projects folder
+mkdir ~/Projects
+
 # Add IP address for boot2docker to /etc/hosts (if needed)
 if ! grep -q "boot2docker" /etc/hosts; then
     read -r -p "Install boot2docker IP in /etc/hosts? [y/N] " response

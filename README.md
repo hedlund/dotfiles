@@ -132,6 +132,23 @@ There's also a few applications that needs to be installed via the damn App Stor
 * Xcode
 
 
+## Configure integrations
+
+### Github
+
+Open the [Github tokens page](https://github.com/settings/tokens) and generate 
+two new tokens: one for general Git usage, and one for Homebrew (name them accordlingly).
+
+Use the Git token the next time you push to a Github repository to store it.
+
+Use the Homebrew token to create a new local dotfile which will contain code only relevant to this machine:
+
+	echo "export HOMEBREW_GITHUB_API_TOKEN=<TOKEN>" >> ~/.local
+
+Replace the *<TOKEN>* with the new token of course...
+
+
+
 
 
 ## Thanks to…

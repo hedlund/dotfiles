@@ -19,3 +19,12 @@ if ! grep -q "boot2docker" /etc/hosts; then
         sudo bash -c 'echo "192.168.59.103	boot2docker" >> /etc/hosts'
     fi
 fi
+
+# Add the new bash version to /etc/shells (if needed)
+if ! grep -q "/usr/local/bin/bash" /etc/shells; then
+    read -r -p "Install new bash version to /etc/shells? [y/N] " response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        sudo bash -c 'echo "/usr/local/bin/bash" >> /etc/shells'
+        chsh -s /usr/local/bin/bash
+    fi
+fi

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Install OS X applications for a personal setup.
-# Run this after brew-install.sh and cask-install.sh.
+# Run this after install-brew.sh and install-cask.sh.
 
 # Ask for the administrator password upfront.
 sudo -v
@@ -21,3 +21,6 @@ brew cask install adobe-creative-cloud
 # Install entertainment applications.
 brew cask install spotify
 brew cask install steam
+
+# Run rcup with the personal settings
+rcup -t personal

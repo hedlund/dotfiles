@@ -1,97 +1,83 @@
-# Mathias’s dotfiles
+# dotfiles
 
-![Screenshot of my shell prompt](http://i.imgur.com/EkEtphC.png)
+Nothing is true, everything is permitted.
 
 ## Installation
 
-### Using Git and the bootstrap script
+### Setup a new Mac
 
-You can clone the repository wherever you want. (I like to keep it in `~/Projects/dotfiles`, with `~/dotfiles` as a symlink.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
+Open up a Terminal and run:
 
-```bash
-git clone https://github.com/mathiasbynens/dotfiles.git && cd dotfiles && source bootstrap.sh
-```
+	git clone https://github.com/hedlund/dotfiles.git ~/.dotfiles
+	cd ~/.dotfiles
 
-To update, `cd` into your local `dotfiles` repository and then:
+*If you're prompted to install git, just follow the instructions.*
 
-```bash
-source bootstrap.sh
-```
+Install the Homebrew formulae:
 
-Alternatively, to update while avoiding the confirmation prompt:
+	./install-brew.sh
+	./install-cask.sh
 
-```bash
-set -- -f; source bootstrap.sh
-```
+Install the dotfiles & install the new bash shell:
 
-### Git-free install
+	./bootstrap.sh
 
-To install these dotfiles without Git:
+Setup the machine:
 
-```bash
-cd; curl -#L https://github.com/mathiasbynens/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh,LICENSE-MIT.txt}
-```
+	./setup-osx.sh
 
-To update later on, just run that command again.
+Setup the system as *either* a personal machine:
 
-### Specify the `$PATH`
+	./setup-personal.sh
 
-If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-26)) takes place.
+*or* a work one:
 
-Here’s an example `~/.path` file that adds `/usr/local/bin` to the `$PATH`:
+	./setup-work.sh
 
-```bash
-export PATH="/usr/local/bin:$PATH"
-```
+Finally, reboot to ensure everything takes effect.
 
-### Add custom commands without creating a new fork
 
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+#### 1Password
 
-My `~/.extra` looks something like this:
+* Read the existing password vault from `~/Dropbox/Library/1Password`
+* Add license
+* Install browser extensions
 
-```bash
-# Git credentials
-# Not in the repository, to prevent people from accidentally committing under my name
-GIT_AUTHOR_NAME="Mathias Bynens"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="mathias@mailinator.com"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
-```
+#### Google Chrome
 
-You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/mathiasbynens/dotfiles/fork) instead, though.
+* Sign in to Chrome
 
-### Sensible OS X defaults
+#### Spectacle
 
-When setting up a new Mac, you may want to set some sensible OS X defaults:
+* Grant universal access
+
+
+#### Dash
+
+* Download docsets
+
+
+### Mackup
+
+In order to restore (and symlink to Dropbox), some of the more complex application configurations, simply run:
 
 ```bash
-./.osx
+mackup restore
 ```
 
-### Install Homebrew formulae
 
-When setting up a new Mac, you may want to install some common [Homebrew](http://brew.sh/) formulae (after installing Homebrew, of course):
 
-```bash
-./brew.sh
-```
+### App Store
 
-## Feedback
+* Airmail 2
+* Dropshare
+* Pixelmator
+* Voila
 
-Suggestions/improvements
-[welcome](https://github.com/mathiasbynens/dotfiles/issues)!
-
-## Author
-
-| [![twitter/mathias](http://gravatar.com/avatar/24e08a9ea84deb17ae121074d0f17125?s=70)](http://twitter.com/mathias "Follow @mathias on Twitter") |
-|---|
-| [Mathias Bynens](https://mathiasbynens.be/) |
 
 ## Thanks to…
 
+* [Mathias Bynens](https://mathiasbynens.be/)
 * @ptb and [his _OS X Lion Setup_ repository](https://github.com/ptb/Mac-OS-X-Lion-Setup)
 * [Ben Alman](http://benalman.com/) and his [dotfiles repository](https://github.com/cowboy/dotfiles)
 * [Chris Gerke](http://www.randomsquared.com/) and his [tutorial on creating an OS X SOE master image](http://chris-gerke.blogspot.com/2012/04/mac-osx-soe-master-image-day-7.html) + [_Insta_ repository](https://github.com/cgerke/Insta)

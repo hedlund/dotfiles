@@ -41,9 +41,6 @@ brew cask install transmit
 brew cask install evernote
 #brew cask install fantastical
 
-# Install virtualisation applications.
-#brew cask install parallels-desktop
-
 # Install developments tools.
 brew cask install sencha
 brew cask install dash
@@ -61,7 +58,6 @@ brew cask install dbeaver-enterprise
 brew cask install sublime-text3
 brew cask install visual-studio-code
 brew cask install android-studio
-#brew cask install intellij-idea-ce
 brew cask install mou
 brew cask install eclipse-jee
 
@@ -70,13 +66,6 @@ brew cask install atom
 apm install atom-typescript
 apm install atom-material-ui atom-material-syntax
 apm install dash
-
-# Install entertainment applications.
-#brew cask install spotify
-#brew cask install steam
-
-# Install misc additional applications.
-#brew cask install adobe-creative-cloud
 
 # Start Dropbox immediately, as there's a bunch of applications
 # down the line that's dependent on it's existence

@@ -32,6 +32,7 @@ brew cask install chronosync
 brew cask install jotta
 brew cask install 1password
 #brew cask install growlnotify
+brew cask install expandrive
 
 # Install internet-related applications.
 brew cask install google-chrome

@@ -128,10 +128,13 @@ And a number of applications that requires a login:
 There's also a few applications that needs to be installed via the damn App Store, and those are:
 
 * Airmail 2
+* Keynote
+* Numbers
+* Pages
+* Xcode
 * Dropshare
 * Pixelmator
 * Voila
-* Xcode
 
 
 ## Configure integrations
@@ -168,6 +171,11 @@ Copy the public SSH key to the clipboard:
 Then open the [Bitbucket SSH keys page](https://bitbucket.org/account/user/hedlund/ssh-keys/) and press **Add key**. Simply paste the key and store it with a good name.
 
 
+## Wrapping up
+
+Wrap up the whole installation process by running:
+
+	~/.dotfiles/finalize.sh
 
 
 ## Thanks to…

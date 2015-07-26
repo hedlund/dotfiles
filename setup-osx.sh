@@ -217,7 +217,14 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 # Change "Move focus to next window" shortcut to Alt + Tab
-/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:51:value:parameters:0 39" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27 dict" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27:enabled bool true" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27:value dict" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27:value:type string standard" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27:value:parameters array" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27:value:parameters:0 integer 65535" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27:value:parameters:1 integer 48" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:27:value:parameters:2 integer 524288" ~/Library/Preferences/com.apple.symbolichotkeys.plist
 
 
 ###############################################################################
@@ -972,6 +979,13 @@ defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string "~/D
 defaults write com.runningwithcrayons.Alfred-Preferences "hotkey.default" '{ key = 49; mod = 262144; string = Space; }'
 
 ###############################################################################
+# ChronoSync                                                                  #
+###############################################################################
+
+# Don't run the scheduler in the background
+defaults write com.econtechnologies.chronosync prefUseBackgrounderKey -bool false
+
+###############################################################################
 # Login Items                                                                 #
 ###############################################################################
 
@@ -982,8 +996,6 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Jotta.app", name:"Jottacloud", hidden:false}'
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Spectacle.app", name:"Spectacle", hidden:false}'
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"~/Applications/Evernote.app/Contents/Library/LoginItems/EvernoteHelper.app", name:"EvernoteHelper", hidden:false}'
-
-#osascript -e 'tell application "System Events" to delete login item "Google Chrome"'
 
 ###############################################################################
 # Kill affected applications                                                  #

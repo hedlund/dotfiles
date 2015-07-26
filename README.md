@@ -1,32 +1,51 @@
 # dotfiles
 
+Simply my dotfiles, and this README is mostly a reminder for my own sake, so there's not a lot of valuable information for anyone else...
+
 Nothing is true, everything is permitted.
 
-## Installation
 
-### Setup a new Mac
+## Installation & setup
 
-Open up a Terminal and run:
+Open up a Terminal and simply run:
 
-	git clone https://github.com/hedlund/dotfiles.git ~/.dotfiles
-	cd ~/.dotfiles
+	git
 
-*If you're prompted to install git, just follow the instructions.*
+You should now be prompted to install git - just follow the instructions. After the installation has finished, run:
 
-Install the Homebrew formulae:
+	git clone https://github.com/hedlund/dotfiles.git ~/.dotfiles && cd ~/.dotfiles
+
+### Installing the softwares
+
+Install the Homebrew formulae (the command-line stuff):
 
 	./install-brew.sh
+
+This is a script that takes quite a while to run, and you'll be asked a few questions. Simply answer yes and supply your password when prompted for it.
+
+Then install the Homebrew Cask formulae (UI applications):
+
 	./install-cask.sh
 
-Install the dotfiles & install the new bash shell:
+Again, this is a long script that will ask for your password and a few other prompts. At the end of the script a couple of applications will be run:
+
+1. Simply close the iTerm 2 window.
+2. Follow the MAMP Pro uninstall instructions (we only need the regular edition).
+3. Log in to you Dropbox account and **wait for the synchronization to completely finish before continuing!**
+
+### Configuring the environment
+
+After Dropbox is finished with it's synchronization, install the dotfiles & the new bash shell:
 
 	./bootstrap.sh
 
-Setup the machine:
+You will be asked to verify that you want to overwrite and patch a few files; simply answer yes. A couple of operations also requires your password.
+
+Setup the main components of the system:
 
 	./setup-osx.sh
 
-Setup the system as *either* a personal machine:
+And then finish up by setting up the system as *either* a personal machine:
 
 	./setup-personal.sh
 
@@ -37,42 +56,82 @@ Setup the system as *either* a personal machine:
 Finally, reboot to ensure everything takes effect.
 
 
-#### 1Password
+## After the reboot
 
-* Read the existing password vault from `~/Dropbox/Library/1Password`
-* Add license
-* Install browser extensions
+A number of applications will ask you about things after the reboot (if the startup items have been added successfully). Configure these right away to make sure everything runs smoothly...
 
-#### Google Chrome
+### 1Password
 
-* Sign in to Chrome
+1. Read the existing password vault from `~/Dropbox/Library/1Password`
+2. Add the license
+3. Install browser extensions
 
-#### Spectacle
+### Alfred 2
 
-* Grant universal access
+1. Allow it to access your contacts.
+2. Configure it to use the Ctrl + Space shortcut.
+3. Activate the powerpack
+
+### Google Chrome
+
+1. Make the default browser
+2. Sign in to Chrome
+
+### Jotta
+
+1. Login and follow the instructions
+2. Setup the folders to backup
+
+### Spectacle
+
+1. Grant universal access
+
+### Dash
+
+1. Grant universal access
+2. Download docsets
+
+### Sublime Text
+
+1. Start Sublime Text
+2. Wait for a notification that it needs to be restarted
+3. Restart it to automatically install all the plugins
 
 
-#### Dash
+## Additional licenses, logins & the App Store
 
-* Download docsets
+There's a number of applications to that needs licenses:
 
+* TotalFinder
+* ChronoSync
+* AppZapper
+* Parallels Desktop
+* IntelliJ IDEA
 
-### Mackup
+And a number of applications that requires a login:
 
-In order to restore (and symlink to Dropbox), some of the more complex application configurations, simply run:
+* Evernote
+* Spotify
+* Todoist
+* Steam
 
-```bash
-mackup restore
-```
+### Adobe Creative Cloud
 
-
+1. Run the *Creative Cloud Installer* and wait for it the install the CC client.
+2. Login with the Adobe credentials.
+3. Install **Photoshop CC** and *Lightroom CC**.
 
 ### App Store
+
+There's also a few applications that needs to be installed via the damn App Store, and those are:
 
 * Airmail 2
 * Dropshare
 * Pixelmator
 * Voila
+* Xcode
+
+
 
 
 ## Thanks to…

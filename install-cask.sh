@@ -68,6 +68,7 @@ brew cask install atom
 apm install atom-typescript
 apm install atom-material-ui atom-material-syntax
 apm install dash
+apm install language-docker
 
 # Start Dropbox immediately, as there's a bunch of applications
 # down the line that's dependent on it's existence

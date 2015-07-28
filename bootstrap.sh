@@ -13,7 +13,9 @@ ln -s $HOME/.dotfiles/mackup.cfg $HOME/.mackup.cfg
 mackup restore
 
 # Create a Projects folder
-mkdir ~/Projects
+if [ ! -d "$HOME/Projects" ]; then
+	mkdir ~/Projects
+fi
 
 # Add IP address for boot2docker to /etc/hosts (if needed)
 if ! grep -q "boot2docker" /etc/hosts; then
@@ -31,3 +33,18 @@ if ! grep -q "/usr/local/bin/bash" /etc/shells; then
         chsh -s /usr/local/bin/bash
     fi
 fi
+
+# Configure jenv
+eval "$(jenv init -)"
+VERSIONS=$(jenv versions)
+# TODO: These string checks are really not fool-proof, but they'll have to do for now...
+if [[ $VERSIONS != *"1.6"* ]]; then
+	jenv add /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
+fi
+if [[ $VERSIONS != *"1.7"* ]]; then
+	jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
+fi
+if [[ $VERSIONS != *"1.8"* ]]; then
+	jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/
+fi
+jenv rehash

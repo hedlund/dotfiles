@@ -131,6 +131,7 @@ npm install -g bower
 brew cask install java
 brew cask install java7
 brew cask install java6
+brew install jenv
 brew install ant
 brew install maven
 brew install gradle

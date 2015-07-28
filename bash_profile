@@ -68,3 +68,6 @@ if [[ "$DOCKER_IP" != *"error in run"* ]]; then
         printf "\n\033[0;31mWARNING: boot2docker's IP address is not matching environment!\033[0m\n\n"
     fi
 fi
+
+# Init jenv
+eval "$(jenv init -)"

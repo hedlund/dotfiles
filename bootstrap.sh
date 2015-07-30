@@ -9,12 +9,14 @@ git pull origin master
 env RCRC=$HOME/.dotfiles/rcrc rcup
 
 # Use mackup to put the Dropboxed config files into place
-ln -s $HOME/.dotfiles/mackup.cfg $HOME/.mackup.cfg
+if [ ! -f "$HOME/.mackup.cfg" ]; then
+    ln -s $HOME/.dotfiles/mackup.cfg $HOME/.mackup.cfg
+fi
 mackup restore
 
 # Create a Projects folder
 if [ ! -d "$HOME/Projects" ]; then
-	mkdir ~/Projects
+	mkdir $HOME/Projects
 fi
 
 # Add IP address for boot2docker to /etc/hosts (if needed)

@@ -245,50 +245,62 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-function dockeradd() {
-	if [ $# -eq 3 ]; then
-		tar -cf - $1|docker exec -i $2 /bin/tar -C $3 -xf -
-	else
-		printf "Usage:\tdockeradd <folder/file> <docker name/hash> <target dir>\n"
-	fi
+###############################################################################
+# Docker stuff                                                                #
+###############################################################################
+
+# Shorthand for docker ps
+function dps() {
+	docker ps $@
 }
 
-function dockerbash() {
+# Delete all exited containers
+function drm() {
+	docker rm $(docker ps -a -q --filter "status=exit")
+}
+
+# Delete all dangling images
+function dri() {
+	docker rmi $(docker images -q --filter "dangling=true")
+}
+
+# Run a daemonized container
+function dkd() {
+	docker run -d -P $@
+}
+complete -F _docker_run dkd
+
+# Run an interactive container
+function dki() {
+	docker run -it -P $@
+}
+complete -F _docker_run dki
+
+# Enter into a running container
+function dent() {
 	if [ $# -eq 1 ]; then
-		docker exec -it $1 bash
+		docker exec -it $1 /bin/bash
 	else
-		printf "Usage:\tdockerbash <docker name/hash>\n"
+		printf "Usage:\tdent <container name/hash>\n"
 	fi
 }
+complete -F _docker_exec dent
 
-function dockerclean() {
-	containers=""
-	images=""
-	while test $# -gt 0; do
-		case "$1" in
-			--help) printf "Available options:\n"
-					printf "   -c Clean all unused containers\n"
-					printf "   -i Clean all unused images\n"
-					printf "No arguments will do both\n"
-					return 0
-				;;
-			-c) containers=true
-				;;
-			-i) images=true
-				;;
-			-a) containers=true
-				images=true
-				;;
-		esac
-		shift
-	done
-
-	if [ "$containers" == true -o "$images" != true ]; then
-		#docker rm $(docker ps -a -q)
-		docker rm $(docker ps -a -q --filter "status=exit")
+# Run a bash shell for an image
+function dbash() {
+	if [ $# -eq 1 ]; then
+		docker run --rm -i -t -e TERM=xterm --entrypoint /bin/bash $1
+	else
+		printf "Usage:\tdbash <image name/hash>\n"
 	fi
+}
+complete -F _docker_images dbash
 
-	if [ "$images" == true -o "$containers" != true ]; then
-		docker rmi $(docker images -q --filter "dangling=true")
+# Add a file or folder to a running container
+function dadd() {
+	if [ $# -eq 3 ]; then
+		(cd $(dirname "$1") && tar -cf - $(basename "$1")|docker exec -i $2 /bin/tar -C $3 -xf -)
+	else
+		printf "Usage:\tdockeradd <folder/file> <container name/hash> <target dir>\n"
 	fi
 }

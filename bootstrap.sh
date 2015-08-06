@@ -50,3 +50,6 @@ if [[ $VERSIONS != *"1.8"* ]]; then
 	jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/
 fi
 jenv rehash
+jenv enable-plugin maven
+jenv enable-plugin gradle
+jenv enable-plugin ant

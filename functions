@@ -249,6 +249,12 @@ function tre() {
 # Docker stuff                                                                #
 ###############################################################################
 
+# Initiate environment
+function denv() {
+	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	eval "$(docker-machine env $MACHINE)"
+}
+
 # Shorthand for docker ps
 function dps() {
 	docker ps $@

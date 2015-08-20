@@ -56,13 +56,11 @@ if command -v brew >/dev/null 2>&1; then
     [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
 fi
 
-# Setup boot2docker environment
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
+# Setup Docker machine environment
+eval "$(docker-machine env default)"
 
 # If boot2docker is running double check its IP
-DOCKER_IP="$(boot2docker ip 2>&1)"
+DOCKER_IP="$(docker-machine ip default 2>&1)"
 if [[ "$DOCKER_IP" != *"error in run"* ]]; then
     if [[ "$DOCKER_HOST" != *"$DOCKER_IP"* ]]; then
         printf "\n\033[0;31mWARNING: boot2docker's IP address is not matching environment!\033[0m\n\n"

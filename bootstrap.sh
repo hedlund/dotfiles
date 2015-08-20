@@ -23,7 +23,8 @@ fi
 if ! grep -q "boot2docker" /etc/hosts; then
     read -r -p "Install boot2docker IP in /etc/hosts? [y/N] " response
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-        sudo bash -c 'echo "192.168.59.103	boot2docker" >> /etc/hosts'
+        DOCKER_IP="$(docker-machine ip default 2>&1)"
+        sudo bash -c 'echo "$DOCKER_IP	boot2docker" >> /etc/hosts'
     fi
 fi
 

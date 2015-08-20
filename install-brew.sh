@@ -153,15 +153,7 @@ brew tap thoughtbot/formulae
 brew install rcm
 
 # Install some Docker & virtualization things.
-brew cask install virtualbox
-brew install docker
-brew install docker-compose
-brew install boot2docker
-brew cask install vagrant
 brew install packer
 
 # Remove outdated versions from the cellar.
 brew cleanup
-
-# Initiate boot2docker & let it download the necessary ISO file
-boot2docker init

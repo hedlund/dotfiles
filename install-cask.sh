@@ -70,6 +70,20 @@ apm install atom-material-ui atom-material-syntax
 apm install dash
 apm install language-docker
 
+# Install some Docker & virtualization things.
+brew cask install virtualbox
+brew cask install dockertoolbox
+brew cask install vagrant
+
+# Create a local Docker machine for development
+/Applications/VirtualBox.app/Contents/MacOS/VBoxManage showvminfo default &> /dev/null
+VM_EXISTS_CODE=$?
+if [ $VM_EXISTS_CODE -eq 1 ]; then
+	docker-machine rm -f default &> /dev/null
+	rm -rf ~/.docker/machine/machines/default
+	docker-machine create -d virtualbox --virtualbox-memory 2048 default
+fi
+
 # Start Dropbox immediately, as there's a bunch of applications
 # down the line that's dependent on it's existence
 open -a dropbox
@@ -80,3 +94,6 @@ open -a "Mamp Pro Uninstaller"
 # Make sure iTerm has been started once to ensure that it associates
 # it's config files (necessary for osx-setup.sh)
 open -a iTerm
+
+# Remove outdated versions from the cellar.
+brew cleanup && brew cask cleanup

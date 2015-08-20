@@ -137,6 +137,10 @@ brew install maven
 brew install gradle
 brew tap pivotal/tap
 brew install springboot
+brew install typesafe-activator
+
+# Install C++ related things.
+brew install cmake
 
 # Install Android related things.
 brew install android-sdk
@@ -154,6 +158,7 @@ brew install docker
 brew install docker-compose
 brew install boot2docker
 brew cask install vagrant
+brew install packer
 
 # Remove outdated versions from the cellar.
 brew cleanup

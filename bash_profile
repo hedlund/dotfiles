@@ -69,3 +69,7 @@ fi
 
 # Init jenv
 eval "$(jenv init -)"
+
+# Init GVM
+export GVM_DIR="$HOME/.gvm"
+[[ -s "$GVM_DIR/bin/gvm-init.sh" ]] && source "$GVM_DIR/bin/gvm-init.sh"

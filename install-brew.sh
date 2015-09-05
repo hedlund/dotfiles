@@ -155,5 +155,12 @@ brew install rcm
 # Install some Docker & virtualization things.
 brew install packer
 
+# Install GVM & Groovy
+curl -s get.gvmtool.net | bash
+sed -i "s/gvm_auto_answer=false/gvm_auto_answer=true/g" "$HOME/.gvm/etc/config"
+source "$HOME/.gvm/bin/gvm-init.sh"
+gvm install groovy
+sed -i "s/gvm_auto_answer=true/gvm_auto_answer=false/g" "$HOME/.gvm/etc/config"
+
 # Remove outdated versions from the cellar.
 brew cleanup

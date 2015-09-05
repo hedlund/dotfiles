@@ -48,7 +48,7 @@ if [[ $VERSIONS != *"1.7"* ]]; then
 	jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
 fi
 if [[ $VERSIONS != *"1.8"* ]]; then
-	jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/
+	jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/
 fi
 jenv rehash
 jenv enable-plugin maven

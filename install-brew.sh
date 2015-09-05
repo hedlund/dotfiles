@@ -155,6 +155,9 @@ brew install rcm
 # Install some Docker & virtualization things.
 brew install packer
 
+# Install Kotlin
+brew install kotlin-compiler
+
 # Install GVM & Groovy
 curl -s get.gvmtool.net | bash
 sed -i "s/gvm_auto_answer=false/gvm_auto_answer=true/g" "$HOME/.gvm/etc/config"

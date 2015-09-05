@@ -33,6 +33,7 @@ brew cask install jotta
 brew cask install 1password
 #brew cask install growlnotify
 brew cask install expandrive
+brew cask install istat-menus
 
 # Install internet-related applications.
 brew cask install google-chrome

@@ -42,7 +42,7 @@ eval "$(jenv init -)"
 VERSIONS=$(jenv versions)
 # TODO: These string checks are really not fool-proof, but they'll have to do for now...
 if [[ $VERSIONS != *"1.6"* ]]; then
-	jenv add /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
+	jenv add /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
 fi
 if [[ $VERSIONS != *"1.7"* ]]; then
 	jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/

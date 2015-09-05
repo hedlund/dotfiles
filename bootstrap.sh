@@ -19,6 +19,15 @@ if [ ! -d "$HOME/Projects" ]; then
 	mkdir $HOME/Projects
 fi
 
+# Create a local Docker machine for development
+/Applications/VirtualBox.app/Contents/MacOS/VBoxManage showvminfo default &> /dev/null
+VM_EXISTS_CODE=$?
+if [ $VM_EXISTS_CODE -eq 1 ]; then
+    docker-machine rm -f default &> /dev/null
+    rm -rf ~/.docker/machine/machines/default
+    docker-machine create -d virtualbox --virtualbox-memory 2048 default
+fi
+
 # Add IP address for boot2docker to /etc/hosts (if needed)
 if ! grep -q "boot2docker" /etc/hosts; then
     read -r -p "Install boot2docker IP in /etc/hosts? [y/N] " response

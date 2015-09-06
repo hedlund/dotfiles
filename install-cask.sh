@@ -76,16 +76,5 @@ brew cask install virtualbox
 brew cask install dockertoolbox
 brew cask install vagrant
 
-# Start Dropbox immediately, as there's a bunch of applications
-# down the line that's dependent on it's existence
-open -a dropbox
-
-# Uninstall MAMP Pro and just keep MAMP.
-open -a "Mamp Pro Uninstaller"
-
-# Make sure iTerm has been started once to ensure that it associates
-# it's config files (necessary for osx-setup.sh)
-open -a iTerm
-
 # Remove outdated versions from the cellar.
 brew cleanup && brew cask cleanup

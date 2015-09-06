@@ -124,13 +124,6 @@ brew install phpunit
 brew install composer
 brew install beanstalk
 
-# Install Node related things.
-brew install node
-npm install -g typescript
-npm install -g tsd
-npm install -g yo
-npm install -g bower
-
 # Install Java related things.
 brew cask install java
 brew cask install java7

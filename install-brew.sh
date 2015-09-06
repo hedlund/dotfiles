@@ -19,6 +19,15 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade --all
 
+# Install Homebrew Cask
+brew install caskroom/cask/brew-cask
+
+# Tap a few new repositories
+brew tap homebrew/versions
+brew tap caskroom/versions
+brew tap pivotal/tap #springboot, ..
+brew tap thoughtbot/formulae #rcm
+
 # Install GNU core utilities (those that come with OS X are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
@@ -34,7 +43,6 @@ brew install gnu-sed --with-default-names
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
 # running `chsh`.
 brew install bash
-brew tap homebrew/versions
 brew install bash-completion2
 
 # Install `wget` with IRI support.
@@ -109,10 +117,6 @@ brew install doxygen
 brew install graphviz
 brew install tesseract
 
-# Install Homebrew Cask (needed for java)
-brew install caskroom/cask/brew-cask
-brew tap caskroom/versions
-
 # Install PHP related things.
 brew install php55-imagick
 brew install php55-mcrypt
@@ -134,9 +138,6 @@ brew cask install java6
 brew install jenv
 brew install ant
 brew install maven
-brew install gradle
-brew tap pivotal/tap
-brew install springboot
 brew install typesafe-activator
 
 # Install C++ related things.
@@ -149,7 +150,6 @@ echo "y" | android update sdk --no-ui --filter 'platform-tools'
 
 # Install some backup management
 brew install mackup
-brew tap thoughtbot/formulae
 brew install rcm
 
 # Install some Docker & virtualization things.
@@ -157,13 +157,6 @@ brew install packer
 
 # Install Kotlin
 brew install kotlin-compiler
-
-# Install GVM & Groovy
-curl -s get.gvmtool.net | bash
-sed -i "s/gvm_auto_answer=false/gvm_auto_answer=true/g" "$HOME/.gvm/etc/config"
-source "$HOME/.gvm/bin/gvm-init.sh"
-gvm install groovy
-sed -i "s/gvm_auto_answer=true/gvm_auto_answer=false/g" "$HOME/.gvm/etc/config"
 
 # Remove outdated versions from the cellar.
 brew cleanup

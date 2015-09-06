@@ -1,2 +1,2 @@
-EXCLUDES="README.md LICENSE-MIT.txt init bootstrap.sh install-brew.sh install-cask.sh setup-osx.sh setup-personal.sh setup-work.sh mackup.cfg"
+EXCLUDES="README.md LICENSE-MIT.txt init bootstrap.sh install.sh install-brew.sh install-cask.sh install-gvm.sh install-npm.sh setup-osx.sh setup-personal.sh setup-work.sh mackup.cfg"
 COPY_ALWAYS="gitconfig"

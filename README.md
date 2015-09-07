@@ -17,19 +17,17 @@ You should now be prompted to install git - just follow the instructions. After 
 
 ### Installing the softwares
 
-Install the Homebrew formulae (the command-line stuff):
+Run the the script:
 
-	./install-brew.sh
+	./install.sh
 
-This is a script that takes quite a while to run, and you'll be asked a few questions. Simply answer yes and supply your password when prompted for it.
+And this in turn will run each of the sub-scripts (brew, cask, npm, ...) to install all of the software I want on the machine.
 
-Then install the Homebrew Cask formulae (UI applications):
+This is a script that takes quite a while to run, and you'll be asked a few questions. Simply answer the questions and supply your password when prompted for it.
 
-	./install-cask.sh
+At the end of the script a couple of applications will be run:
 
-Again, this is a long script that will ask for your password and a few other prompts. At the end of the script a couple of applications will be run:
-
-1. Simply close the iTerm 2 window.
+1. Just close the iTerm 2 window.
 2. Follow the MAMP Pro uninstall instructions (we only need the regular edition).
 3. Log in to you Dropbox account and **wait for the synchronization to completely finish before continuing!**
 

@@ -255,6 +255,19 @@ function denv() {
 	eval "$(docker-machine env $MACHINE)"
 }
 
+# Restart machine
+function drest() {
+	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	docker-machine restart $MACHINE
+	denv $MACHINE
+}
+
+# Sync time with docker machine
+function dclock() {
+[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	docker-machine ssh $MACHINE "sudo date -u $(date -u +%m%d%H%M%Y)"
+}
+
 # Shorthand for docker ps
 function dps() {
 	docker ps $@
@@ -285,7 +298,7 @@ complete -F _docker_run dki
 # Enter into a running container
 function dent() {
 	if [ $# -eq 1 ]; then
-		docker exec -it $1 /bin/bash
+		docker exec -it $1 /bin/bash -c "export TERM=xterm; exec bash"
 	else
 		printf "Usage:\tdent <container name/hash>\n"
 	fi

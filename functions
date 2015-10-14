@@ -245,6 +245,16 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
+# Base64 encode a string
+function enc64() {
+	echo "$1" |base64
+}
+
+# Base64 decode a string
+function dec64() {
+	echo "$1" |base64 --decode
+}
+
 ###############################################################################
 # Docker stuff                                                                #
 ###############################################################################
@@ -253,6 +263,13 @@ function tre() {
 function denv() {
 	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
 	eval "$(docker-machine env $MACHINE)"
+}
+
+# Start machine
+function drest() {
+	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	docker-machine start $MACHINE
+	denv $MACHINE
 }
 
 # Restart machine
@@ -266,6 +283,11 @@ function drest() {
 function dclock() {
 [[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
 	docker-machine ssh $MACHINE "sudo date -u $(date -u +%m%d%H%M%Y)"
+}
+
+# Shorthand to check whihc machine we're running against
+function dwhich() {
+	docker-machine active
 }
 
 # Shorthand for docker ps

@@ -266,7 +266,7 @@ function denv() {
 }
 
 # Start machine
-function drest() {
+function dstart() {
 	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
 	docker-machine start $MACHINE
 	denv $MACHINE

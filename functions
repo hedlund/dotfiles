@@ -297,7 +297,7 @@ function dps() {
 
 # Delete all exited containers
 function drm() {
-	docker rm $(docker ps -a -q --filter "status=exit")
+	docker rm $(docker ps -a -q --filter "status=exited")
 }
 
 # Delete all dangling images

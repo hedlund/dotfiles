@@ -116,6 +116,7 @@ brew install git-flow-avh
 brew install doxygen
 brew install graphviz
 brew install tesseract
+brew install httpie
 
 # Install PHP related things.
 brew install php55-imagick

@@ -154,3 +154,9 @@ brew install kotlin-compiler
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+# Install Conscript
+curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
+
+# Install giter8
+$HOME/bin/cs n8han/giter8

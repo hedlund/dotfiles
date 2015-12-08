@@ -17,3 +17,9 @@ export CATALINA_HOME=$CATALINA_BASE
 
 # Adding Ant
 export ANT_HOME=/usr/local/Cellar/ant/1.9.4/libexec
+
+# Adding Conscript
+export PATH=$HOME/bin:$PATH
+
+# Adding Scalatra JRebel
+export SCALATRA_JREBEL=$HOME/Dropbox/Scripts/jrebel/jrebel.jar

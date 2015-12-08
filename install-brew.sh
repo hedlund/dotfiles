@@ -25,8 +25,8 @@ brew install caskroom/cask/brew-cask
 # Tap a few new repositories
 brew tap homebrew/versions
 brew tap caskroom/versions
-brew tap pivotal/tap #springboot, ..
-brew tap thoughtbot/formulae #rcm
+brew tap pivotal/tap 			#springboot, ..
+brew tap thoughtbot/formulae 	#rcm
 
 # Install GNU core utilities (those that come with OS X are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
@@ -59,7 +59,7 @@ brew install vim --override-system-vi
 brew install homebrew/dupes/grep
 brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
-brew install homebrew/php/php55 --with-gmp
+brew install homebrew/php/php70 --with-gmp
 
 # Install font tools.
 #brew tap bramstein/webfonttools
@@ -119,8 +119,8 @@ brew install tesseract
 brew install httpie
 
 # Install PHP related things.
-brew install php55-imagick
-brew install php55-mcrypt
+brew install php70-imagick
+brew install php70-mcrypt
 brew install phpunit
 brew install composer
 brew install beanstalk

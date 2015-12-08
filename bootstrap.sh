@@ -48,17 +48,18 @@ fi
 
 # Configure jenv
 eval "$(jenv init -)"
-VERSIONS=$(jenv versions)
-# TODO: These string checks are really not fool-proof, but they'll have to do for now...
-if [[ $VERSIONS != *"1.6"* ]]; then
+if [[ "$(jenv versions)" != *"1.6"* ]]; then
 	jenv add /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
 fi
-if [[ $VERSIONS != *"1.7"* ]]; then
-	jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
-fi
-if [[ $VERSIONS != *"1.8"* ]]; then
-	jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/
-fi
+for version in $(ls /Library/Java/JavaVirtualMachines/); do
+    if [[ $version =~ ^jdk([0-9]+\.[0-9]+\.[0-9]+)_([0-9]+)\.jdk ]]; then
+        v="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+        if [ -z "$(jenv versions |grep "$v")" ]; then
+            echo "Adding new Java version: $v"
+            jenv add "/Library/Java/JavaVirtualMachines/$version/Contents/Home/"
+        fi
+    fi
+done
 jenv rehash
 jenv enable-plugin maven
 jenv enable-plugin gradle

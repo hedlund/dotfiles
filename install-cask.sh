@@ -38,6 +38,7 @@ brew cask install istat-menus
 # Install internet-related applications.
 brew cask install google-chrome
 brew cask install firefox
+brew cask install firefoxdeveloperedition
 brew cask install adium
 brew cask install transmit
 brew cask install evernote

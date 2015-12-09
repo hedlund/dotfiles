@@ -64,6 +64,7 @@ brew cask install visual-studio-code
 brew cask install android-studio
 brew cask install mou
 brew cask install eclipse-jee
+brew cask install pixate-studio
 
 # Install Atom and some dependencies
 brew cask install atom

@@ -78,6 +78,9 @@
 	# Commit shorthand
 	ci = commit
 
+	# Mercurial style purge
+	purge = clean -f -d
+
 [apply]
 
 	# Detect whitespace errors when applying a patch

@@ -110,6 +110,7 @@ brew install lua
 brew install tree
 brew install webkit2png
 #brew install zopfli
+brew install rsync
 
 brew install z
 brew install git-flow-avh

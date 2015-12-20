@@ -14,6 +14,9 @@ sdk install groovy
 sdk install grails
 sdk install gradle
 sdk install springboot
+sdk install maven
+sdk install sbt
+sdk install scala
 
 # Turn off auto answer
 sed -i "s/sdkman_auto_answer=true/sdkman_auto_answer=false/g" "$HOME/.sdkman/etc/config"

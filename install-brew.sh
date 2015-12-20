@@ -25,7 +25,6 @@ brew install caskroom/cask/brew-cask
 # Tap a few new repositories
 brew tap homebrew/versions
 brew tap caskroom/versions
-brew tap pivotal/tap 			#springboot, ..
 brew tap thoughtbot/formulae 	#rcm
 
 # Install GNU core utilities (those that come with OS X are outdated).
@@ -114,7 +113,6 @@ brew install rsync
 
 brew install z
 brew install git-flow-avh
-brew install doxygen
 brew install graphviz
 brew install tesseract
 brew install httpie
@@ -132,11 +130,11 @@ brew cask install java7
 brew cask install java6
 brew install jenv
 brew install ant
-brew install maven
-brew install typesafe-activator
+brew install kotlin-compiler
 
 # Install C++ related things.
 brew install cmake
+brew install doxygen
 
 # Install Android related things.
 brew install android-sdk
@@ -149,9 +147,6 @@ brew install rcm
 
 # Install some Docker & virtualization things.
 brew install packer
-
-# Install Kotlin
-brew install kotlin-compiler
 
 # Remove outdated versions from the cellar.
 brew cleanup

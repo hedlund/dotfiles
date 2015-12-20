@@ -67,9 +67,9 @@ if [[ "$DOCKER_IP" != *"error in run"* ]]; then
     fi
 fi
 
-# Init jenv
-eval "$(jenv init -)"
-
 # Init SDKMAN!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+# Init jenv
+eval "$(jenv init -)"

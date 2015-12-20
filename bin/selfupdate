@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+CASKROOM="/opt/homebrew-cask/Caskroom/"
+
+confirm () {
+    printf "\n"
+    read -r -p "${1:-Are you sure?} [Y/n] " response
+    response=${response,,}   # tolower
+    if [ -z $response ] || [[ $response =~ ^(yes|y)$ ]]; then
+        true
+    else
+        false
+    fi
+}
+
+# Un- and re-tap the caskroom/versions as that can trigger an error otherwise
+brew untap caskroom/versions
+brew tap caskroom/versions
+
+# Update Homebrew tools...
+if confirm "Update Homebrew?"; then
+    brew update
+    brew upgrade --all
+fi
+
+# Update Homebrew Cask applications...
+if confirm "Update Homebrew Casks?"; then
+    brew cask update
+
+    for app in $(brew cask list); do
+    	if [ -n "$(brew cask info $app |grep "Not installed")" ]; then
+    		echo "Updating $app..."
+    		for version in $(ls "$CASKROOM/$app"); do
+    			echo "    Removing version $version"
+    			rm -rf "$CASKROOM/$app/$version"
+    		done
+    		echo "    Reinstalling latest version"
+    		brew cask install "$app"
+    	fi
+    done
+fi
+
+# Cleanup Homebrew & Casks
+printf "\nCleaning up Homebrew...\n"
+brew cleanup
+brew cask cleanup
+
+# Update the Android SDK
+if confirm "Update Android SDK?"; then
+    echo "y" | android update sdk --no-ui --filter 'platform-tools'
+fi
+
+# Register potential new Java versions with jenv
+if confirm "Register new Java versions with JEnv?"; then
+    for version in $(ls /Library/Java/JavaVirtualMachines/); do
+    	if [[ $version =~ ^jdk([0-9]+\.[0-9]+\.[0-9]+)_([0-9]+)\.jdk ]]; then
+    		v="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+    		if [ -z "$(jenv versions |grep "$v")" ]; then
+    			echo "Adding new Java version: $v"
+    			jenv add "/Library/Java/JavaVirtualMachines/$version/Contents/Home/"
+    		fi
+    	fi
+    done
+    jenv rehash
+fi
+
+# Update SDKMAN
+if confirm "Update SDKMAN?"; then
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk selfupdate
+    #TODO: write a script to parse the outdated versions and install updates...
+fi
+
+# Update Node
+if confirm "Update Node?"; then
+    npm install npm -g
+fi
+
+# Update Atom
+if confirm "Update Atom?"; then
+    apm upgrade --confirm=false
+fi
+
+# Update Python
+if confirm "Update Python?"; then
+    pip install --upgrade pip setuptools
+fi

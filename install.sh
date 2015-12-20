@@ -6,7 +6,7 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # Run the individual installation scripts
 $DIR/install-brew.sh
 $DIR/install-cask.sh
-$DIR/install-gvm.sh
+$DIR/install-sdk.sh
 $DIR/install-npm.sh
 
 # Start Dropbox immediately, as there's a bunch of applications

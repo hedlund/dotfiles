@@ -70,6 +70,6 @@ fi
 # Init jenv
 eval "$(jenv init -)"
 
-# Init GVM
-export GVM_DIR="$HOME/.gvm"
-[[ -s "$GVM_DIR/bin/gvm-init.sh" ]] && source "$GVM_DIR/bin/gvm-init.sh"
+# Init SDKMAN!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"

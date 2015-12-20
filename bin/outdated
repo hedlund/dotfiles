@@ -16,3 +16,6 @@ sdk outdated
 
 printf "\nOutdated NPM packages:\n"
 npm outdated
+
+printf "\nOutdated APM packages:\n"
+apm outdated

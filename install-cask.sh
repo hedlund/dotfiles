@@ -64,13 +64,6 @@ brew cask install mou
 brew cask install eclipse-jee
 brew cask install pixate-studio
 
-# Install Atom and some dependencies
-brew cask install atom
-apm install atom-typescript
-apm install atom-material-ui atom-material-syntax
-apm install dash
-apm install language-docker
-
 # Install some Docker & virtualization things.
 brew cask install virtualbox
 brew cask install dockertoolbox

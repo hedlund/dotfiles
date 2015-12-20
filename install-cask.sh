@@ -42,7 +42,6 @@ brew cask install firefoxdeveloperedition
 brew cask install yakyak
 brew cask install transmit
 brew cask install evernote
-brew cask install todoist
 #brew cask install fantastical
 
 # Install developments tools.
@@ -50,7 +49,6 @@ brew cask install sencha
 brew cask install dash
 brew cask install sourcetree
 brew cask install postgres
-brew cask install mamp
 brew cask install gitup
 
 # Install database tools
@@ -77,6 +75,9 @@ apm install language-docker
 brew cask install virtualbox
 brew cask install dockertoolbox
 brew cask install vagrant
+
+# Install some entertainment
+brew cask install spotify
 
 # Remove outdated versions from the cellar.
 brew cleanup && brew cask cleanup

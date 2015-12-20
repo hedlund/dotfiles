@@ -16,7 +16,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 brew cask install parallels-desktop
 brew cask install intellij-idea-ce
 brew cask install adobe-creative-cloud
-brew cask install spotify
 brew cask install steam
 
 ###############################################################################

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+printf "Outdated Homebrew packages:\n"
+brew outdated
+
+printf "\nOutdated Homebrew Cask packages:\n"
+for app in $(brew cask list); do
+	if [ -n "$(brew cask info $app |grep "Not installed")" ]; then
+		echo "$app"
+	fi
+done
+
+printf "\nOutdated SDKMAN! packages:\n"
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk outdated
+
+printf "\nOutdated NPM packages:\n"
+npm outdated

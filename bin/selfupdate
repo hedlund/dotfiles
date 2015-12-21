@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 CASKROOM="/opt/homebrew-cask/Caskroom/"
+DOTFILES="$HOME/.dotfiles"
 
 confirm () {
     printf "\n"
@@ -13,9 +14,14 @@ confirm () {
     fi
 }
 
+# Update yourself
+if confirm "Update dotfiles?"; then
+    (cd $DOTFILES && git pull)
+    rcup
+fi
+
 # Un- and re-tap the caskroom/versions as that can trigger an error otherwise
-brew untap caskroom/versions
-brew tap caskroom/versions
+brew untap caskroom/versions && brew tap caskroom/versions
 
 # Update Homebrew tools...
 if confirm "Update Homebrew?"; then

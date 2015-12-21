@@ -5,3 +5,6 @@ osascript -e 'tell application "System Events" to delete login item "Spotify"'
 osascript -e 'tell application "System Events" to delete login item "Google Chrome"'
 osascript -e 'tell application "System Events" to delete login item "ChronoSync Scheduler"'
 osascript -e 'tell application "System Events" to delete login item "Steam"'
+
+# Register some software licenses
+~/Dropbox/Library/Licenses/register.sh

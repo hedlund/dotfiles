@@ -898,7 +898,7 @@ defaults write com.binaryage.totalfinder TotalFinderShowStatusItem -bool false
 # Enable copy path in context menus
 defaults write com.binaryage.totalfinder TotalFinderCopyPathMenuEnabled -bool true
 
-# Show cut and paste in context menus 
+# Show cut and paste in context menus
 defaults write com.binaryage.totalfinder TotalFinderCutAndPasteShowContextMenuButtons -bool true
 
 # Display folders on top
@@ -951,19 +951,34 @@ defaults write com.panic.Transmit ShowHiddenFiles2 -bool true
 ###############################################################################
 
 # Start at login
-defaults write com.kapeli.dash shouldStartAtLogin -bool true
+defaults write com.kapeli.dashdoc shouldStartAtLogin -bool true
 
 # Show icon in menu bar
-defaults write com.kapeli.dash shouldShowStatusIcon -bool true
+defaults write com.kapeli.dashdoc shouldShowStatusIcon -bool true
 
 # Menu bar icon click toggles menu
-defaults write com.kapeli.dash shouldToggleMethods -bool true
+defaults write com.kapeli.dashdoc shouldToggleMethods -bool true
 
 # Do not show in dock
-defaults write com.kapeli.dash showInDock -bool false
+defaults write com.kapeli.dashdoc showInDock -bool false
+
+# Sync the bookmarks
+defaults write com.kapeli.dashdoc shouldSyncBookmarks -bool true
+
+# Sync the docsets
+defaults write com.kapeli.dashdoc shouldSyncDocsets -bool true
+
+# Sync general settings
+defaults write com.kapeli.dashdoc shouldSyncGeneral -bool true
+
+# Sync view settings
+defaults write com.kapeli.dashdoc shouldSyncView -bool true
+
+# Set the sync folder path
+defaults write com.kapeli.dashdoc syncFolderPath -string "$HOME/Dropbox/Library/Dash"
 
 # Set the Snippets library path
-defaults write com.kapeli.dash snippetSQLPath -string  "~/Dropbox/Library/Dash/library.dash"
+defaults write com.kapeli.dashdoc snippetSQLPath -string "$HOME/Dropbox/Library/Dash/library.dash"
 
 ###############################################################################
 # Alfred 2                                                                    #

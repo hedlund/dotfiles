@@ -116,6 +116,7 @@ brew install git-flow-avh
 brew install graphviz
 brew install tesseract
 brew install httpie
+brew install dark-mode
 
 # Install PHP related things.
 brew install php70-imagick

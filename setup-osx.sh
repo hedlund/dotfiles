@@ -1019,6 +1019,12 @@ defaults write com.bjango.istatmenus5.extras "Network_MenubarMode" -int 1
 defaults write com.bjango.istatmenus5.extras "Battery_MenubarMode" -int 2
 
 ###############################################################################
+# Enable Dark Mode                                                            #
+###############################################################################
+
+dark-mode --mode Dark
+
+###############################################################################
 # Login Items                                                                 #
 ###############################################################################
 

@@ -29,19 +29,25 @@ sudo nvram SystemAudioVolume=" "
 # Disable transparency in the menu bar and elsewhere on Yosemite
 #defaults write com.apple.universalaccess reduceTransparency -bool true
 
-# Menu bar: hide the Time Machine, Volume, and User icons
+# Menu bar: hide the Time Machine, Volume, User and Battery icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 	defaults write "${domain}" dontAutoLoad -array \
 		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-		"/System/Library/CoreServices/Menu Extras/User.menu"
+		"/System/Library/CoreServices/Menu Extras/User.menu" \
+		"/System/Library/CoreServices/Menu Extras/Battery.menu"
 done
 defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+	"/Library/Application Support/iStat Menus 5/extras/iStatMenusMemory.menu" \
+	"/Library/Application Support/iStat Menus 5/extras/iStatMenusDrives.menu" \
+	"/Library/Application Support/iStat Menus 5/extras/iStatMenusCPU.menu" \
+	"/Library/Application Support/iStat Menus 5/extras/iStatMenusNetwork.menu" \
 	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+	"/Library/Application Support/iStat Menus 5/extras/iStatMenusBattery.menu" \
 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 	"/System/Library/CoreServices/Menu Extras/TextInput.menu" \
-	"/System/Library/CoreServices/Menu Extras/Battery.menu" \
-	"/System/Library/CoreServices/Menu Extras/Clock.menu"
+	"/System/Library/CoreServices/Menu Extras/Clock.menu" \
+	"/Library/Application Support/iStat Menus 5/extras/MenuCracker.menu"
 
 # Set highlight color to green
 #defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
@@ -999,6 +1005,37 @@ defaults write com.runningwithcrayons.Alfred-Preferences "hotkey.default" '{ key
 
 # Don't run the scheduler in the background
 defaults write com.econtechnologies.chronosync prefUseBackgrounderKey -bool false
+
+###############################################################################
+# iStat Menus                                                                 #
+###############################################################################
+
+# Purple graphs
+defaults write com.bjango.istatmenus5.extras MenubarSkinColor -int 5
+
+# White graph backgrounds
+defaults write com.bjango.istatmenus5.extras MenubarTheme -int 0
+
+# Black dropdown theme
+defaults write com.bjango.istatmenus5.extras DropdownTheme -int 1
+
+# Slow update frequency
+defaults write com.bjango.istatmenus5.extras TimerFrequency -int 0
+
+# Show just the memory graph, no label
+defaults write com.bjango.istatmenus5.extras "Memory_MenubarMode" -int 1
+
+# Show just the disk graph, no label
+defaults write com.bjango.istatmenus5.extras "Disks_MenubarMode" -int 0
+
+# Show just the CPU graph, no label
+defaults write com.bjango.istatmenus5.extras "CPU_MenubarMode" -int 0
+
+# Show just the network graph, no label
+defaults write com.bjango.istatmenus5.extras "Network_MenubarMode" -int 1
+
+# Show percentage left of battery indicator
+defaults write com.bjango.istatmenus5.extras "Battery_MenubarMode" -int 2
 
 ###############################################################################
 # Login Items                                                                 #

@@ -13,9 +13,6 @@ $DIR/install-npm.sh
 # down the line that's dependent on it's existence
 open -a dropbox
 
-# Uninstall MAMP Pro and just keep MAMP.
-open -a "Mamp Pro Uninstaller"
-
 # Make sure iTerm has been started once to ensure that it associates
 # it's config files (necessary for osx-setup.sh)
 open -a iTerm

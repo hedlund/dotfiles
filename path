@@ -1,7 +1,3 @@
-# Adding Sencha Cmd to path
-export PATH=/opt/Sencha/Cmd/5.1.3.61:$PATH
-export SENCHA_CMD_3_0_0="/opt/Sencha/Cmd/5.1.3.61"
-
 # Adding Postgres to path
 export PATH=~/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
 

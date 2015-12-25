@@ -43,7 +43,6 @@ brew cask install evernote
 #brew cask install fantastical
 
 # Install developments tools.
-brew cask install sencha
 brew cask install dash
 brew cask install sourcetree
 brew cask install postgres

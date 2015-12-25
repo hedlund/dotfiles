@@ -29,8 +29,7 @@ This is a script that takes quite a while to run, and you'll be asked a few ques
 At the end of the script a couple of applications will be run:
 
 1. Just close the iTerm 2 window.
-2. Follow the MAMP Pro uninstall instructions (we only need the regular edition).
-3. Log in to you Dropbox account and **wait for the synchronization to completely finish before continuing!**
+2. Log in to you Dropbox account and **wait for the synchronization to completely finish before continuing!**
 
 ### Configuring the environment
 

@@ -892,25 +892,6 @@ defaults write com.divisiblebyzero.Spectacle SUEnableAutomaticChecks -bool true
 defaults write com.divisiblebyzero.Spectacle StatusItemEnabled -bool false
 
 ###############################################################################
-# TotalFinder                                                                 #
-###############################################################################
-
-# Enable automatic update checks
-defaults write com.binaryage.totalfinder SUEnableAutomaticChecks -bool true
-
-# Hide icon in menu bar
-defaults write com.binaryage.totalfinder TotalFinderShowStatusItem -bool false
-
-# Enable copy path in context menus
-defaults write com.binaryage.totalfinder TotalFinderCopyPathMenuEnabled -bool true
-
-# Show cut and paste in context menus
-defaults write com.binaryage.totalfinder TotalFinderCutAndPasteShowContextMenuButtons -bool true
-
-# Display folders on top
-defaults write com.binaryage.totalfinder TotalFinderFoldersOnTop -bool true
-
-###############################################################################
 # Caffeine                                                                    #
 ###############################################################################
 

@@ -38,16 +38,10 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 done
 defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-	"/Library/Application Support/iStat Menus 5/extras/iStatMenusMemory.menu" \
-	"/Library/Application Support/iStat Menus 5/extras/iStatMenusDrives.menu" \
-	"/Library/Application Support/iStat Menus 5/extras/iStatMenusCPU.menu" \
-	"/Library/Application Support/iStat Menus 5/extras/iStatMenusNetwork.menu" \
 	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-	"/Library/Application Support/iStat Menus 5/extras/iStatMenusBattery.menu" \
 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 	"/System/Library/CoreServices/Menu Extras/TextInput.menu" \
-	"/System/Library/CoreServices/Menu Extras/Clock.menu" \
-	"/Library/Application Support/iStat Menus 5/extras/MenuCracker.menu"
+	"/System/Library/CoreServices/Menu Extras/Clock.menu"
 
 # Set highlight color to green
 #defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
@@ -1017,6 +1011,9 @@ defaults write com.bjango.istatmenus5.extras "Network_MenubarMode" -int 1
 
 # Show percentage left of battery indicator
 defaults write com.bjango.istatmenus5.extras "Battery_MenubarMode" -int 2
+
+# Set the order of the status items
+defaults write com.bjango.istatmenus5.extras "StatusItems-Order" -array 2 3 1 4 6
 
 ###############################################################################
 # Enable Dark Mode                                                            #

@@ -4,6 +4,7 @@ Simply my dotfiles, and this README is mostly a reminder for my own sake, so the
 
 Nothing is true, everything is permitted.
 
+**Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
 
 ## Installation & setup
 
@@ -147,9 +148,9 @@ Copy the public SSH key to the clipboard:
 
 Then open the [Github SSH key page](https://github.com/settings/ssh) and press **Add SSH key**. Simply paste the key and store it with a good name.
 
-#### Tokens 
+#### Tokens
 
-Open the [Github tokens page](https://github.com/settings/tokens) and generate 
+Open the [Github tokens page](https://github.com/settings/tokens) and generate
 two new tokens: one for general Git usage, and one for Homebrew (name them accordlingly).
 
 Use the Git token the next time you push to a Github repository to store it.

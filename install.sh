@@ -8,6 +8,8 @@ $DIR/install-brew.sh
 $DIR/install-cask.sh
 $DIR/install-sdk.sh
 $DIR/install-npm.sh
+$DIR/install-apm.sh
+$DIR/install-pip.sh
 
 # Start Dropbox immediately, as there's a bunch of applications
 # down the line that's dependent on it's existence

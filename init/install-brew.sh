@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
+# Install OS X command-line tools using Homebrew.
 
-# Install command-line tools using Homebrew.
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    echo "Not running on Mac OS X. Aborting!"
+    exit 1
+fi
 
 # Ask for the administrator password upfront.
 sudo -v
@@ -133,6 +137,9 @@ brew install jenv
 brew install ant
 brew install kotlin-compiler
 
+# Install JavaScript related things.
+brew install node
+
 # Install C++ related things.
 brew install cmake
 brew install doxygen
@@ -152,8 +159,16 @@ brew install packer
 # Remove outdated versions from the cellar.
 brew cleanup
 
+
+###############################################################################
+# Non-Homebrew installs                                                       #
+###############################################################################
+
 # Install Conscript
 curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
 
 # Install giter8
 $HOME/bin/cs n8han/giter8
+
+# Install SDKMAN!
+curl -s http://get.sdkman.io | bash

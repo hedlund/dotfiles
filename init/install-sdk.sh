@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Install SDKMAN!
-curl -s http://get.sdkman.io | bash
-
 # Make SDKMAN! auto answers questions with yes
 sed -i "s/sdkman_auto_answer=false/sdkman_auto_answer=true/g" "$HOME/.sdkman/etc/config"
 

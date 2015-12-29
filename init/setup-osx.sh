@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-# ~/.osx — https://mths.be/osx
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    echo "Not running on Mac OS X. Aborting!"
+    exit 1
+fi
 
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DOTFILES=$( cd "$CURRENT/.." && pwd )

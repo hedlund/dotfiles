@@ -3,18 +3,57 @@
 # Get the script directory
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-# Run the individual installation scripts
-$CURRENT/install-brew.sh
-$CURRENT/install-cask.sh
+case "$(uname -s)" in
+    ##########################################################################
+    # Mac OS X                                                               #
+    ##########################################################################
+    Darwin)
+        $CURRENT/install-brew.sh
+        $CURRENT/install-cask.sh
+
+        # Start Dropbox to get the synch going as soon as possible
+        open -a dropbox
+
+        # iTerm must've been started once before setup-osx.sh
+        open -a iTerm
+        ;;
+
+    ##########################################################################
+    # Linux                                                                  #
+    ##########################################################################
+    Linux)
+        if [ -n "$(which apt-get)" ]; then
+            $CURRENT/install-apt.sh
+        elif [ -n "$(which yum)" ]; then
+            $CURRENT/install-yum.sh
+        else
+            echo "Can't find a package manager. Aborting!"
+            exit 1
+        fi
+        ;;
+
+    ##########################################################################
+    # Windows                                                                #
+    ##########################################################################
+    CYGWIN*|MINGW32*|MSYS*)
+        $CURRENT/install-choco.sh
+        ;;
+
+    ##########################################################################
+    # Unknown / error                                                        #
+    ##########################################################################
+    *)
+        echo "Running on unknown OS. Aborting!"
+        exit 1
+        ;;
+esac
+
+
+##############################################################################
+# Common stuff                                                               #
+##############################################################################
+
 $CURRENT/install-sdk.sh
 $CURRENT/install-npm.sh
 $CURRENT/install-apm.sh
 $CURRENT/install-pip.sh
-
-# Start Dropbox immediately, as there's a bunch of applications
-# down the line that's dependent on it's existence
-open -a dropbox
-
-# Make sure iTerm has been started once to ensure that it associates
-# it's config files (necessary for osx-setup.sh)
-open -a iTerm

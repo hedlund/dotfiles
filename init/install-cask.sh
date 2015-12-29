@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-
 # Install OS X applications using Homebrew Cask.
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    echo "Not running on Mac OS X. Aborting!"
+    exit 1
+fi
 
 # Ask for the administrator password upfront.
 sudo -v

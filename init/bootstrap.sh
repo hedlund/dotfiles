@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")";
+CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+DOTFILES=$( cd "$CURRENT/.." && pwd )
 
 # Make sure we have the latest goodies
-git pull origin master
+( cd "$DOTFILES" && git pull origin master )
 
 # Use rcm to symlink all the dotfiles
-env RCRC=$HOME/.dotfiles/rcrc rcup
+env RCRC=$DOTFILES/rcrc rcup
 
 # Use mackup to put the Dropboxed config files into place
 if [ ! -f "$HOME/.mackup.cfg" ]; then
-    ln -s $HOME/.dotfiles/mackup.cfg $HOME/.mackup.cfg
+    ln -s $DOTFILES/mackup.cfg $HOME/.mackup.cfg
 fi
 mackup restore
 
@@ -49,7 +50,7 @@ fi
 # Configure jenv
 eval "$(jenv init -)"
 if [[ "$(jenv versions)" != *"1.6"* ]]; then
-	jenv add /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
+    jenv add /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
 fi
 for version in $(ls /Library/Java/JavaVirtualMachines/); do
     if [[ $version =~ ^jdk([0-9]+\.[0-9]+\.[0-9]+)_([0-9]+)\.jdk ]]; then

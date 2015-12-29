@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # Get the script directory
-DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Run the individual installation scripts
-$DIR/install-brew.sh
-$DIR/install-cask.sh
-$DIR/install-sdk.sh
-$DIR/install-npm.sh
-$DIR/install-apm.sh
-$DIR/install-pip.sh
+$CURRENT/install-brew.sh
+$CURRENT/install-cask.sh
+$CURRENT/install-sdk.sh
+$CURRENT/install-npm.sh
+$CURRENT/install-apm.sh
+$CURRENT/install-pip.sh
 
 # Start Dropbox immediately, as there's a bunch of applications
 # down the line that's dependent on it's existence

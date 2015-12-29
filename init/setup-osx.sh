@@ -2,7 +2,8 @@
 
 # ~/.osx — https://mths.be/osx
 
-DOTFILES=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+DOTFILES=$( cd "$CURRENT/.." && pwd )
 
 # Ask for the administrator password upfront
 sudo -v
@@ -618,7 +619,7 @@ tell application "Terminal"
 	(* Open the custom theme so that it gets added to the list
 	   of available terminal themes (note: this will open two
 	   additional terminal windows). *)
-	do shell script "open '$DOTFILES/init/" & themeName & ".terminal'"
+	do shell script "open '$CURRENT/config/" & themeName & ".terminal'"
 
 	(* Wait a little bit to ensure that the custom theme is added. *)
 	delay 1
@@ -655,7 +656,7 @@ EOD
 #defaults write org.x.X11 wm_ffm -bool true
 
 # Install the Solarized Dark theme for iTerm
-open "${DOTFILES}/init/Solarized Dark.itermcolors"
+open "${CURRENT}/config/Solarized Dark.itermcolors"
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
@@ -801,8 +802,8 @@ wget -O /tmp/sublime-material.zip https://github.com/equinusocio/material-theme/
 	rm /tmp/sublime-material.zip
 
 # Install Sublime Text settings
-ln -sf "${HOME}/.dotfiles/init/Preferences.sublime-settings" "${SUBLIME_DIR}/Packages/User/Preferences.sublime-settings"
-ln -sf "${HOME}/.dotfiles/init/Package Control.sublime-settings" "${SUBLIME_DIR}/Packages/User/Package Control.sublime-settings"
+ln -sf "${CURRENT}/config/Preferences.sublime-settings" "${SUBLIME_DIR}/Packages/User/Preferences.sublime-settings"
+ln -sf "${CURRENT}/config/Package Control.sublime-settings" "${SUBLIME_DIR}/Packages/User/Package Control.sublime-settings"
 
 # Install license (from Dropbox)
 cp ~/Dropbox/Library/Licenses/License.sublime_license "${SUBLIME_DIR}/Local" &2>/dev/null

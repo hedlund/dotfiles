@@ -14,7 +14,7 @@ Open up a Terminal and simply run:
 
 You should now be prompted to install git - just follow the instructions. After the installation has finished, run:
 
-	git clone https://github.com/hedlund/dotfiles.git ~/.dotfiles && cd ~/.dotfiles
+	git clone https://github.com/hedlund/dotfiles.git ~/.dotfiles && cd ~/.dotfiles/init
 
 ### Installing the softwares
 

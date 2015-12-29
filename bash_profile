@@ -1,4 +1,4 @@
-# Add `~/bin` to the `$PATH`
+# Add `~/.bin` to the `$PATH`
 export PATH="$HOME/.bin:$PATH";
 
 # Add /usr/local/sbin
@@ -28,13 +28,6 @@ for option in autocd globstar; do
 	shopt -s "$option" 2> /dev/null;
 done;
 
-# Add tab completion for many Bash commands
-if which brew > /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-	source "$(brew --prefix)/share/bash-completion/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
-fi;
-
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
 	complete -o default -o nospace -F _git g;
@@ -43,29 +36,12 @@ fi;
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults;
-
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
-
-# Move next only if `homebrew` is installed
-if command -v brew >/dev/null 2>&1; then
-    # Load rupa's z if installed
-    [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
-fi
-
-# Setup Docker machine environment
-eval "$(docker-machine env default)"
-
-# If boot2docker is running double check its IP
-DOCKER_IP="$(docker-machine ip default 2>&1)"
-if [[ "$DOCKER_IP" != *"error in run"* ]]; then
-    if [[ "$DOCKER_HOST" != *"$DOCKER_IP"* ]]; then
-        printf "\n\033[0;31mWARNING: boot2docker's IP address is not matching environment!\033[0m\n\n"
-    fi
-fi
+# Add tab completion for many Bash commands
+if which brew > /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+	source "$(brew --prefix)/share/bash-completion/bash_completion";
+elif [ -f /etc/bash_completion ]; then
+	source /etc/bash_completion;
+fi;
 
 # Init SDKMAN!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -73,3 +49,29 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Init jenv
 eval "$(jenv init -)"
+
+if [[ $OSTYPE =~ darwin* ]]; then
+	# Add tab completion for `defaults read|write NSGlobalDomain`
+	# You could just use `-g` instead, but I like being explicit
+	complete -W "NSGlobalDomain" defaults;
+
+	# Add `killall` tab completion for common apps
+	complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+	# Move next only if `homebrew` is installed
+	if command -v brew >/dev/null 2>&1; then
+	    # Load rupa's z if installed
+	    [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
+	fi
+
+	# Setup Docker machine environment
+	eval "$(docker-machine env default)"
+
+	# If boot2docker is running double check its IP
+	DOCKER_IP="$(docker-machine ip default 2>&1)"
+	if [[ "$DOCKER_IP" != *"error in run"* ]]; then
+	    if [[ "$DOCKER_HOST" != *"$DOCKER_IP"* ]]; then
+	        printf "\n\033[0;31mWARNING: boot2docker's IP address is not matching environment!\033[0m\n\n"
+	    fi
+	fi
+fi

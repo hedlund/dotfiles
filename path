@@ -19,3 +19,10 @@ export PATH=$HOME/bin:$PATH
 
 # Adding Scalatra JRebel
 export SCALATRA_JREBEL=$HOME/Dropbox/Scripts/jrebel/jrebel.jar
+
+if [[ $OSTYPE =~ linux* ]]; then
+
+    # Adding jEnv
+    export PATH=$HOME/.jenv/bin:$PATH
+
+fi

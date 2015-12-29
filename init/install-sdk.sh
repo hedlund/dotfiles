@@ -14,6 +14,7 @@ sdk install springboot
 sdk install maven
 sdk install sbt
 sdk install scala
+sdk install kotlin
 
 # Turn off auto answer
 sed -i "s/sdkman_auto_answer=true/sdkman_auto_answer=false/g" "$HOME/.sdkman/etc/config"

@@ -49,8 +49,6 @@ brew cask install evernote
 # Install developments tools.
 brew cask install dash
 brew cask install sourcetree
-brew cask install postgres
-brew cask install gitup
 
 # Install database tools
 brew cask install pgadmin3

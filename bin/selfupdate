@@ -74,6 +74,7 @@ fi
 if confirm "Update SDKMAN?"; then
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     sdk selfupdate
+    sdk flush candidates
     #TODO: write a script to parse the outdated versions and install updates...
 fi
 

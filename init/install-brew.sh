@@ -29,7 +29,7 @@ brew install caskroom/cask/brew-cask
 # Tap a few new repositories
 brew tap homebrew/versions
 brew tap caskroom/versions
-brew tap thoughtbot/formulae 	#rcm
+brew tap thoughtbot/formulae
 
 # Install GNU core utilities (those that come with OS X are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.

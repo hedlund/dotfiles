@@ -31,3 +31,11 @@ jenv rehash
 jenv enable-plugin maven
 jenv enable-plugin gradle
 jenv enable-plugin ant
+
+# Autostart Dropbox
+if [ ! -f "$HOME/.config/autostart/dropbox.desktop" ]; then
+    if [ ! -d "$HOME/.config/autostart" ]; then
+        mkdir -p "$HOME/.config/autostart"
+    fi
+    sed "s@Exec=~@Exec=$HOME@g" $CURRENT/config/dropbox.desktop >$HOME/.config/autostart/dropbox.desktop
+fi

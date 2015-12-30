@@ -24,6 +24,10 @@ fi
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 
+# Add the Node JS repository
+sudo apt-get -y install curl
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+
 # Add some additional repositories
 sudo add-apt-repository -y ppa:webupd8team/atom
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
@@ -37,7 +41,6 @@ sudo apt-get update
 # Install some CLI tools
 sudo apt-get -y install vim
 sudo apt-get -y install tree
-sudo apt-get -y install curl
 sudo apt-get -y install imagemagick --fix-missing
 sudo apt-get -y install git-flow
 sudo apt-get -y install graphviz
@@ -57,14 +60,11 @@ sudo apt-get -y install oracle-java7-installer
 sudo apt-get -y install oracle-java8-installer
 sudo apt-get -y install cmake
 sudo apt-get -y install doxygen
+sudo apt-get -y install nodejs
 
 # Install Docker
 sudo apt-get -y install docker-engine
 sudo apt-get -y install docker-compose
-
-# Install Node JS
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get -y install nodejs
 
 # Install some applications.
 sudo apt-get -y install google-chrome-stable

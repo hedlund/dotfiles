@@ -94,3 +94,7 @@ curl -s http://get.sdkman.io | bash
 
 # Install jEnv
 git clone https://github.com/gcuisinier/jenv.git ~/.jenv
+
+# Install & start Dropbox
+( cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf - )
+~/.dropbox-dist/dropboxd &

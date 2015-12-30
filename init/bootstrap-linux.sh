@@ -19,6 +19,9 @@ sudo usermod -aG docker $USER
 
 # Configure jenv
 #TODO: this little routine is much smarter in the OS X version...
+if [ -z "$(which jenv)" ]; then
+    export PATH="~/.jenv/bin:$PATH"
+fi
 eval "$(jenv init -)"
 for version in $(ls /usr/lib/jvm/); do
     echo "Adding new Java version: $version"

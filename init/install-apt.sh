@@ -11,7 +11,14 @@ sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /et
 
 # Add the Docker repository...
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" >> /etc/apt/sources.list.d/docker.list'
+#TODO: this whole thing should be made a bit smarter...
+if [ "$(lsb_release -si)" == "LinuxMint" ]; then
+    # Assuming our Linux Mint install is based on Ubuntu Trusty
+    sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list'
+else
+    # Assuming our Ubuntu install is Ubuntu Wily..
+    sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" >> /etc/apt/sources.list.d/docker.list'
+fi
 
 # Add the Spotify repository...
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
@@ -30,6 +37,7 @@ sudo apt-get update
 # Install some CLI tools
 sudo apt-get -y install vim
 sudo apt-get -y install tree
+sudo apt-get -y install curl
 sudo apt-get -y install imagemagick --fix-missing
 sudo apt-get -y install git-flow
 sudo apt-get -y install graphviz
@@ -38,6 +46,7 @@ sudo apt-get -y install httpie
 sudo apt-get -y install ubuntu-make
 sudo apt-get -y install linux-image-extra-$(uname -r)
 sudo apt-get -y install build-essential
+sudo apt-get -y install apparmor lxc cgroup-lite
 sudo apt-get -y install rcm
 
 # Install some development related things.

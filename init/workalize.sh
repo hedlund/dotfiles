@@ -9,8 +9,16 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     brew cask install hipchat
     #brew cask install intellij-idea
 
+fi
+
+###############################################################################
+# Mac OS X & Linux                                                            #
+###############################################################################
+if [[ "$(uname -s)" =~ Darwin*|Linux* ]]; then
+
     # rcup the work settings
     rcup -t work
+
 fi
 
 ###############################################################################

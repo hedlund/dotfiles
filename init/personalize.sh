@@ -16,9 +16,16 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     defaults write com.adobe.Lightroom6 memoryCardDetectionAction -string "ImportBehavior_DoNothing"
     # Always ask for catalog on startup
     defaults write com.adobe.Lightroom6 recentLibraryBehavior20 -string "AlwaysPromptForLibrary"
+fi
+
+###############################################################################
+# Mac OS X & Linux                                                            #
+###############################################################################
+if [[ "$(uname -s)" =~ Darwin*|Linux* ]]; then
 
     # rcup the personal settings
     rcup -t personal
+
 fi
 
 ###############################################################################

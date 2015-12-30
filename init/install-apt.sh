@@ -70,11 +70,15 @@ sudo apt-get -y install nodejs
 sudo apt-get -y install google-chrome-stable
 sudo apt-get -y install sublime-text-installer
 sudo apt-get -y install atom
-sudo apt-get -y install wine
 sudo apt-get -y install everpad
 sudo apt-get -y install spotify-client
 sudo apt-get -y install virtualbox virtualbox-dkms
 sudo apt-get -y install vagrant
+
+# Install Wine
+echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+sudo apt-get -y install ttf-mscorefonts-installer
+sudo apt-get -y install wine
 
 # Applications that should be installed:
 #packer

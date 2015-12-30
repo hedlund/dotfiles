@@ -47,9 +47,11 @@ sudo apt-get -y install ubuntu-make
 sudo apt-get -y install linux-image-extra-$(uname -r)
 sudo apt-get -y install build-essential
 sudo apt-get -y install apparmor lxc cgroup-lite
+sudo apt-get -y install python-software-properties debconf-utils
 sudo apt-get -y install rcm
 
 # Install some development related things.
+echo "oracle-java6-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
 sudo apt-get -y install oracle-java6-installer
 sudo apt-get -y install oracle-java7-installer
 sudo apt-get -y install oracle-java8-installer

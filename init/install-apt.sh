@@ -11,14 +11,24 @@ sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /et
 
 # Add the Docker repository...
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-#TODO: this whole thing should be made a bit smarter...
-if [ "$(lsb_release -si)" == "LinuxMint" ]; then
-    # Assuming our Linux Mint install is based on Ubuntu Trusty
-    sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list'
-else
-    # Assuming our Ubuntu install is Ubuntu Wily..
-    sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" >> /etc/apt/sources.list.d/docker.list'
-fi
+case "$(lsb_release -si)" in
+    Ubuntu)
+        case "$(lsb_release -sr)" in
+            15.10) sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" >> /etc/apt/sources.list.d/docker.list' ;;
+            15.04) sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-vivid main" >> /etc/apt/sources.list.d/docker.list' ;;
+            14.04) sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list' ;;
+            12.04) sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-precise main" >> /etc/apt/sources.list.d/docker.list' ;;
+            *)
+                echo "Warning: Unknown Ubuntu version - configuring Docker like Ubuntu Wily..."
+                sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" >> /etc/apt/sources.list.d/docker.list' ;;
+        esac ;;
+    LinuxMint)
+        # Assuming our Linux Mint install is based on Ubuntu Trusty
+        sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list' ;;
+    *)
+        echo "Warning: Unknown Linux distribution - configuring Docker like Ubuntu Wily..."
+        sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" >> /etc/apt/sources.list.d/docker.list' ;;
+esac
 
 # Add the Spotify repository...
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
@@ -29,6 +39,7 @@ sudo apt-get -y install curl
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 
 # Add some additional repositories
+sudo add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
 sudo add-apt-repository -y ppa:webupd8team/atom
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 sudo add-apt-repository -y ppa:webupd8team/java
@@ -90,9 +101,13 @@ sudo apt-get -y install wine
 # Ubuntu Make installs                                                        #
 ###############################################################################
 
-umake android android-ndk android-studio
+umake android android-sdk android-ndk android-studio
 umake web firefox-dev visual-studio-code
 umake ide eclipse
+
+# Update the Android SDK
+#TODO: This will fail if umake installs in somwhere else than in ~/.local
+echo "y" | $HOME/.local/share/umake/android/android-sdk/tools/android update sdk --no-ui --filter 'platform-tools'
 
 ###############################################################################
 # Additional installs                                                         #

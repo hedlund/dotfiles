@@ -12,7 +12,16 @@ DOTFILES=$( cd "$CURRENT/.." && pwd )
 env RCRC=$DOTFILES/rcrc rcup
 
 # Start Docker
-sudo service docker start
+if [ -z "$(which rpm)" ]; then
+    sudo systemctl start docker
+    sudo systemctl enable docker
+else
+    sudo service docker start
+    if [ "$(lsb_release -si)" == "Ubuntu"]; then
+        #TODO: This'll fail on older Ubuntu versions...
+        sudo systemctl enable docker
+    fi
+fi
 
 # Make sure the current user can run docker commands without sudo
 sudo usermod -aG docker $USER

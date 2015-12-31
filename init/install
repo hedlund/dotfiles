@@ -24,8 +24,8 @@ case "$(uname -s)" in
     Linux)
         if [ -n "$(which apt-get)" ]; then
             $CURRENT/install-apt.sh
-        elif [ -n "$(which yum)" ]; then
-            $CURRENT/install-yum.sh
+        elif [ -n "$(which dnf)" ]; then
+            $CURRENT/install-dnf.sh
         else
             echo "Can't find a package manager. Aborting!"
             exit 1

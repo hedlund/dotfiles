@@ -91,7 +91,7 @@ echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select t
 sudo apt-get -y install ttf-mscorefonts-installer
 sudo apt-get -y install wine
 
-# Applications that should be installed:
+#TODO: Applications that should be installed:
 #packer
 #yakyak
 #todoist

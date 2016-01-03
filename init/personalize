@@ -10,6 +10,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     brew cask install intellij-idea-ce
     brew cask install adobe-creative-cloud
     brew cask install steam
+    brew cask install unity
 
     # Configure Adobe Lightroom
     # Don't try to import when detecting memory card

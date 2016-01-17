@@ -36,6 +36,7 @@ brew cask install 1password
 #brew cask install growlnotify
 brew cask install expandrive
 brew cask install istat-menus
+brew cask install path-finder
 
 # Install internet-related applications.
 brew cask install google-chrome

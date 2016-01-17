@@ -371,6 +371,12 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Hide the dotfiles folder
 chflags hidden $DOTFILES
 
+# Install Finder workflow to be able to toggle hidden files
+cp -r $CURRENT/config/Toggle\ Hidden\ Files.workflow/ $HOME/Library/Services/Toggle\ Hidden\ Files.workflow/
+/usr/libexec/PlistBuddy -c "Add :NSServicesStatus dict" ~/Library/Preferences/pbs.plist 2> /dev/null
+/usr/libexec/PlistBuddy -c "Add \":NSServicesStatus:(null) - Toggle Hidden Files - runWorkflowAsService\" dict" ~/Library/Preferences/pbs.plist 2> /dev/null
+/usr/libexec/PlistBuddy -c "Add \":NSServicesStatus:(null) - Toggle Hidden Files - runWorkflowAsService:key_equivalent\" string \"@$.\"" ~/Library/Preferences/pbs.plist 2> /dev/null
+
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################

@@ -10,6 +10,7 @@ case "$(uname -s)" in
     Darwin)
         $CURRENT/install-brew.sh
         $CURRENT/install-cask.sh
+        $CURRENT/install-fonts.sh
 
         # Start Dropbox to get the synch going as soon as possible
         open -a dropbox

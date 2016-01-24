@@ -15,3 +15,4 @@ ninst typescript
 ninst tsd
 ninst yo
 ninst bower
+ninst nodemon

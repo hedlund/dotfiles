@@ -69,8 +69,10 @@ brew cask install virtualbox
 brew cask install dockertoolbox
 brew cask install vagrant
 
-# Install some entertainment
+# Install some other things.
 brew cask install spotify
+brew cask install pagico
+
 
 # Remove outdated versions from the cellar.
 brew cleanup && brew cask cleanup

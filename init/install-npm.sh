@@ -16,3 +16,5 @@ ninst tsd
 ninst yo
 ninst bower
 ninst nodemon
+ninst express-generator
+ninst strongloop

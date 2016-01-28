@@ -37,6 +37,8 @@ brew cask install 1password
 brew cask install expandrive
 brew cask install istat-menus
 brew cask install path-finder
+brew cask install little-snitch
+brew cask install micro-snitch
 
 # Install internet-related applications.
 brew cask install google-chrome
@@ -71,8 +73,6 @@ brew cask install vagrant
 
 # Install some other things.
 brew cask install spotify
-brew cask install pagico
-
 
 # Remove outdated versions from the cellar.
 brew cleanup && brew cask cleanup

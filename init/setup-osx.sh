@@ -257,6 +257,10 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 # Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
+# Don't show mirroring options in the menu bar when available
+defaults write com.apple.airplay showInMenuBarIfPresent -bool false
+
+
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
@@ -556,6 +560,26 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 # Disable automatic spell checking
 #defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
+
+###############################################################################
+# Firewall                                                                    #
+###############################################################################
+
+# Application Level Firewall state.
+# Possible value:
+#  0: Disabled
+#  1: Enabled
+#  2: Enabled & blocking all incoming connections
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
+
+# Allow signed apps
+#sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool true
+
+# Enable logging
+#sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
+
+# Enable stealth mode
+sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -bool true
 
 ###############################################################################
 # Spotlight                                                                   #

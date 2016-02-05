@@ -10,11 +10,20 @@ else
     }
 fi
 
-# Install the Node softwares we want using NPM
+# Typescript stuff
 ninst typescript
 ninst tsd
-ninst yo
-ninst bower
+
+# Node development
 ninst nodemon
 ninst express-generator
 ninst strongloop
+
+# Some general dev tools
+ninst yo
+ninst bower
+
+# CLI tools
+ninst commander
+ninst inquirer
+ninst vorpal

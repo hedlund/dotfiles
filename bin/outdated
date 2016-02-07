@@ -1,21 +1,35 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
-printf "Outdated Homebrew packages:\n"
-brew outdated
+'use strict';
 
-printf "\nOutdated Homebrew Cask packages:\n"
-for app in $(brew cask list); do
-	if [ -n "$(brew cask info $app |grep "Not installed")" ]; then
-		echo "$app"
-	fi
-done
+const exec = require('child_process').exec;
+const cask_outdated = require('./lib/cask_outdated');
 
-printf "\nOutdated SDKMAN! packages:\n"
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk outdated
+function logResults(title, outdated) {
+	const headline = `\nOutdated ${title} packages`;
+	console.log(headline);
+	console.log('='.repeat(headline.length-1));
+	outdated.forEach(app => console.log(`    ${app}`));
+}
 
-printf "\nOutdated NPM packages:\n"
-npm outdated
+function listOutdated(title, cmd, regex) {
+	exec(cmd, (error, stdout, stderr) => {
+		const rows = stdout.toString().split('\n');
+		const outdated = rows.map(row => {
+			const match = new RegExp(regex).exec(row);
+			return match? match[1] : null;
+		}).filter(Boolean);
+		logResults(title, outdated);
+	});
+}
 
-printf "\nOutdated APM packages:\n"
-apm outdated
+exec('brew outdated', (error, stdout, stderr) => {
+	const outdated = stdout.toString().split('\n').filter(str => str.trim().length > 0);
+	logResults('Homebrew', outdated);
+});
+
+cask_outdated(outdated => logResults('Homebrew Cask', outdated));
+
+listOutdated('SDKMAN!', 'source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk outdated', /(\w+)\s\(.*\)/g);
+listOutdated('NPM', 'npm outdated -g --color=false', /^(\w+)\s+\d+\.\d+\.\d+\s+.+\s+.+/g);
+listOutdated('APM', 'apm outdated --color=false', /── ([\w-]+) .+ -> .+/g);

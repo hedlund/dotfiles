@@ -22,8 +22,3 @@ ninst strongloop
 # Some general dev tools
 ninst yo
 ninst bower
-
-# CLI tools
-ninst commander
-ninst inquirer
-ninst vorpal

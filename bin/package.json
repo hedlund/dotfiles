@@ -1,0 +1,13 @@
+{
+  "name": "bin",
+  "version": "1.0.0",
+  "description": "Just a couple of CLI tools",
+  "author": "Henrik Hedlund",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hedlund/dotfiles"
+  },
+  "dependencies": {
+  }
+}

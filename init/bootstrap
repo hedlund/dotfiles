@@ -17,3 +17,6 @@ esac
 if [ ! -d "$HOME/Projects" ]; then
 	mkdir $HOME/Projects
 fi
+
+# Install the Node dependencies for the CLI scripts
+( cd "$DOTFILES/bin" && npm install )

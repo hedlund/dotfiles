@@ -65,6 +65,7 @@ brew cask install android-studio
 brew cask install mou
 brew cask install eclipse-jee
 brew cask install pixate-studio
+brew cask install lighttable
 
 # Install some Docker & virtualization things.
 brew cask install virtualbox

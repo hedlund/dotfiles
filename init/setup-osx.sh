@@ -689,7 +689,15 @@ EOD
 #defaults write org.x.X11 wm_ffm -bool true
 
 # Install the Solarized Dark theme for iTerm
-open "${CURRENT}/config/Solarized Dark.itermcolors"
+open -a iTerm && open "${CURRENT}/config/Solarized Dark.itermcolors"
+
+# Make sure the DynamicProfiles folder exists & symlink the dynamic profile there
+ITERM2_DIR="$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+mkdir -p "$ITERM2_DIR"
+ln -sf "${CURRENT}/config/iterm2-default.json" "$ITERM2_DIR/iterm2-default.json"
+
+# Set the profile "Dynamic Default" from the JSON file above as the default
+defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "9166D500-B4DB-4C9D-AD36-7C9783733096"
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
@@ -775,8 +783,8 @@ defaults write com.apple.gamed Disabled -bool true
 ###############################################################################
 
 # Allow installing user scripts via GitHub Gist or Userscripts.org
-defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
-defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
+defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/"
+defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/"
 
 # Disable the all too sensitive backswipe on trackpads
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
@@ -992,7 +1000,7 @@ defaults write com.runningwithcrayons.Alfred-Preferences "appearance.theme" -str
 # Set the sync folder
 defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string "~/Dropbox/Library/Alfred"
 
-# Set the hotkey to Ctrl + Space
+# Set the hotkey to Cmd + Space
 defaults write com.runningwithcrayons.Alfred-Preferences "hotkey.default" '{ key = 49; mod = 262144; string = Space; }'
 
 ###############################################################################

@@ -15,9 +15,6 @@ case "$(uname -s)" in
         # Start Dropbox to get the synch going as soon as possible
         open -a dropbox
 
-        # iTerm must've been started once before setup-osx.sh
-        open -a iTerm
-
         # Open up the Little Snitch installer
         LITTLESNITCH_PATH="/opt/homebrew-cask/Caskroom/little-snitch"
         if [[ "$(brew cask info little-snitch)" =~ $LITTLESNITCH_PATH/([0-9]+\.[0-9]+\.[0-9]+) ]]; then

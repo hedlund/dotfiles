@@ -25,7 +25,7 @@ brew tap caskroom/versions
 brew cask install alfred
 brew cask install dropbox
 brew cask install spectacle
-brew cask install iterm2
+brew cask install iterm2-beta
 brew cask install appzapper
 brew cask install caffeine
 #brew cask install dropshare
@@ -33,7 +33,6 @@ brew cask install the-unarchiver
 brew cask install chronosync
 brew cask install jotta
 brew cask install 1password
-#brew cask install growlnotify
 brew cask install expandrive
 brew cask install istat-menus
 brew cask install path-finder
@@ -47,7 +46,6 @@ brew cask install firefoxdeveloperedition
 brew cask install yakyak
 brew cask install transmit
 brew cask install evernote
-#brew cask install fantastical
 
 # Install developments tools.
 brew cask install dash
@@ -63,9 +61,8 @@ brew cask install sublime-text3
 brew cask install visual-studio-code
 brew cask install android-studio
 brew cask install mou
-brew cask install eclipse-jee
 brew cask install pixate-studio
-brew cask install lighttable
+brew cask install webstorm
 
 # Install some Docker & virtualization things.
 brew cask install virtualbox
@@ -74,6 +71,7 @@ brew cask install vagrant
 
 # Install some other things.
 brew cask install spotify
+brew cask install wkhtmltopdf
 
 # Remove outdated versions from the cellar.
 brew cleanup && brew cask cleanup

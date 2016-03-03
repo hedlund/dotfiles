@@ -22,3 +22,13 @@ ninst strongloop
 # Some general dev tools
 ninst yo
 ninst bower
+ninst gulp-cli
+ninst http-server
+ninst browser-sync
+ninst babel
+
+# Some Tern related packages
+ninst tern
+ninst tern-eslint
+ninst tern-node-express
+ninst tern-phaser

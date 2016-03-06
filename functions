@@ -254,3 +254,13 @@ function enc64() {
 function dec64() {
 	echo "$1" |base64 --decode
 }
+
+# Colorize the output of a Java-style log tail, or something similar
+function colorize() {
+ awk '
+  /] ERROR/ {print "\033[31m" $0 "\033[39m"; next}
+  /] WARN/  {print "\033[33m" $0 "\033[39m"; next}
+  /] INFO/  {print "\033[32m" $0 "\033[39m"; next}
+  1
+'
+}

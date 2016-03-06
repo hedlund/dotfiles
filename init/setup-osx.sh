@@ -702,6 +702,18 @@ defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "9166D500-B
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
+# Set Dark theme for tabs...
+defaults write com.googlecode.iterm2 TabStyle -int 1
+
+# ...and always show them
+defaults write com.googlecode.iterm2 HideTab -bool false
+
+# Set the dimming to be a bit less invasive
+defaults write com.googlecode.iterm2 SplitPaneDimmingAmount -string "0.2"
+
+# Configure the Toolbelt
+defaults write com.googlecode.iterm2 ToolbeltTools -array "Command History" "Recent Directories" "Notes"
+
 ###############################################################################
 # Time Machine                                                                #
 ###############################################################################

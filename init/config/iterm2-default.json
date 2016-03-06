@@ -1,6 +1,6 @@
 {
 	"Profiles": [{
-		"Name": "Dynamic Default",
+		"Name": "Solarized Default",
 		"Guid": "9166D500-B4DB-4C9D-AD36-7C9783733096",
 		"Custom Directory": "No",
 		"Tags": [
@@ -114,7 +114,7 @@
 			"Red Component": 0.3243661820888519
 		},
 		"Use Italic Font": true,
-		"Unlimited Scrollback": false,
+		"Unlimited Scrollback": true,
 		"Keyboard Map": {
 			"0xf702-0x280000": {
 				"Action": 10,

@@ -85,6 +85,9 @@
 	# Mercurial style purge
 	purge = clean -f -d
 
+	# Pretty log
+	lg = "log --graph --pretty=format:'%Cred%h%Creset %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cgreen(%cd)%Creset' --abbrev-commit"
+
 [apply]
 
 	# Detect whitespace errors when applying a patch
@@ -191,4 +194,3 @@
 [credential]
 
         helper = osxkeychain
-

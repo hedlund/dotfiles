@@ -43,13 +43,6 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
-# Init SDKMAN!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
-# Init jenv
-eval "$(jenv init -)"
-
 if [[ $OSTYPE =~ darwin* ]]; then
 	# Add tab completion for `defaults read|write NSGlobalDomain`
 	# You could just use `-g` instead, but I like being explicit
@@ -75,3 +68,13 @@ if [[ $OSTYPE =~ darwin* ]]; then
 	    fi
 	fi
 fi
+
+# Init SDKMAN!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+# Init jenv
+eval "$(jenv init -)"
+
+# Enable iTerm 2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

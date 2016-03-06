@@ -206,6 +206,9 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Set a blazingly fast keyboard repeat rate
 #defaults write NSGlobalDomain KeyRepeat -int 0
 
+# Use the F-keys as standard function keys..
+defaults write NSGlobalDomain "com.apple.keyboard.fnState" -int 1
+
 # Set language and text formats
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
 # `Inches`, `en_GB` with `en_US`, and `true` with `false`.

@@ -7,6 +7,7 @@ apm install dash
 apm install language-docker
 apm install language-jade
 apm install language-ejs
+apm install sublime-style-column-selection
 
 # Install TernJS support
 apm install atom-ternjs

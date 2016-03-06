@@ -17,9 +17,9 @@
 			"Red Component": 0
 		},
 		"Ansi 3 Color": {
-			"Blue Component": 0.02348481118679047,
-			"Green Component": 0.4675142467021942,
-			"Red Component": 0.6474647521972656
+			"Blue Component" : 0.03649498894810677,
+			"Green Component" : 0.8440795540809631,
+			"Red Component" : 0.9249564409255981
 		},
 		"Bold Color": {
 			"Blue Component": 0.5636365413665771,
@@ -32,9 +32,9 @@
 			"Red Component": 0.1275488436222076
 		},
 		"Ansi 6 Color": {
-			"Blue Component": 0.5250227451324463,
-			"Green Component": 0.570823609828949,
-			"Red Component": 0.1467953473329544
+			"Green Component" : 0.570823609828949,
+		    "Blue Component" : 0.5250227451324463,
+		    "Red Component" : 0.1467953473329544
 		},
 		"Rows": 25,
 		"Default Bookmark": "No",
@@ -421,9 +421,9 @@
 			"Red Component": 0.7773894071578979
 		},
 		"Ansi 2 Color": {
-			"Blue Component": 0.02020875550806522,
-			"Green Component": 0.5411549210548401,
-			"Red Component": 0.4497745335102081
+			"Red Component" : 0.5601407289505005,
+		    "Blue Component" : 0.03484820201992989,
+		    "Green Component" : 0.90484619140625
 		}
 	}]
 }

@@ -93,8 +93,8 @@
 		},
 		"Custom Command": "No",
 		"ASCII Anti Aliased": true,
-		"Non Ascii Font": "Monaco 12",
-		"Vertical Spacing": 1,
+		"Non Ascii Font": "Monaco 13",
+		"Vertical Spacing": 1.1,
 		"Use Bold Font": true,
 		"Option Key Sends": 0,
 		"Selected Text Color": {
@@ -409,7 +409,7 @@
 			"Green Component": 0.8900123834609985,
 			"Red Component": 0.916110634803772
 		},
-		"Normal Font": "Monaco 12",
+		"Normal Font": "Monaco 13",
 		"Ansi 9 Color": {
 			"Blue Component": 0.07353043556213379,
 			"Green Component": 0.2132530063390732,

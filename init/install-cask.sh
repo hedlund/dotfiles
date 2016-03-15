@@ -60,6 +60,7 @@ brew cask install dbeaver-enterprise
 brew cask install sublime-text3
 brew cask install visual-studio-code
 brew cask install android-studio
+brew cask install android-file-transfer
 brew cask install mou
 brew cask install pixate-studio
 brew cask install webstorm
@@ -72,6 +73,7 @@ brew cask install vagrant
 # Install some other things.
 brew cask install spotify
 brew cask install wkhtmltopdf
+brew cask install calibre
 
 # Remove outdated versions from the cellar.
 brew cleanup && brew cask cleanup

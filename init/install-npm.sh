@@ -32,3 +32,6 @@ ninst tern
 ninst tern-eslint
 ninst tern-node-express
 ninst tern-phaser
+
+# Book stuff
+ninst gitbook-cli

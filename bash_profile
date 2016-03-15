@@ -7,7 +7,7 @@ export PATH="/usr/local/sbin:$PATH";
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,dockerfunc,local}; do
+for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,dockerfunc,localfunc}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -67,14 +67,18 @@ if [[ $OSTYPE =~ darwin* ]]; then
 	        printf "\n\033[0;31mWARNING: boot2docker's IP address is not matching environment!\033[0m\n\n"
 	    fi
 	fi
+
+	# Enable iTerm 2 shell integration
+	test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
 # Init SDKMAN!
 export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+if [ -d "$SDKMAN_DIR" ]; then
+	[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
 
 # Init jenv
-eval "$(jenv init -)"
-
-# Enable iTerm 2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+if which jenv > /dev/null; then
+	eval "$(jenv init -)"
+fi

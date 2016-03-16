@@ -258,9 +258,9 @@ function dec64() {
 # Colorize the output of a Java-style log tail, or something similar
 function colorize() {
  awk '
-  /] ERROR/ {print "\033[31m" $0 "\033[39m"; next}
-  /] WARN/  {print "\033[33m" $0 "\033[39m"; next}
-  /] INFO/  {print "\033[32m" $0 "\033[39m"; next}
+  /](\s)+ERROR/ {print "\033[31m" $0 "\033[39m"; next}
+  /](\s)+WARN/  {print "\033[33m" $0 "\033[39m"; next}
+  /](\s)+INFO/  {print "\033[32m" $0 "\033[39m"; next}
   1
 '
 }

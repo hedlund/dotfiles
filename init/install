@@ -29,10 +29,8 @@ case "$(uname -s)" in
     Linux)
         if [ -n "$(which apt-get)" ]; then
             $CURRENT/install-apt.sh
-        elif [ -n "$(which dnf)" ]; then
-            $CURRENT/install-dnf.sh
         else
-            echo "Can't find a package manager. Aborting!"
+            echo "Installation is only compatible with Ubuntu-based distros. Aborting!"
             exit 1
         fi
         ;;

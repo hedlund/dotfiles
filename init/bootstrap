@@ -3,9 +3,12 @@
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DOTFILES=$( cd "$CURRENT/.." && pwd )
 
+#-------------------------------------------------------------------------------
 # Make sure we have the latest goodies
 ( cd "$CURRENT" && git pull origin master )
 
+#-------------------------------------------------------------------------------
+# Run the script for the respective platform
 case "$(uname -s)" in
     Darwin) $CURRENT/bootstrap-osx.sh ;;
     Linux) $CURRENT/bootstrap-linux.sh ;;
@@ -13,10 +16,14 @@ case "$(uname -s)" in
     *) echo "Running on unknown OS. Aborting!" ; exit 1 ;;
 esac
 
+#-------------------------------------------------------------------------------
 # Create a Projects folder
 if [ ! -d "$HOME/Projects" ]; then
 	mkdir $HOME/Projects
 fi
 
+#-------------------------------------------------------------------------------
 # Install the Node dependencies for the CLI scripts
-( cd "$DOTFILES/bin" && npm install )
+if command -v npm >/dev/null 2>&1; then
+    ( cd "$DOTFILES/bin" && npm install )
+fi

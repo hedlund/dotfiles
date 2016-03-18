@@ -15,9 +15,9 @@ exists() {
 #-------------------------------------------------------------------------------
 # Use rcm to symlink all the dotfiles
 if ! exists rcup; then
-    sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
+    sudo add-apt-repository -y ppa:martin-frost/thoughtbot-rcm
     sudo apt-get update
-    sudo apt-get install rcm
+    sudo apt-get install -y rcm
 fi
 env RCRC=$DOTFILES/rcrc rcup
 

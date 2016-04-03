@@ -6,17 +6,10 @@
 if [[ "$(uname -s)" == "Darwin" ]]; then
 
     # Install software
-    brew cask install parallels-desktop
     brew cask install intellij-idea-ce
     brew cask install adobe-creative-cloud
     brew cask install steam
     brew cask install unity
-
-    # Configure Adobe Lightroom
-    # Don't try to import when detecting memory card
-    defaults write com.adobe.Lightroom6 memoryCardDetectionAction -string "ImportBehavior_DoNothing"
-    # Always ask for catalog on startup
-    defaults write com.adobe.Lightroom6 recentLibraryBehavior20 -string "AlwaysPromptForLibrary"
 fi
 
 ###############################################################################

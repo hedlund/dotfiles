@@ -1136,6 +1136,16 @@ defaults write "at.obdev.LittleSnitchConfiguration" ShowTerminationAlert -int 0
 defaults write "at.obdev.MicroSnitch" OpenAtLogin -int 1
 
 ###############################################################################
+# Adobe Lightroom                                                             #
+###############################################################################
+
+# Don't try to import when detecting memory card
+defaults write com.adobe.Lightroom6 memoryCardDetectionAction -string "ImportBehavior_DoNothing"
+
+# Always ask for catalog on startup
+defaults write com.adobe.Lightroom6 recentLibraryBehavior20 -string "AlwaysPromptForLibrary"
+
+###############################################################################
 # Enable Dark Mode                                                            #
 ###############################################################################
 

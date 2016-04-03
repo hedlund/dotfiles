@@ -21,6 +21,9 @@ brew upgrade --all
 # Tap the versions repository (needed for Sublime Text 3)
 brew tap caskroom/versions
 
+# Tap the fonts repository
+brew tap caskroom/fonts
+
 # Install system tools.
 brew cask install alfred
 brew cask install dropbox
@@ -75,5 +78,18 @@ brew cask install spotify
 brew cask install wkhtmltopdf
 brew cask install calibre
 
+# Install some fonts
+brew cask install font-inconsolata
+
 # Remove outdated versions from the cellar.
 brew cleanup && brew cask cleanup
+
+# Start Dropbox to get the synch going as soon as possible
+open -a dropbox
+
+# Open up the Little Snitch installer
+LITTLESNITCH_PATH="/opt/homebrew-cask/Caskroom/little-snitch"
+if [[ "$(brew cask info little-snitch)" =~ $LITTLESNITCH_PATH/([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+    VERSION="${BASH_REMATCH[1]}"
+    open "$LITTLESNITCH_PATH/$VERSION/Little Snitch Installer.app"
+fi

@@ -10,17 +10,6 @@ case "$(uname -s)" in
     Darwin)
         $CURRENT/install-brew.sh
         $CURRENT/install-cask.sh
-        $CURRENT/install-fonts.sh
-
-        # Start Dropbox to get the synch going as soon as possible
-        open -a dropbox
-
-        # Open up the Little Snitch installer
-        LITTLESNITCH_PATH="/opt/homebrew-cask/Caskroom/little-snitch"
-        if [[ "$(brew cask info little-snitch)" =~ $LITTLESNITCH_PATH/([0-9]+\.[0-9]+\.[0-9]+) ]]; then
-            VERSION="${BASH_REMATCH[1]}"
-            open "$LITTLESNITCH_PATH/$VERSION/Little Snitch Installer.app"
-        fi
         ;;
 
     ##########################################################################
@@ -59,4 +48,3 @@ esac
 $CURRENT/install-sdk.sh
 $CURRENT/install-npm.sh
 $CURRENT/install-apm.sh
-$CURRENT/install-pip.sh

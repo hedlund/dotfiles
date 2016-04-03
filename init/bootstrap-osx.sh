@@ -13,6 +13,12 @@ exists() {
 }
 
 #-------------------------------------------------------------------------------
+# Make sure Homebrew is available
+if ! exists brew; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+#-------------------------------------------------------------------------------
 # Use rcm to symlink all the dotfiles
 if ! exists rcup; then
     brew tap thoughtbot/formulae

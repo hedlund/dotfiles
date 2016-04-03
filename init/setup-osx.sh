@@ -112,6 +112,12 @@ defaults write com.apple.helpviewer DevMode -bool true
 # in the login window
 #sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
+# Display contact info on login window
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "Email: henrik@hedlund.im"
+
+# Make sure auto login is disabled
+sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUser
+
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
 
@@ -143,6 +149,22 @@ defaults write com.apple.menuextra.clock IsAnalog -bool false
 
 # Show the battery percentage
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+
+###############################################################################
+# Network                                                                     #
+###############################################################################
+
+# Use Google's DNS servers
+sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
+
+# Require admin auth to create computer-to-computer networks
+sudo /usr/libexec/airportd prefs RequireAdminIBSS=YES
+
+# Require admin auth to change networks
+sudo /usr/libexec/airportd prefs RequireAdminNetworkChange=YES
+
+# Require admin auth torn wifi on and off
+sudo /usr/libexec/airportd prefs RequireAdminPowerToggle=YES
 
 ###############################################################################
 # SSD-specific tweaks                                                         #
@@ -577,10 +599,17 @@ sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
 #sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool true
 
 # Enable logging
-#sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
+sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
 
 # Enable stealth mode
 sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -bool true
+
+###############################################################################
+# Location Services                                                           #
+###############################################################################
+
+# Show location icon in menu bar when System Services request your location
+sudo defaults write /Library/Preferences/com.apple.locationmenu ShowSystemServices -bool true
 
 ###############################################################################
 # Spotlight                                                                   #
@@ -631,7 +660,7 @@ sudo mdutil -i on / > /dev/null
 sudo mdutil -E / > /dev/null
 
 ###############################################################################
-# Terminal & iTerm 2                                                          #
+# Terminal                                                                    #
 ###############################################################################
 
 # Only use UTF-8 in Terminal.app
@@ -689,6 +718,13 @@ EOD
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true
 
+# Enable Secure Keyboard Entry
+defaults write com.apple.terminal SecureKeyboardEntry -bool true
+
+###############################################################################
+# iTerm                                                                       #
+###############################################################################
+
 # Install the Solarized Dark theme for iTerm
 open -a iTerm && open "${CURRENT}/config/Solarized Dark.itermcolors"
 
@@ -714,6 +750,9 @@ defaults write com.googlecode.iterm2 SplitPaneDimmingAmount -string "0.2"
 
 # Configure the Toolbelt
 defaults write com.googlecode.iterm2 ToolbeltTools -array "Command History" "Recent Directories" "Notes"
+
+# Enable Secure Keyboard Entry
+defaults write com.googlecode.iterm2 "Secure Input" -bool true
 
 ###############################################################################
 # Time Machine                                                                #
@@ -794,10 +833,6 @@ defaults write com.apple.gamed Disabled -bool true
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
-
-# Allow installing user scripts via GitHub Gist or Userscripts.org
-defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/"
-defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/"
 
 # Disable the all too sensitive backswipe on trackpads
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false

@@ -75,12 +75,6 @@ brew install tesseract
 brew install httpie
 brew install dark-mode
 
-# Install Java related things.
-brew cask install java
-brew cask install java7
-brew cask install java6
-brew install jenv
-
 # Install JavaScript related things.
 brew install node
 brew install flow
@@ -93,22 +87,5 @@ echo "y" | android update sdk --no-ui --filter 'platform-tools'
 # Install some backup management
 brew install mackup
 
-# Install some Docker & virtualization things.
-brew install packer
-
 # Remove outdated versions from the cellar.
 brew cleanup
-
-
-###############################################################################
-# Non-Homebrew installs                                                       #
-###############################################################################
-
-# Install Conscript
-curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
-
-# Install giter8
-$HOME/bin/cs n8han/giter8
-
-# Install SDKMAN!
-curl -s http://get.sdkman.io | bash

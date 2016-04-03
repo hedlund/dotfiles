@@ -72,12 +72,6 @@ if [[ $OSTYPE =~ darwin* ]]; then
 	test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
-# Init SDKMAN!
-export SDKMAN_DIR="$HOME/.sdkman"
-if [ -d "$SDKMAN_DIR" ]; then
-	[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-fi
-
 # Init jenv
 if command -v jenv >/dev/null 2>&1; then
 	eval "$(jenv init -)"

@@ -65,12 +65,6 @@ sudo apt-get -y install python-software-properties debconf-utils
 sudo apt-get -y install rcm
 
 # Install some development related things.
-echo "oracle-java6-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
-sudo apt-get -y install oracle-java6-installer
-sudo apt-get -y install oracle-java7-installer
-sudo apt-get -y install oracle-java8-installer
-sudo apt-get -y install cmake
-sudo apt-get -y install doxygen
 sudo apt-get -y install nodejs
 
 # Install Docker
@@ -91,12 +85,6 @@ echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select t
 sudo apt-get -y install ttf-mscorefonts-installer
 sudo apt-get -y install wine
 
-#TODO: Applications that should be installed:
-#packer
-#yakyak
-#todoist
-
-
 ###############################################################################
 # Ubuntu Make installs                                                        #
 ###############################################################################
@@ -112,18 +100,6 @@ echo "y" | $HOME/.local/share/umake/android/android-sdk/tools/android update sdk
 ###############################################################################
 # Additional installs                                                         #
 ###############################################################################
-
-# Install Conscript
-curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
-
-# Install giter8
-$HOME/bin/cs n8han/giter8
-
-# Install SDKMAN!
-curl -s http://get.sdkman.io | bash
-
-# Install jEnv
-git clone https://github.com/gcuisinier/jenv.git ~/.jenv
 
 # Install & start Dropbox
 ( cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf - )

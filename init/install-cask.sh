@@ -32,50 +32,45 @@ brew cask install iterm2-beta
 brew cask install appzapper
 brew cask install caffeine
 #brew cask install dropshare
+brew cask install daisydisk
 brew cask install the-unarchiver
 brew cask install chronosync
-brew cask install jotta
+#brew cask install jotta
 brew cask install 1password
 brew cask install expandrive
 brew cask install istat-menus
 brew cask install path-finder
 brew cask install little-snitch
 brew cask install micro-snitch
+brew cask install java
 
 # Install internet-related applications.
 brew cask install google-chrome
 brew cask install firefox
 brew cask install firefoxdeveloperedition
-brew cask install yakyak
 brew cask install transmit
 brew cask install evernote
 
 # Install developments tools.
 brew cask install dash
-brew cask install sourcetree
-
-# Install database tools
-brew cask install pgadmin3
-brew cask install sequel-pro
-brew cask install dbeaver-enterprise
+brew cask install gitkraken
+brew cask install insomnia
 
 # Install IDEs and editors.
 brew cask install sublime-text3
 brew cask install visual-studio-code
-brew cask install android-studio
+brew cask install android-studio-canary
 brew cask install android-file-transfer
-brew cask install mou
 brew cask install pixate-studio
 brew cask install webstorm
 
 # Install some Docker & virtualization things.
 brew cask install virtualbox
-brew cask install dockertoolbox
+#brew cask install dockertoolbox
 brew cask install vagrant
 
 # Install some other things.
 brew cask install spotify
-brew cask install wkhtmltopdf
 brew cask install calibre
 
 # Install some fonts

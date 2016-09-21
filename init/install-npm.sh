@@ -12,20 +12,19 @@ fi
 
 # Typescript stuff
 ninst typescript
-ninst tsd
+ninst typings
 
 # Node development
 ninst nodemon
 ninst express-generator
 ninst strongloop
+ninst adonis-cli
 
 # Some general dev tools
 ninst yo
-ninst bower
-ninst gulp-cli
 ninst http-server
 ninst browser-sync
-ninst babel
+ninst eslint
 
 # Some Tern related packages
 ninst tern

@@ -6,10 +6,8 @@
 if [[ "$(uname -s)" == "Darwin" ]]; then
 
     # Install software
-    brew cask install intellij-idea-ce
     brew cask install adobe-creative-cloud
     brew cask install steam
-    brew cask install unity
 fi
 
 ###############################################################################

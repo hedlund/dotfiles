@@ -162,3 +162,6 @@ alias mcint="mvn clean install -Dmaven.test.skip=true"
 
 # Git stüff
 alias gst="git status"
+
+# Node stüff
+alias ace="./ace"

@@ -6,34 +6,23 @@ Nothing is true, everything is permitted.
 
 **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
 
-## Installation & setup
+## Mac OS X
 
-Open up a Terminal and simply run:
+Open up a Terminal and simply run `git` and follow the instructions to get Git installed.
 
-	git
-
-You should now be prompted to install git - just follow the instructions. After the installation has finished, run:
+After Git is installed, clone the repo and run the installation scripts:
 
 	git clone https://github.com/hedlund/dotfiles.git ~/.dotfiles && cd ~/.dotfiles/init
-
-### Installing the softwares
-
-Run the the script:
-
 	./install.sh
 
-And this in turn will run each of the sub-scripts (brew, cask, npm, ...) to install all of the software I want on the machine.
-
-This is a script that takes quite a while to run, and you'll be asked a few questions. Simply answer the questions and supply your password when prompted for it.
+The script is *not* quite non-interactive, so you need to babysit it a bit - simply answer the questions and supply your password when prompted for it.
 
 At the end of the script a couple of applications will be run:
 
 1. Just close the iTerm 2 window.
 2. Log in to you Dropbox account and **wait for the synchronization to completely finish before continuing!**
 
-### Configuring the environment
-
-After Dropbox is finished with it's synchronization, install the dotfiles & the new bash shell:
+When Dropbox has finished with it's synchronization, install the dotfiles & the new bash shell:
 
 	./bootstrap.sh
 
@@ -41,19 +30,24 @@ You will be asked to verify that you want to overwrite and patch a few files; si
 
 Setup the main components of the system:
 
-	./setup-osx.sh
+	./setup.sh
 
 And then finish up by setting up the system as *either* a personal machine:
 
-	./setup-personal.sh
+	./personalize.sh
 
 *or* a work one:
 
-	./setup-work.sh
+	./workalize.sh
 
 This step will install a few additional softwares (depeding on the type of system), and generate a new SSH key which you'll be prompted about.
 
 Finally, reboot to ensure everything takes effect.
+
+
+
+
+
 
 
 ## After the reboot
@@ -173,7 +167,7 @@ Then open the [Bitbucket SSH keys page](https://bitbucket.org/account/user/hedlu
 
 Wrap up the whole installation process by running:
 
-	~/.dotfiles/finalize.sh
+	~/.dotfiles/init/finalize.sh
 
 
 ## Thanks to…

@@ -82,6 +82,9 @@
 	# Commit shorthand
 	ci = commit
 
+	# Checkout shorthand
+	co = checkout
+
 	# Mercurial style purge
 	purge = clean -f -d
 
@@ -193,4 +196,4 @@
 
 [credential]
 
-        helper = osxkeychain
+	helper = osxkeychain

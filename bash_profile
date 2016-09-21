@@ -4,6 +4,9 @@ export PATH="$HOME/.bin:$PATH";
 # Add /usr/local/sbin
 export PATH="/usr/local/sbin:$PATH";
 
+# Export the frameworks path
+export FRAMEWORKS_PATH="${HOME}/Frameworks";
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -58,21 +61,40 @@ if [[ $OSTYPE =~ darwin* ]]; then
 	fi
 
 	# Setup Docker machine environment
-	eval "$(docker-machine env default)"
+	#eval "$(docker-machine env default)"
 
 	# If boot2docker is running double check its IP
-	DOCKER_IP="$(docker-machine ip default 2>&1)"
-	if [[ "$DOCKER_IP" != *"error in run"* ]]; then
-	    if [[ "$DOCKER_HOST" != *"$DOCKER_IP"* ]]; then
-	        printf "\n\033[0;31mWARNING: boot2docker's IP address is not matching environment!\033[0m\n\n"
-	    fi
-	fi
+	#DOCKER_IP="$(docker-machine ip default 2>&1)"
+	#if [[ "$DOCKER_IP" != *"error in run"* ]]; then
+	#    if [[ "$DOCKER_HOST" != *"$DOCKER_IP"* ]]; then
+	#        printf "\n\033[0;31mWARNING: boot2docker's IP address is not matching environment!\033[0m\n\n"
+	#    fi
+	#fi
 
 	# Enable iTerm 2 shell integration
 	test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
 # Init jenv
-if command -v jenv >/dev/null 2>&1; then
-	eval "$(jenv init -)"
+#if command -v jenv >/dev/null 2>&1; then
+#	eval "$(jenv init -)"
+#fi
+
+# Init Cocos2d-x
+if [ -d "${FRAMEWORKS_PATH}/Cocos/cocos2d-x-latest" ]; then
+
+	export COCOS_X_ROOT=$FRAMEWORKS_PATH/Cocos
+	export COCOS_CONSOLE_ROOT=$COCOS_X_ROOT/cocos2d-x-latest/tools/cocos2d-console/bin
+	export COCOS_TEMPLATES_ROOT=$COCOS_X_ROOT/cocos2d-x-latest/templates
+
+	export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+	export NDK_ROOT=/usr/local/Cellar/android-ndk/r12
+	export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/24.4.1_1
+
+	#export PATH=$COCOS_X_ROOT:$PATH
+	#export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+	#export PATH=$NDK_ROOT:$PATH
+	#export PATH=$ANDROID_SDK_ROOT:$PATH
+	#export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
 fi

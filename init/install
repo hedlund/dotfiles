@@ -45,6 +45,4 @@ esac
 # Common stuff                                                               #
 ##############################################################################
 
-$CURRENT/install-sdk.sh
 $CURRENT/install-npm.sh
-$CURRENT/install-apm.sh

@@ -15,22 +15,6 @@ ninst typescript
 ninst typings
 
 # Node development
-ninst nodemon
-ninst express-generator
-ninst strongloop
-ninst adonis-cli
-
-# Some general dev tools
 ninst yo
+ninst nodemon
 ninst http-server
-ninst browser-sync
-ninst eslint
-
-# Some Tern related packages
-ninst tern
-ninst tern-eslint
-ninst tern-node-express
-ninst tern-phaser
-
-# Book stuff
-ninst gitbook-cli

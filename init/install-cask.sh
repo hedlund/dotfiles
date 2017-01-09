@@ -14,10 +14,8 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Make sure we’re using the latest Homebrew.
+# Make sure we’re up to date
 brew update
-
-# Upgrade any already-installed formulae.
 brew upgrade --all
 
 # Tap a few extra repositories
@@ -41,7 +39,7 @@ brew cask install java
 
 # Install internet-related applications.
 brew cask install google-chrome
-brew cask install firefox
+brew cask install firefoxdeveloperedition
 brew cask install transmit
 
 # Install developments tools.

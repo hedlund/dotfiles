@@ -1,5 +1,57 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
+'use strict';
+
+const program = require('commander');
+const inquirer = require('inquirer');
+const _ = require('lodash');
+const outdated = require('./lib/outdated');
+
+const CASKROOM='/opt/homebrew-cask/Caskroom/';
+
+program
+    .version('0.1.0')
+    .option('-y, --yes', 'update everything')
+    .option('-d, --dot', 'update dotfiles')
+    .option('-b, --brew', 'update Homebrew')
+    .option('-c, --cask', 'update Homebrew Cask')
+    .option('-s, --sdk', 'update SDKMAN!')
+    .option('-n, --npm', 'update Node packages')
+    .option('-a, --apm', 'update Atom packages')
+    .option('-p, --pip', 'update Python')
+    .parse(process.argv);
+
+//Enter interactive mode if we haven't specified any options...
+const interactive = _.chain(program.opts()).omit('version').pickBy((v, k) => v).isEmpty().value();
+
+function confirm(message, callback) {
+    inquirer.prompt([{
+        type: 'confirm',
+        name: 'confirm',
+        message: message,
+        default: true
+    }], result => callback(result.confirm));
+}
+
+function tryToUpdate(option, question, callback) {
+    if (program.yes || program[option]) {
+        callback();
+    }
+    else if (interactive) {
+        confirm(question, answer => answer? callback() : null);
+    }
+}
+
+
+tryToUpdate('dot', 'Update dotfiles?', () => {
+    console.log('dot');
+});
+
+tryToUpdate('brew', 'Update Homebrew?', () => {
+    console.log('brew');
+});
+
+/*
 CASKROOM="/opt/homebrew-cask/Caskroom/"
 DOTFILES="$HOME/.dotfiles"
 
@@ -91,4 +143,4 @@ fi
 # Update Python
 if confirm "Update Python?"; then
     pip install --upgrade pip setuptools
-fi
+fi*/

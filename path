@@ -1,16 +1,5 @@
+# Add `~/.bin` to the `$PATH`
+export PATH="$HOME/.bin:$PATH";
 
-# Adding Android
-export ANDROID_HOME=/usr/local/opt/android-sdk
-
-# Adding Conscript
-export PATH=$HOME/bin:$PATH
-
-# Adding Scalatra JRebel
-export SCALATRA_JREBEL=$HOME/Dropbox/Scripts/jrebel/jrebel.jar
-
-if [[ $OSTYPE =~ linux* ]]; then
-
-    # Adding jEnv
-    export PATH=$HOME/.jenv/bin:$PATH
-
-fi
+# Add /usr/local/sbin
+export PATH="/usr/local/sbin:$PATH";

@@ -14,12 +14,12 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install Homebrew unless it's already installed
 if [ -z "$(which brew)" ]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
 fi
 
 # Make sure we’re using the latest Homebrew & upgrade all installed formulae.
 brew update
-brew upgrade --all
+brew upgrade
 
 # Tap Homebrew Cask and a few other useful repositories.
 brew tap caskroom/cask
@@ -66,7 +66,6 @@ brew install rsync
 brew install z
 brew install zsh zsh-completions
 brew install httpie
-brew install dark-mode
 
 # Install JavaScript related things.
 brew install node

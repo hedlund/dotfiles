@@ -46,6 +46,10 @@ defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 	"/System/Library/CoreServices/Menu Extras/TextInput.menu" \
 	"/System/Library/CoreServices/Menu Extras/Clock.menu"
+defaults delete "com.apple.systemuiserver" "NSStatusItem Visible com.apple.menuextra.battery"
+
+# Enable dark mode
+defaults write "Apple Global Domain" AppleInterfaceStyle -string "Dark"
 
 # Set highlight color to green
 #defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
@@ -98,7 +102,7 @@ defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 #defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 # Disable the crash reporter
-#defaults write com.apple.CrashReporter DialogType -string "none"
+defaults write com.apple.CrashReporter DialogType -string "none"
 
 # Set Help Viewer windows to non-floating mode
 #defaults write com.apple.helpviewer DevMode -bool true
@@ -120,9 +124,6 @@ sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUser
 
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
-
-# Never go into computer sleep mode
-#sudo systemsetup -setcomputersleep Off > /dev/null
 
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
@@ -155,7 +156,7 @@ defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 ###############################################################################
 
 # Use Google's DNS servers
-sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
+#sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
 
 # Require admin auth to create computer-to-computer networks
 sudo /usr/libexec/airportd prefs RequireAdminIBSS=YES
@@ -186,15 +187,6 @@ defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 # Trackpad: enable dragging
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
 defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
-
-# Trackpad: map bottom right corner to right-click
-#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-#defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-#defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-
-# Disable “natural” (Lion-style) scrolling
-#defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 # Increase sound quality for Bluetooth headphones/headsets
 #defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -251,12 +243,6 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/nul
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-# Save screenshots to the desktop
-#defaults write com.apple.screencapture location -string "${HOME}/Desktop"
-
-# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-#defaults write com.apple.screencapture type -string "png"
 
 # Disable shadow in screenshots
 #defaults write com.apple.screencapture disable-shadow -bool true
@@ -322,11 +308,6 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Disable disk image verification
-#defaults write com.apple.frameworks.diskimages skip-verify -bool true
-#defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-#defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
 # Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
@@ -365,22 +346,8 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # Enable AirDrop over Ethernet and on unsupported Macs running Lion
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-# Enable the MacBook Air SuperDrive on any Mac
-sudo nvram boot-args="mbasd=1"
-
 # Show the ~/Library folder
 chflags nohidden ~/Library
-
-# Remove Dropbox’s green checkmark icons in Finder
-#file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
-#[ -e "${file}" ] && mv -f "${file}" "${file}.bak"
-
-# Expand the following File Info panes:
-# “General”, “Open with”, and “Sharing & Permissions”
-defaults write com.apple.finder FXInfoPanesExpanded -dict \
-	General -bool true \
-	OpenWith -bool true \
-	Privileges -bool true
 
 # Hide the dotfiles folder
 chflags hidden $DOTFILES
@@ -541,31 +508,6 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 ###############################################################################
-# Mail                                                                        #
-###############################################################################
-
-# Disable send and reply animations in Mail.app
-#defaults write com.apple.mail DisableReplyAnimations -bool true
-#defaults write com.apple.mail DisableSendAnimations -bool true
-
-# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
-#defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
-#defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" -string "@\\U21a9"
-
-# Display emails in threaded mode, sorted by date (oldest at the top)
-#defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-#defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
-#defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
-
-# Disable inline attachments (just show the icons)
-#defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
-
-# Disable automatic spell checking
-#defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
-
-###############################################################################
 # Firewall                                                                    #
 ###############################################################################
 
@@ -577,7 +519,7 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
 
 # Allow signed apps
-#sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool true
+sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool true
 
 # Enable logging
 sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
@@ -640,6 +582,9 @@ sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
 sudo mdutil -E / > /dev/null
 
+# Disable Spotlight hotkey
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:64:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
 ###############################################################################
 # Terminal                                                                    #
 ###############################################################################
@@ -693,11 +638,6 @@ tell application "Terminal"
 end tell
 
 EOD
-
-# Enable “focus follows mouse” for Terminal.app and all X11 apps
-# i.e. hover over a window and start typing in it without clicking first
-#defaults write com.apple.terminal FocusFollowsMouse -bool true
-#defaults write org.x.X11 wm_ffm -bool true
 
 # Enable Secure Keyboard Entry
 defaults write com.apple.terminal SecureKeyboardEntry -bool true
@@ -798,18 +738,6 @@ defaults write com.apple.appstore ShowDebugMenu -bool true
 # Disable gamed from continously spamming Apple's servers
 defaults write com.apple.gamed Disabled -bool true
 
-###############################################################################
-# Messages                                                                    #
-###############################################################################
-
-# Disable automatic emoji substitution (i.e. use plain text smileys)
-#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
-
-# Disable smart quotes as it’s annoying for messages that contain code
-#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
-
-# Disable continuous spell checking
-#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
@@ -823,14 +751,6 @@ defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -boo
 defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
 defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
 
-# Use the system-native print preview dialog
-#defaults write com.google.Chrome DisablePrintPreview -bool true
-#defaults write com.google.Chrome.canary DisablePrintPreview -bool true
-
-# Expand the print dialog by default
-#defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
-#defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
-
 ###############################################################################
 # Spectacle.app                                                               #
 ###############################################################################
@@ -842,9 +762,10 @@ defaults write com.divisiblebyzero.Spectacle SUEnableAutomaticChecks -bool true
 defaults write com.divisiblebyzero.Spectacle StatusItemEnabled -bool false
 
 # Symlink config file with my preferred keyboard shortcuts
+# Doesn't work anymore, so let's just copy it...
 SPECTACLE_DIR="$HOME/Library/Application Support/Spectacle"
 mkdir -p "$SPECTACLE_DIR"
-ln -sf "$CURRENT/config/Shortcuts.json" "$SPECTACLE_DIR/Shortcuts.json"
+\cp "$CURRENT/config/Shortcuts.json" "$SPECTACLE_DIR/Shortcuts.json"
 
 ###############################################################################
 # Caffeine                                                                    #
@@ -907,24 +828,11 @@ defaults write com.kapeli.dashdoc syncFolderPath -string "$HOME/Dropbox/Library/
 defaults write com.kapeli.dashdoc snippetSQLPath -string "$HOME/Dropbox/Library/Dash/library.dash"
 
 ###############################################################################
-# Alfred 3                                                                    #
-###############################################################################
-
-# Set the theme
-defaults write com.runningwithcrayons.Alfred-Preferences "appearance.theme" -string "alfred.theme.darkandsmooth"
-
-# Set the sync folder
-defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string "~/Dropbox/Library/Alfred"
-
-# Set the hotkey to Cmd + Space
-defaults write com.runningwithcrayons.Alfred-Preferences "hotkey.default" '{ key = 49; mod = 262144; string = Space; }'
-
-###############################################################################
 # iStat Menus                                                                 #
 ###############################################################################
 
-# Purple graphs
-defaults write com.bjango.istatmenus5.extras MenubarSkinColor -int 5
+# Green graphs
+defaults write com.bjango.istatmenus5.extras MenubarSkinColor -int 3
 
 # White graph backgrounds
 defaults write com.bjango.istatmenus5.extras MenubarTheme -int 0
@@ -935,23 +843,25 @@ defaults write com.bjango.istatmenus5.extras DropdownTheme -int 1
 # Slow update frequency
 defaults write com.bjango.istatmenus5.extras TimerFrequency -int 0
 
+# Setting the following defaults prevents iStat from starting for some reason...
+
 # Show just the memory graph, no label
-defaults write com.bjango.istatmenus5.extras "Memory_MenubarMode" -int 1
+#defaults write com.bjango.istatmenus5.extras "Memory_MenubarMode" -int 1
 
 # Show just the disk graph, no label
-defaults write com.bjango.istatmenus5.extras "Disks_MenubarMode" -int 0
+#defaults write com.bjango.istatmenus5.extras "Disks_MenubarMode" -int 0
 
 # Show just the CPU graph, no label
-defaults write com.bjango.istatmenus5.extras "CPU_MenubarMode" -int 0
+#defaults write com.bjango.istatmenus5.extras "CPU_MenubarMode" -int 0
 
 # Show just the network graph, no label
-defaults write com.bjango.istatmenus5.extras "Network_MenubarMode" -int 1
+#defaults write com.bjango.istatmenus5.extras "Network_MenubarMode" -int 1
 
 # Show percentage left of battery indicator
-defaults write com.bjango.istatmenus5.extras "Battery_MenubarMode" -int 2
+#defaults write com.bjango.istatmenus5.extras "Battery_MenubarMode" -int 2
 
 # Set the order of the status items
-defaults write com.bjango.istatmenus5.extras "StatusItems-Order" -array 2 3 1 4 6
+#defaults write com.bjango.istatmenus5.extras "StatusItems-Order" -array 2 3 1 4 6
 
 ###############################################################################
 # Todoist                                                                     #
@@ -983,10 +893,10 @@ defaults write com.adobe.Lightroom6 memoryCardDetectionAction -string "ImportBeh
 defaults write com.adobe.Lightroom6 recentLibraryBehavior20 -string "AlwaysPromptForLibrary"
 
 ###############################################################################
-# Enable Dark Mode                                                            #
+# Arduino                                                                     #
 ###############################################################################
 
-dark-mode --mode Dark
+sed -i "s|sketchbook.path=.*|sketchbook.path=${HOME}/Projects/Arduino|g" ${HOME}/Library/Arduino15/preferences.txt
 
 ###############################################################################
 # Login Items                                                                 #

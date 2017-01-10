@@ -16,7 +16,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Make sure we’re up to date
 brew update
-brew upgrade --all
+brew upgrade
 
 # Tap a few extra repositories
 brew tap caskroom/versions
@@ -47,6 +47,7 @@ brew cask install dash
 brew cask install gitkraken
 brew cask install insomnia
 brew cask install visual-studio-code
+brew cask install arduino
 
 # Install some Docker & virtualization things.
 brew cask install virtualbox
@@ -62,8 +63,10 @@ brew cask install font-inconsolata
 brew cleanup && brew cask cleanup
 
 
-# Start Dropbox to get the synch going as soon as possible
+# Start 1Password, Dropbox & iStat Menus
+open -a "1Password 6"
 open -a dropbox
+open -a "iStat Menus"
 
 # Open up the Little Snitch installer
 LITTLESNITCH_PATH="$CASKROOM_PATH/little-snitch"
@@ -74,11 +77,13 @@ fi
 
 
 # On macOS Sierra accessibility mode cannot be enabled automatically
+open /System/Library/PreferencePanes/Security.prefPane/
 printf "\nRemember to enable Accessibility access for the following applications:\n"
 printf "    Alfred\n"
 printf "    Dropbox\n"
 printf "    Spectacle\n"
 printf "Go to System Preferences > Security & Privacy > Privacy > Accessibility\n\n"
 
+printf "Login to 1Password to get the passwords syncing.\n"
 printf "Login to Dropbox and let it finish the first sync.\n"
 printf "Then install Little Snitch and let it restart the computer...\n\n"

@@ -18,8 +18,8 @@ esac
 
 #-------------------------------------------------------------------------------
 # Create a Projects folder
-if [ ! -d "$HOME/Projects" ]; then
-	mkdir $HOME/Projects
+if [ ! -d "$HOME/Projects/Arduino" ]; then
+	mkdir -p $HOME/Projects/Arduino
 fi
 
 #-------------------------------------------------------------------------------

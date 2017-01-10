@@ -15,7 +15,7 @@ exists() {
 #-------------------------------------------------------------------------------
 # Make sure Homebrew is available
 if ! exists brew; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
 fi
 
 #-------------------------------------------------------------------------------
@@ -29,10 +29,10 @@ env RCRC=$DOTFILES/rcrc rcup
 #-------------------------------------------------------------------------------
 # Use mackup to put the Dropboxed config files into place
 if exists mackup; then
-    if [ ! -f "$HOME/.mackup.cfg" ]; then
-        ln -s $DOTFILES/mackup.cfg $HOME/.mackup.cfg
-    fi
-    mackup restore
+   if [ ! -f "$HOME/.mackup.cfg" ]; then
+       ln -s $DOTFILES/mackup.cfg $HOME/.mackup.cfg
+   fi
+   mackup restore
 fi
 
 #-------------------------------------------------------------------------------

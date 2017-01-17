@@ -67,6 +67,10 @@ brew install z
 brew install zsh zsh-completions
 brew install httpie
 
+# Install security related things.
+brew install gpg
+brew install pinentry-mac
+
 # Install JavaScript related things.
 brew install node
 

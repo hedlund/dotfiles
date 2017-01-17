@@ -5,6 +5,7 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
     exit 1
 fi
 
+PUBLIC_GPG_KEY=93B0E5FD
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DOTFILES=$( cd "$CURRENT/.." && pwd )
 
@@ -45,4 +46,10 @@ if [ -f /usr/local/bin/bash ]; then
             chsh -s /usr/local/bin/bash
         fi
     fi
+fi
+
+#-------------------------------------------------------------------------------
+# Import public GPG key (if needed)
+if [[ ! $(gpg --list-keys) =~ $PUBLIC_GPG_KEY ]]; then
+    gpg --import < $CURRENT/config/pubkey.txt
 fi

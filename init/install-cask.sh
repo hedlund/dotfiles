@@ -36,6 +36,7 @@ brew cask install istat-menus
 brew cask install little-snitch
 brew cask install micro-snitch
 brew cask install java
+brew cask install hyper
 
 # Install internet-related applications.
 brew cask install google-chrome

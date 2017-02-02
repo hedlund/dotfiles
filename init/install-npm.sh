@@ -18,3 +18,5 @@ ninst typings
 ninst yo
 ninst nodemon
 ninst http-server
+
+ninst hpm-cli

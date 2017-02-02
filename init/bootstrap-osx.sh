@@ -26,6 +26,7 @@ if ! exists rcup; then
     brew install rcm
 fi
 env RCRC=$DOTFILES/rcrc rcup
+ln -sf $DOTFILES/hyper.js $HOME/.hyper.js
 
 #-------------------------------------------------------------------------------
 # Use mackup to put the Dropboxed config files into place

@@ -62,6 +62,7 @@ brew install git-flow-avh
 brew install imagemagick --with-webp
 brew install tree
 brew install rsync
+brew install pstree
 
 brew install z
 brew install zsh zsh-completions

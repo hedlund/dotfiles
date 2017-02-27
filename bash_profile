@@ -54,10 +54,7 @@ if [[ $OSTYPE =~ darwin* ]]; then
 	# Enable iTerm 2 shell integration
 	test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-	# Replace ssh-agent with gpg-agent
-	pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --use-standard-socket --log-file $HOME/.gnupg/gpg-agent.log --write-env-file)
-elif [[ $OSTYPE =~ linux* ]]; then
-	# Replace ssh-agent with gpg-agent
-	pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)
 fi
 
+# Replace ssh-agent with gpg-agent
+pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)

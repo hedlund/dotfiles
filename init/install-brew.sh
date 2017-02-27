@@ -71,6 +71,7 @@ brew install httpie
 # Install security related things.
 brew install gpg
 brew install pinentry-mac
+sudo ln -s /usr/local/bin/pinentry-mac /usr/local/bin/pinentry-yubikey
 
 # Install JavaScript related things.
 brew install node

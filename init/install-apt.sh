@@ -52,6 +52,7 @@ sudo apt-get -y install nodejs
 # Install GnuPG
 sudo apt-get -y install gnupg2 gnupg-agent scdaemon pcscd pcsc-tools
 sudo ln -s /usr/bin/gpg2 /usr/local/bin/gpg
+sudo ln -s /usr/bin/pinentry-gtk-2 /usr/local/bin/pinentry-yubikey
 
 # Install Docker
 sudo apt-get -y install docker-engine

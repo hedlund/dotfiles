@@ -56,4 +56,8 @@ if [[ $OSTYPE =~ darwin* ]]; then
 
 	# Replace ssh-agent with gpg-agent
 	pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --use-standard-socket --log-file $HOME/.gnupg/gpg-agent.log --write-env-file)
+elif [[ $OSTYPE =~ linux* ]]; then
+	# Replace ssh-agent with gpg-agent
+	pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)
 fi
+

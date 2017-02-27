@@ -5,6 +5,10 @@ export PATH="$HOME/.bin:$PATH";
 export PATH="/usr/local/sbin:$PATH";
 
 # Add Go
-export GOROOT=/usr/local/opt/go/libexec
+if [[ $OSTYPE =~ darwin* ]]; then
+    export GOROOT=/usr/local/opt/go/libexec
+elif [[ $OSTYPE =~ linux* ]]; then
+    export GOROOT=$HOME/.local/share/umake/go/go-lang
+fi
 export GOPATH=$HOME/Projects/golang
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

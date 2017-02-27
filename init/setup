@@ -1,17 +1,29 @@
 #!/usr/bin/env bash
 
-# Get the script directory
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
+#-------------------------------------------------------------------------------
+# Run the script for the respective platform
 case "$(uname -s)" in
-    Darwin)
-        $CURRENT/setup-osx.sh ;;
-
-    Linux)
-        $CURRENT/setup-linux.sh ;;
-
-    CYGWIN*|MINGW32*|MSYS*)
-        $CURRENT/setup-win.sh ;;
-
+    Darwin) $CURRENT/setup-osx.sh ;;
+    Linux) $CURRENT/setup-linux.sh ;;
+    CYGWIN*|MINGW32*|MSYS*) $CURRENT/setup-win.sh ;;
     *) echo "Running on unknown OS. Aborting!" ; exit 1 ;;
 esac
+
+#-------------------------------------------------------------------------------
+# Create a Projects folder
+
+if [ ! -d "$HOME/Projects/arduino" ]; then
+	mkdir -p $HOME/Projects/arduino
+fi
+
+if [ ! -d "$HOME/Projects/golang/src" ]; then
+    mkdir -p $HOME/Projects/golang/src
+fi
+
+#-------------------------------------------------------------------------------
+# Import public GPG key (if needed)
+if [[ ! $(gpg --list-keys) =~ $PUBLIC_GPG_KEY ]]; then
+    gpg --import < $CURRENT/config/pubkey.txt
+fi

@@ -11,18 +11,15 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 fi
 
 ###############################################################################
-# Mac OS X & Linux                                                            #
-###############################################################################
-if [[ "$(uname -s)" =~ Darwin*|Linux* ]]; then
-
-    # rcup the personal settings
-    rcup -t personal
-
-fi
-
-###############################################################################
 # Generate SSH key                                                            #
 ###############################################################################
 
 printf "\nGenerating a new SSH key..."
 ssh-keygen -t rsa -b 4096 -C "henrik@hedlund.im"
+
+###############################################################################
+# Configure Git                                                               #
+###############################################################################
+
+git config --global user.name "Henrik Hedlund"
+git config --global user.email "henrik@hedlund.im"

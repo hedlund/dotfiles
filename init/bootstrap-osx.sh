@@ -5,7 +5,6 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
     exit 1
 fi
 
-PUBLIC_GPG_KEY=93B0E5FD
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DOTFILES=$( cd "$CURRENT/.." && pwd )
 
@@ -18,15 +17,6 @@ exists() {
 if ! exists brew; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
 fi
-
-#-------------------------------------------------------------------------------
-# Use rcm to symlink all the dotfiles
-if ! exists rcup; then
-    brew tap thoughtbot/formulae
-    brew install rcm
-fi
-env RCRC=$DOTFILES/rcrc rcup
-ln -sf $DOTFILES/hyper.js $HOME/.hyper.js
 
 #-------------------------------------------------------------------------------
 # Use mackup to put the Dropboxed config files into place
@@ -50,7 +40,5 @@ if [ -f /usr/local/bin/bash ]; then
 fi
 
 #-------------------------------------------------------------------------------
-# Import public GPG key (if needed)
-if [[ ! $(gpg --list-keys) =~ $PUBLIC_GPG_KEY ]]; then
-    gpg --import < $CURRENT/config/pubkey.txt
-fi
+# Configure Git
+git config --global credential.helper "osxkeychain"

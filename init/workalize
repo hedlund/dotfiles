@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
 
 ###############################################################################
-# Mac OS X & Linux                                                            #
-###############################################################################
-if [[ "$(uname -s)" =~ Darwin*|Linux* ]]; then
-
-    # rcup the work settings
-    rcup -t work
-
-fi
-
-###############################################################################
 # Generate SSH key                                                            #
 ###############################################################################
 
 printf "\nGenerating a new SSH key..."
 ssh-keygen -t rsa -b 4096 -C "henrik.hedlund@knowit.no"
+
+###############################################################################
+# Configure Git                                                               #
+###############################################################################
+
+git config --global user.name "Henrik Hedlund"
+git config --global user.email "henrik.hedlund@knowit.no"

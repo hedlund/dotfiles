@@ -896,7 +896,7 @@ defaults write com.adobe.Lightroom6 recentLibraryBehavior20 -string "AlwaysPromp
 # Arduino                                                                     #
 ###############################################################################
 
-sed -i "s|sketchbook.path=.*|sketchbook.path=${HOME}/Projects/Arduino|g" ${HOME}/Library/Arduino15/preferences.txt
+sed -i "s|sketchbook.path=.*|sketchbook.path=${HOME}/Projects/arduino|g" ${HOME}/Library/Arduino15/preferences.txt
 
 ###############################################################################
 # Login Items                                                                 #

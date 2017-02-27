@@ -3,3 +3,8 @@ export PATH="$HOME/.bin:$PATH";
 
 # Add /usr/local/sbin
 export PATH="/usr/local/sbin:$PATH";
+
+# Add Go
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/Projects/golang
+export PATH=$PATH:$GOPATH/bin

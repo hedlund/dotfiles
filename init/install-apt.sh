@@ -31,10 +31,24 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 # Add the Node JS repository
 curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 
+# Add the Yarn repository
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+# Add the Enpass repository
+curl -sS https://dl.sinew.in/keys/enpass-linux.key | sudo apt-key add -
+echo "deb http://repo.sinew.in/ stable main" | sudo tee /etc/apt/sources.list.d/enpass.list
+
+
+#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 1E9377A2BA9EF27F
+
 # Add some additional repositories
-sudo add-apt-repository ppa:nilarimogard/webupd8
-sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+sudo add-apt-repository -y ppa:nilarimogard/webupd8
+sudo add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
 #sudo add-apt-repository -y ppa:webupd8team/java
+
+sudo add-apt-repository -y ppa:wereturtle/ppa
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 653124679B3CCB19
 
 # Update apt-get
 sudo apt-get update
@@ -48,6 +62,7 @@ sudo apt-get -y install httpie
 sudo apt-get -y install ubuntu-make
 sudo apt-get -y install build-essential
 sudo apt-get -y install nodejs
+sudo apt-get -y install python-gpgme
 
 # Install GnuPG
 sudo apt-get -y install gnupg2 gnupg-agent scdaemon pcscd pcsc-tools
@@ -65,3 +80,6 @@ sudo apt-get -y install spotify-client
 sudo apt-get -y install albert
 sudo apt-get -y install caffeine-plus
 sudo apt-get -y install spotify-client
+sudo apt-get -y install ghostwriter
+sudo apt-get -y install yarn
+sudo apt-get -y install enpass

@@ -18,4 +18,4 @@ umake go
 #echo "y" | $HOME/.local/share/umake/android/android-sdk/tools/android update sdk --no-ui --filter 'platform-tools'
 
 # Make Visual Studio Code available on the path
-ln -s $HOME/.local/share/umake/ide/visual-studio-code/code $HOME/.bin/
+ln -s $HOME/.local/share/umake/ide/visual-studio-code/bin/code $HOME/.bin/

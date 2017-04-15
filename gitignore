@@ -12,3 +12,6 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# Ignore Visual Studio Code symlink on Ubuntu
+bin/code

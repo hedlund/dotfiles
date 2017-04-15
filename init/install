@@ -18,6 +18,7 @@ case "$(uname -s)" in
     Linux)
         if [ -n "$(which apt-get)" ]; then
             $CURRENT/install-apt.sh
+            $CURRENT/install-umake.sh
         else
             echo "Installation is only compatible with Ubuntu-based distros. Aborting!"
             exit 1
@@ -46,3 +47,4 @@ esac
 ##############################################################################
 
 $CURRENT/install-npm.sh
+$CURRENT/install-code.sh

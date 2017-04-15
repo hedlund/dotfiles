@@ -91,7 +91,14 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
+<<<<<<< HEAD
   plugins: ["hyper-statusline"],
+=======
+  plugins: [
+      "hyper-statusline",
+      "hyper-solarized-dark"
+  ],
+>>>>>>> 58b886733f8aad1c0aba3b7912bd5a26a46a11bd
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

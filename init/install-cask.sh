@@ -49,6 +49,7 @@ brew cask install gitkraken
 brew cask install insomnia
 brew cask install visual-studio-code
 brew cask install arduino
+brew cask install android-studio
 
 # Install some Docker & virtualization things.
 brew cask install virtualbox
@@ -75,7 +76,6 @@ if [[ "$(brew cask info little-snitch)" =~ $LITTLESNITCH_PATH/([0-9]+\.[0-9]+\.?
     VERSION="${BASH_REMATCH[1]}"
     open "$LITTLESNITCH_PATH/$VERSION/Little Snitch Installer.app"
 fi
-
 
 # On macOS Sierra accessibility mode cannot be enabled automatically
 open /System/Library/PreferencePanes/Security.prefPane/

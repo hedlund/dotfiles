@@ -73,8 +73,9 @@ brew install gpg
 brew install pinentry-mac
 sudo ln -s /usr/local/bin/pinentry-mac /usr/local/bin/pinentry-yubikey
 
-# Install JavaScript related things.
+# Install some development things.
 brew install node
+brew install golang
 
 # Install some backup management
 brew install mackup

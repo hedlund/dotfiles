@@ -8,25 +8,6 @@ fi
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DOTFILES=$( cd "$CURRENT/.." && pwd )
 
-exists() {
-    command -v "$1" >/dev/null 2>&1
-}
-
-#-------------------------------------------------------------------------------
-# Make sure Homebrew is available
-if ! exists brew; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
-fi
-
-#-------------------------------------------------------------------------------
-# Use mackup to put the Dropboxed config files into place
-if exists mackup; then
-   if [ ! -f "$HOME/.mackup.cfg" ]; then
-       ln -s $DOTFILES/mackup.cfg $HOME/.mackup.cfg
-   fi
-   mackup restore
-fi
-
 #-------------------------------------------------------------------------------
 # Add the new bash version to /etc/shells (if needed)
 if [ -f /usr/local/bin/bash ]; then

@@ -1,2 +1,0 @@
-EXCLUDES="README.md LICENSE-MIT.txt init mackup.cfg"
-COPY_ALWAYS="gitconfig"

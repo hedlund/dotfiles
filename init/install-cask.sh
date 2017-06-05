@@ -45,8 +45,6 @@ brew cask install transmit
 
 # Install developments tools.
 brew cask install dash
-brew cask install gitkraken
-brew cask install insomnia
 brew cask install visual-studio-code
 brew cask install arduino
 brew cask install android-studio

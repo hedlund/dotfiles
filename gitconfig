@@ -193,7 +193,3 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
-
-[credential]
-
-	helper = osxkeychain

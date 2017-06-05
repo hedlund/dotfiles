@@ -69,7 +69,6 @@ confirm () {
 # Update yourself
 if confirm "Update dotfiles?"; then
     (cd $DOTFILES && git pull)
-    rcup
 fi
 
 # Un- and re-tap the caskroom/versions as that can trigger an error otherwise

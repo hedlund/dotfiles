@@ -899,6 +899,12 @@ defaults write com.adobe.Lightroom6 recentLibraryBehavior20 -string "AlwaysPromp
 sed -i "s|sketchbook.path=.*|sketchbook.path=${HOME}/Projects/arduino|g" ${HOME}/Library/Arduino15/preferences.txt
 
 ###############################################################################
+# Visual Studio Code                                                          #
+###############################################################################
+
+ln -sf $DOTFILES/init/config/vscode-config.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+###############################################################################
 # Login Items                                                                 #
 ###############################################################################
 

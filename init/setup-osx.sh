@@ -583,7 +583,33 @@ sudo mdutil -i on / > /dev/null
 sudo mdutil -E / > /dev/null
 
 # Disable Spotlight hotkey
-/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:64:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:64 dict" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:64:enabled bool" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:64:enabled false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+
+###############################################################################
+# Alfred 3                                                                    #
+###############################################################################
+
+ALFRED3_PREFERENCES="$HOME/Library/Application Support/Alfred 3/Alfred.alfredpreferences/preferences"
+ALFRED3_LOCAL_ID=$( ls "$ALFRED3_PREFERENCES/local" | head -1 )
+ALFRED3_LOCAL_PREFERENCES="$ALFRED3_PREFERENCES/local/$ALFRED3_LOCAL_ID"
+
+# Don't show icon in toolbar menu
+/usr/libexec/PlistBuddy -c "Add :hidemenu bool" "$ALFRED3_PREFERENCES/appearance/options/prefs.plist"
+/usr/libexec/PlistBuddy -c "Set :hidemenu true" "$ALFRED3_PREFERENCES/appearance/options/prefs.plist"
+
+# Set the theme
+/usr/libexec/PlistBuddy -c "Add :currentthemeuid string" "$ALFRED3_LOCAL_PREFERENCES/appearance/prefs.plist"
+/usr/libexec/PlistBuddy -c "Set :currentthemeuid theme.bundled.dark" "$ALFRED3_LOCAL_PREFERENCES/appearance/prefs.plist"
+
+# Set the hotkey (Cmd + Space)
+/usr/libexec/PlistBuddy -c "Add :default dict" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
+/usr/libexec/PlistBuddy -c "Add :default:string string Space" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
+/usr/libexec/PlistBuddy -c "Add :default:key integer 49" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
+/usr/libexec/PlistBuddy -c "Add :default:mod integer 1048576" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
+
 
 ###############################################################################
 # Terminal                                                                    #

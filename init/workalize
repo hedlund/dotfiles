@@ -11,5 +11,5 @@ ssh-keygen -t rsa -b 4096 -C "henrik.hedlund@knowit.no"
 # Configure Git                                                               #
 ###############################################################################
 
-git config --global user.name "Henrik Hedlund"
-git config --global user.email "henrik.hedlund@knowit.no"
+git config --file ~/.gitconfig.local user.name "Henrik Hedlund"
+git config --file ~/.gitconfig.local user.email "henrik.hedlund@knowit.no"

@@ -6,7 +6,7 @@ DOTFILES=$( cd "$CURRENT/.." && pwd )
 
 #-------------------------------------------------------------------------------
 # Symlink all the dotfiles
-ignored_files=(gitconfig init tag-personal tag-work LICENSE-MIT.txt mackup.cfg rcrc README.md)
+ignored_files=(init tag-personal tag-work LICENSE-MIT.txt mackup.cfg rcrc README.md)
 ignored() {
     local e
     for e in "${ignored_files[@]}"; do
@@ -20,7 +20,9 @@ for path in $DOTFILES/*; do
         ln -sf $path $HOME/.$file
     fi
 done;
-\cp $DOTFILES/gitconfig $HOME/.gitconfig
+
+# Ensure we have the local git config file
+touch $HOME/.gitconfig.local
 
 #-------------------------------------------------------------------------------
 # Run the script for the respective platform

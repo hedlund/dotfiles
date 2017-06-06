@@ -22,4 +22,4 @@ fi
 
 #-------------------------------------------------------------------------------
 # Configure Git
-git config --global credential.helper "osxkeychain"
+git config --file ~/.gitconfig.local credential.helper "osxkeychain"

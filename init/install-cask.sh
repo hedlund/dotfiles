@@ -63,10 +63,13 @@ brew cask install font-inconsolata
 brew cleanup && brew cask cleanup
 
 
-# Start 1Password, Dropbox & iStat Menus
+# Start a few applications to get the config started
 open -a "1Password 6"
 open -a dropbox
 open -a "iStat Menus"
+open -a Docker
+open -a "Micro Snitch"
+open -a "Little Snitch Configuration"
 
 # Open up the Little Snitch installer
 LITTLESNITCH_PATH="$CASKROOM_PATH/little-snitch"

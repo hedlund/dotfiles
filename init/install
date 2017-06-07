@@ -16,7 +16,9 @@ case "$(uname -s)" in
     # Linux                                                                  #
     ##########################################################################
     Linux)
-        if [ -n "$(which apt-get)" ]; then
+        if [ -d /mnt/c/Windows ]; then
+            $CURRENT/install-lxss.sh
+        elif [ -n "$(which apt-get)" ]; then
             $CURRENT/install-apt.sh
             $CURRENT/install-umake.sh
         else

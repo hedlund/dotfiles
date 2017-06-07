@@ -28,4 +28,12 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Export IP address for easy usage.
-export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+#TODO: this is really bad right now - make smarter!!
+exists() {
+    ifconfig $1 >/dev/null 2>&1
+}
+if exists en0; then
+    export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+elif exists wifi0; then
+    export IP=$(ifconfig wifi0 | grep inet | awk '$1=="inet" {print $2}')
+fi

@@ -6,7 +6,7 @@ DOTFILES=$( cd "$CURRENT/.." && pwd )
 
 #-------------------------------------------------------------------------------
 # Symlink all the dotfiles
-ignored_files=(init tag-personal tag-work LICENSE-MIT.txt mackup.cfg rcrc README.md)
+ignored_files=(init LICENSE-MIT.txt mackup.cfg README.md .editorconfig)
 ignored() {
     local e
     for e in "${ignored_files[@]}"; do
@@ -20,6 +20,9 @@ for path in $DOTFILES/*; do
         ln -sf $path $HOME/.$file
     fi
 done;
+
+# Symlink the .editorconfig explicitly
+ln -sf $DOTFILES/.editorconfig $HOME/.editorconfig
 
 # Ensure we have the local git config file
 touch $HOME/.gitconfig.local

@@ -1,8 +1,8 @@
 # Use the mouse
-set mouse
+#set mouse
 
 # Set smooth scrolling
-set smooth
+#set smooth
 
 # Tabs should be 4 spaces
 set tabsize 4
@@ -24,7 +24,7 @@ include /usr/local/share/nano/nanorc.nanorc
 include /usr/local/share/nano/patch.nanorc
 include /usr/local/share/nano/python.nanorc
 include /usr/local/share/nano/ruby.nanorc
-include /usr/local/share/nano/rust.nanorc
 include /usr/local/share/nano/sh.nanorc
 include /usr/local/share/nano/xml.nanorc
 
+#include /usr/local/share/nano/rust.nanorc

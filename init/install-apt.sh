@@ -13,7 +13,7 @@ sudo apt-get install -y --no-install-recommends \
     software-properties-common
 
 # Add the Google Chrome repository...
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
 # Add the Docker repository...
@@ -54,9 +54,7 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 653124679
 sudo apt-get update
 
 # Install some CLI tools
-sudo apt-get -y install vim
 sudo apt-get -y install tree
-sudo apt-get -y install imagemagick --fix-missing
 sudo apt-get -y install git-flow
 sudo apt-get -y install httpie
 sudo apt-get -y install ubuntu-make

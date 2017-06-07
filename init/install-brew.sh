@@ -49,7 +49,6 @@ brew install bash bash-completion2
 brew install wget --with-iri
 
 # Install more recent versions of some OS X tools.
-brew install vim --with-override-system-vi
 brew install grep
 brew install openssh
 brew install screen

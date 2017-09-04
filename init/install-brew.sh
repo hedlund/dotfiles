@@ -76,6 +76,7 @@ sudo ln -s /usr/local/bin/pinentry-mac /usr/local/bin/pinentry-yubikey
 # Install some development things.
 brew install node
 brew install golang
+brew install scons
 
 # Remove outdated versions from the cellar.
 brew cleanup

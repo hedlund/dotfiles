@@ -11,7 +11,8 @@ elif [[ $OSTYPE =~ linux* ]]; then
     export GOROOT=$HOME/.local/share/umake/go/go-lang
 fi
 export GOPATH=$HOME/Projects/golang
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOBIN
 
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_X_ROOT=$HOME/Projects/cocos2d/sdk/cocos2d-x-latest

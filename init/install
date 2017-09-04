@@ -50,3 +50,4 @@ esac
 
 $CURRENT/install-npm.sh
 $CURRENT/install-code.sh
+$CURRENT/install-go.sh

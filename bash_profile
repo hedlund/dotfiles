@@ -56,5 +56,11 @@ if [[ $OSTYPE =~ darwin* ]]; then
 
 fi
 
-# Replace ssh-agent with gpg-agent
-pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)
+# Enable GPG for SSH
+if [[ $OSTYPE =~ msys* ]]; then
+    # On win, make sure we start ssh-pageant
+    eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
+else
+    # On *nix, replace ssh-agent with gpg-agent
+    pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)
+fi

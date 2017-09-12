@@ -18,6 +18,7 @@ code --install-extension christian-kohler.path-intellisense
 code --install-extension cssho.vscode-svgviewer
 code --install-extension bierner.color-info
 code --install-extension mitchdenny.ecdc
+code --install-extension flesler.url-encode
 
 # ...a bunch of JavaScript stuff...
 code --install-extension dbaeumer.vscode-eslint
@@ -33,6 +34,7 @@ code --install-extension lukehoban.Go
 code --install-extension PeterJausovec.vscode-docker
 code --install-extension DotJoshJohnson.xml
 code --install-extension geequlim.godot-tools
+code --install-extension mauve.terraform
 
 #... and some pretty themes
 code --install-extension akamud.vscode-theme-onedark

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Get the script directory
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
@@ -30,7 +30,7 @@ case "$(uname -s)" in
     ##########################################################################
     # Windows                                                                #
     ##########################################################################
-    CYGWIN*|MINGW32*|MSYS*)
+    CYGWIN*|MINGW*|MSYS*)
         $CURRENT/install-choco.sh
         ;;
 

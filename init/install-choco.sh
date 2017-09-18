@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 if ! [[ "$(uname -s)" =~ CYGWIN*|MINGW*|MSYS* ]]; then
     echo "Not running on Windows. Aborting!"
@@ -17,13 +17,14 @@ if [ $? -ne 0 ]; then
 fi
 
 # Install system tools.
-#choco install -y dropbox
+choco install -y dropbox
 choco install -y caffeine
 #choco install -y 1password
-#choco install -y jdk8
+choco install -y jdk8
 #choco install -y hyper
-choco install -y putty
+#choco install -y putty
 choco install -y gpg4win
+choco install -y nano
 
 # Install development tools.
 choco install -y visualstudiocode

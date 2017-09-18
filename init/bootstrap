@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 PUBLIC_GPG_KEY=93B0E5FD
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
@@ -32,7 +32,7 @@ touch $HOME/.gitconfig.local
 case "$(uname -s)" in
     Darwin) $CURRENT/bootstrap-osx.sh ;;
     Linux) $CURRENT/bootstrap-linux.sh ;;
-    CYGWIN*|MINGW32*|MSYS*) $CURRENT/bootstrap-win.sh ;;
+    CYGWIN*|MINGW*|MSYS*) $CURRENT/bootstrap-win.sh ;;
     *) echo "Running on unknown OS. Aborting!" ; exit 1 ;;
 esac
 

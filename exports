@@ -28,14 +28,9 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Export IP address for easy usage.
-#TODO: this is really bad right now - make smarter!!
-exists() {
-    ifconfig $1 >/dev/null 2>&1
-}
-if exists en0; then
-    export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
-elif exists wifi0; then
-    export IP=$(ifconfig wifi0 | grep inet | awk '$1=="inet" {print $2}')
-fi
+#NET_IF=`netstat -rn | awk '/^0.0.0.0/ {thif=substr($0,74,10); print thif;} /^default.*UG/ {thif=substr($0,65,10); print thif;}'`
+#export IP=$(ifconfig ${NET_IF} | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 
+# Setup a few useful environment variables
 export PROJECTS=$HOME/Projects
+export PUBLIC_GPG_KEY=93B0E5FD

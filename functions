@@ -255,3 +255,23 @@ function sshfix() {
     pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)
   fi
 }
+
+# Check if a command exists
+function exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Confirm that the wants to continue
+function confirm() {
+    read -r -p "${1:-Are you sure?} [Y/n] " response
+    if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
+        return 0
+    fi
+    return 1
+}
+
+# Prompt the user before continuing
+function prompt() {
+    read -s -p "${1:-Press ENTER to continue}"; echo
+}
+

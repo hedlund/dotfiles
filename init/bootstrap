@@ -1,12 +1,11 @@
 #!/bin/bash
 
-PUBLIC_GPG_KEY=93B0E5FD
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DOTFILES=$( cd "$CURRENT/.." && pwd )
 
 #-------------------------------------------------------------------------------
 # Symlink all the dotfiles
-ignored_files=(init LICENSE-MIT.txt mackup.cfg README.md .editorconfig)
+ignored_files=(init LICENSE-MIT.txt mackup.cfg README.md .editorconfig gnupg)
 ignored() {
     local e
     for e in "${ignored_files[@]}"; do
@@ -24,6 +23,14 @@ done;
 # Symlink the .editorconfig explicitly
 ln -sf $DOTFILES/.editorconfig $HOME/.editorconfig
 
+# Create GPG directory and symlink its files explicitly
+if [ ! -d $HOME/.gnupg ]; then
+    mkdir $HOME/.gnupg && sudo chmod 700 $HOME/.gnupg
+fi
+ln -sf $DOTFILES/gnupg/gpg.conf $HOME/.gnupg/gpg.conf
+ln -sf $DOTFILES/gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+
+#-------------------------------------------------------------------------------
 # Ensure we have the local git config file
 touch $HOME/.gitconfig.local
 
@@ -35,9 +42,3 @@ case "$(uname -s)" in
     CYGWIN*|MINGW*|MSYS*) $CURRENT/bootstrap-win.sh ;;
     *) echo "Running on unknown OS. Aborting!" ; exit 1 ;;
 esac
-
-#-------------------------------------------------------------------------------
-# Install the Node dependencies for the CLI scripts
-if command -v npm >/dev/null 2>&1; then
-    ( cd "$DOTFILES/bin" && npm install )
-fi

@@ -8,9 +8,8 @@ fi
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DOTFILES=$( cd "$CURRENT/.." && pwd )
 
-exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+source ../exports
+source ../functions
 
 #-------------------------------------------------------------------------------
 # Configure Docker
@@ -33,3 +32,22 @@ fi
 #    fi
 #    sed "s@Exec=~@Exec=$HOME@g" $CURRENT/config/dropbox.desktop >$HOME/.config/autostart/dropbox.desktop
 #fi
+
+#-------------------------------------------------------------------------------
+# Fix nano
+if [ ! -d /usr/local/share/nano ]; then
+    sudo mkdir -p /usr/local/share
+    sudo ln -s /usr/share/nano /usr/local/share/nano
+fi
+
+#-------------------------------------------------------------------------------
+# Import public GPG key (if needed)
+if [[ ! $(gpg --list-keys) =~ $PUBLIC_GPG_KEY ]]; then
+    gpg --import < $CURRENT/config/pubkey.txt
+    sudo apt-get install -y scdaemon pcscd >/dev/null
+    prompt "Initiating GPG. Please insert Yubikey and press ENTER to continue."
+    gpg --card-status
+fi
+if [ ! -f /usr/local/bin/pinentry-yubikey ]; then
+    sudo ln -s /usr/bin/pinentry /usr/local/bin/pinentry-yubikey
+fi

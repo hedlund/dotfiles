@@ -19,4 +19,4 @@ ninst yo
 ninst nodemon
 ninst http-server
 
-ninst hpm-cli
+#ninst hpm-cli

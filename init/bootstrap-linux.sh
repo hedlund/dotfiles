@@ -42,9 +42,9 @@ fi
 
 #-------------------------------------------------------------------------------
 # Import public GPG key (if needed)
+sudo apt-get install -y gnupg gnupg-agent scdaemon pcscd >/dev/null
 if [[ ! $(gpg --list-keys) =~ $PUBLIC_GPG_KEY ]]; then
     gpg --import < $CURRENT/config/pubkey.txt
-    sudo apt-get install -y scdaemon pcscd >/dev/null
     prompt "Initiating GPG. Please insert Yubikey and press ENTER to continue."
     gpg --card-status
 fi

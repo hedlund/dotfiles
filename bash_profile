@@ -58,3 +58,8 @@ fi
 
 # Enable GPG for SSH
 sshfix
+
+# Add the hey command
+if [ -d $HOME/.hey ]; then
+    eval "$($HOME/.hey/bin/hey init -)"
+fi

@@ -35,6 +35,12 @@ ln -sf $DOTFILES/gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 touch $HOME/.gitconfig.local
 
 #-------------------------------------------------------------------------------
+# Install hey
+if [ ! -d $HOME/.hey ]; then
+    git clone https://github.com/hedlund/hey.git $HOME/.hey
+fi
+
+#-------------------------------------------------------------------------------
 # Run the script for the respective platform
 case "$(uname -s)" in
     Darwin) $CURRENT/bootstrap-osx.sh ;;

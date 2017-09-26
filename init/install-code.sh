@@ -35,6 +35,7 @@ code --install-extension PeterJausovec.vscode-docker
 code --install-extension DotJoshJohnson.xml
 code --install-extension geequlim.godot-tools
 code --install-extension mauve.terraform
+code --install-extension ms-vscode.PowerShell
 
 #... and some pretty themes
 code --install-extension akamud.vscode-theme-onedark

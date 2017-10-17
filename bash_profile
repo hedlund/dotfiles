@@ -63,3 +63,8 @@ sshfix
 if [ -d $HOME/.hey ]; then
     eval "$($HOME/.hey/bin/hey init -)"
 fi
+
+# Add the 1p command
+if [ -d $HOME/.1password ]; then
+    eval "$($HOME/.1password/bin/1p init -)"
+fi

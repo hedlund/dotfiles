@@ -57,12 +57,7 @@ if [[ $OSTYPE =~ darwin* ]]; then
 fi
 
 # Enable GPG for SSH
-if [[ ! $OSTYPE =~ msys* ]] && [ -f $HOME/.gnupg/gpg.env ]; then
-    . $HOME/.gnupg/gpg.env
-    export GPG_AGENT_INFO; export SSH_AUTH_SOCK; export SSH_AGENT_PID
-else
-    sshfix
-fi
+sshfix
 
 # Add the hey command
 if [ -d $HOME/.hey ]; then

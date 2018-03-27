@@ -18,13 +18,13 @@ if [ -z "$(which brew)" ]; then
 fi
 
 # Make sure we’re using the latest Homebrew & upgrade all installed formulae.
-brew update
-brew upgrade
+brew update && brew upgrade
 
 # Tap Homebrew Cask and a few other useful repositories.
-brew tap caskroom/cask
-brew tap homebrew/versions
-brew tap caskroom/versions
+#brew tap caskroom/cask
+#brew tap caskroom/fonts
+#brew tap homebrew/versions
+#brew tap caskroom/versions
 
 # Install GNU core utilities (those that come with OS X are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
@@ -37,8 +37,9 @@ brew install moreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
 
-# Install GNU `sed`, overwriting the built-in `sed`.
+# Install GNU sed and grep, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
+brew install grep --with-default-names
 
 # Install Bash 4.
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
@@ -49,34 +50,34 @@ brew install bash bash-completion2
 brew install wget --with-iri
 
 # Install more recent versions of some OS X tools.
-brew install grep
 brew install openssh
 brew install screen
 brew install nano
 
 # Install other useful binaries.
 brew install ack
-brew install git
-brew install git-lfs
-brew install git-flow-avh
-brew install imagemagick --with-webp
 brew install tree
 brew install rsync
 brew install pstree
-
 brew install z
-brew install zsh zsh-completions
+brew install fzf
 brew install httpie
+brew install zsh zsh-completions
+
+# Update Git and install som additions.
+brew install git git-lfs git-flow-avh
+git lfs install
 
 # Install security related things.
-brew install gpg
-brew install pinentry-mac
+brew install gpg pinentry-mac
 sudo ln -s /usr/local/bin/pinentry-mac /usr/local/bin/pinentry-yubikey
 
 # Install some development things.
 brew install node
-brew install golang
+brew install go
 brew install scons
+brew install yarn
+brew install firebase-cli
 
 # Remove outdated versions from the cellar.
 brew cleanup

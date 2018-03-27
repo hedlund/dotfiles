@@ -18,20 +18,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # General UI/UX                                                               #
 ###############################################################################
 
-# Set computer name (as done via System Preferences → Sharing)
-#sudo scutil --set ComputerName "0x6D746873"
-#sudo scutil --set HostName "0x6D746873"
-#sudo scutil --set LocalHostName "0x6D746873"
-#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
-
-# Set standby delay to 24 hours (default is 1 hour)
-#sudo pmset -a standbydelay 86400
-
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
-
-# Disable transparency in the menu bar and elsewhere on Yosemite
-#defaults write com.apple.universalaccess reduceTransparency -bool true
 
 # Menu bar: hide the Time Machine, Volume, User and Battery icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
@@ -41,39 +29,20 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 		"/System/Library/CoreServices/Menu Extras/Battery.menu"
 done
 defaults write com.apple.systemuiserver menuExtras -array \
+    "/System/Library/CoreServices/Menu Extras/Clock.menu" \
 	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
 	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
-	"/System/Library/CoreServices/Menu Extras/TextInput.menu" \
-	"/System/Library/CoreServices/Menu Extras/Clock.menu"
+	"/System/Library/CoreServices/Menu Extras/TextInput.menu"
 defaults delete "com.apple.systemuiserver" "NSStatusItem Visible com.apple.menuextra.battery"
+#TODO: This still doesn't remove the default battery icon from the top menu... :(
 
 # Enable dark mode
 defaults write "Apple Global Domain" AppleInterfaceStyle -string "Dark"
 
-# Set highlight color to green
-#defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
-
-# Set sidebar icon size to medium
-#defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
-
-# Always show scrollbars
-#defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
-# Possible values: `WhenScrolling`, `Automatic` and `Always`
-
-# Disable the over-the-top focus ring animation
-#defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false
-
-# Disable smooth scrolling
-# (Uncomment if you’re on an older Mac that messes up the animation)
-#defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false
-
-# Increase window resize speed for Cocoa applications
-#defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 # Expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
@@ -82,15 +51,6 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
-# Automatically quit printer app once the print jobs complete
-#defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-# Disable the “Are you sure you want to open this application?” dialog
-#defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
-#/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
@@ -98,29 +58,14 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
-# Disable automatic termination of inactive apps
-#defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-
 # Disable the crash reporter
-defaults write com.apple.CrashReporter DialogType -string "none"
-
-# Set Help Viewer windows to non-floating mode
-#defaults write com.apple.helpviewer DevMode -bool true
-
-# Fix for the ancient UTF-8 bug in QuickLook (https://mths.be/bbo)
-# Commented out, as this is known to cause problems in various Adobe apps :(
-# See https://github.com/mathiasbynens/dotfiles/issues/237
-#echo "0x08000100:0" > ~/.CFUserTextEncoding
-
-# Reveal IP address, hostname, OS version, etc. when clicking the clock
-# in the login window
-#sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+#defaults write com.apple.CrashReporter DialogType -string "none"
 
 # Display contact info on login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "Email: henrik@hedlund.im"
 
 # Make sure auto login is disabled
-sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUser
+sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUser 2> /dev/null
 
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
@@ -129,7 +74,7 @@ sudo systemsetup -setrestartfreeze on
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable Notification Center and remove the menu bar icon
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+#launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
 # Disable smart quotes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -164,15 +109,8 @@ sudo /usr/libexec/airportd prefs RequireAdminIBSS=YES
 # Require admin auth to change networks
 sudo /usr/libexec/airportd prefs RequireAdminNetworkChange=YES
 
-# Require admin auth torn wifi on and off
+# Require admin auth to turn wifi on and off
 sudo /usr/libexec/airportd prefs RequireAdminPowerToggle=YES
-
-###############################################################################
-# SSD-specific tweaks                                                         #
-###############################################################################
-
-# Disable local Time Machine snapshots
-sudo tmutil disablelocal
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -201,20 +139,12 @@ defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 # Follow the keyboard focus while zoomed in
 #defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
-# Disable press-and-hold for keys in favor of key repeat
-#defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-# Set a blazingly fast keyboard repeat rate
-#defaults write NSGlobalDomain KeyRepeat -int 0
-
 # Use the F-keys as standard function keys..
 defaults write NSGlobalDomain "com.apple.keyboard.fnState" -int 1
 
 # Set language and text formats
 defaults write NSGlobalDomain AppleLanguages -array "en" "nb" "sv"
 defaults write NSGlobalDomain AppleLocale -string "en_SE"
-#defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-#defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
 sudo systemsetup -settimezone "Europe/Oslo" > /dev/null
@@ -549,29 +479,29 @@ sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Vol
 # 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
 # 	MENU_WEBSEARCH             (send search queries to Apple)
 # 	MENU_OTHER
-defaults write com.apple.spotlight orderedItems -array \
-	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
-	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
-	'{"enabled" = 1;"name" = "PDF";}' \
-	'{"enabled" = 1;"name" = "FONTS";}' \
-	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
-	'{"enabled" = 0;"name" = "MESSAGES";}' \
-	'{"enabled" = 0;"name" = "CONTACT";}' \
-	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
-	'{"enabled" = 0;"name" = "IMAGES";}' \
-	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
-	'{"enabled" = 0;"name" = "MUSIC";}' \
-	'{"enabled" = 0;"name" = "MOVIES";}' \
-	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-	'{"enabled" = 0;"name" = "SOURCE";}' \
-	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
-	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
-	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
-	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
-	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
-	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+# defaults write com.apple.spotlight orderedItems -array \
+# 	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
+# 	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+# 	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
+# 	'{"enabled" = 1;"name" = "PDF";}' \
+# 	'{"enabled" = 1;"name" = "FONTS";}' \
+# 	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
+# 	'{"enabled" = 0;"name" = "MESSAGES";}' \
+# 	'{"enabled" = 0;"name" = "CONTACT";}' \
+# 	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
+# 	'{"enabled" = 0;"name" = "IMAGES";}' \
+# 	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
+# 	'{"enabled" = 0;"name" = "MUSIC";}' \
+# 	'{"enabled" = 0;"name" = "MOVIES";}' \
+# 	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
+# 	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
+# 	'{"enabled" = 0;"name" = "SOURCE";}' \
+# 	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
+# 	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
+# 	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
+# 	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
+# 	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
+# 	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 # Load new settings before rebuilding the index
 killall mds > /dev/null 2>&1
 # Make sure indexing is enabled for the main volume
@@ -589,24 +519,10 @@ sudo mdutil -E / > /dev/null
 # Alfred 3                                                                    #
 ###############################################################################
 
-ALFRED3_PREFERENCES="$HOME/Library/Application Support/Alfred 3/Alfred.alfredpreferences/preferences"
-ALFRED3_LOCAL_ID=$( ls "$ALFRED3_PREFERENCES/local" | head -1 )
-ALFRED3_LOCAL_PREFERENCES="$ALFRED3_PREFERENCES/local/$ALFRED3_LOCAL_ID"
+# Set the config sync folder
+defaults write com.runningwithcrayons.Alfred-Preferences-3 syncfolder -string "~/Dropbox/Library/Alfred"
 
-# Don't show icon in toolbar menu
-/usr/libexec/PlistBuddy -c "Add :hidemenu bool" "$ALFRED3_PREFERENCES/appearance/options/prefs.plist"
-/usr/libexec/PlistBuddy -c "Set :hidemenu true" "$ALFRED3_PREFERENCES/appearance/options/prefs.plist"
-
-# Set the theme
-/usr/libexec/PlistBuddy -c "Add :currentthemeuid string" "$ALFRED3_LOCAL_PREFERENCES/appearance/prefs.plist"
-/usr/libexec/PlistBuddy -c "Set :currentthemeuid theme.bundled.dark" "$ALFRED3_LOCAL_PREFERENCES/appearance/prefs.plist"
-
-# Set the hotkey (Cmd + Space)
-/usr/libexec/PlistBuddy -c "Add :default dict" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
-/usr/libexec/PlistBuddy -c "Add :default:string string Space" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
-/usr/libexec/PlistBuddy -c "Add :default:key integer 49" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
-/usr/libexec/PlistBuddy -c "Add :default:mod integer 1048576" "$ALFRED3_LOCAL_PREFERENCES/hotkey/prefs.plist"
-
+#TODO: Configuring colour scheme and key binding
 
 ###############################################################################
 # Terminal                                                                    #
@@ -705,9 +621,6 @@ defaults write com.googlecode.iterm2 "Secure Input" -bool true
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-# Disable local Time Machine backups
-hash tmutil &> /dev/null && sudo tmutil disablelocal
-
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
@@ -804,67 +717,20 @@ defaults write com.lightheadsw.caffeine DefaultDuration -int 60
 defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
 
 ###############################################################################
-# Transmit                                                                    #
-###############################################################################
-
-# Enable automatic updates
-defaults write com.panic.Transmit SUAutomaticallyUpdate -bool true
-
-# Hide icon in menu bar
-defaults write com.panic.Transmit ShowTransmitMenu -bool false
-
-# Show hidden files
-defaults write com.panic.Transmit ShowHiddenFiles2 -bool true
-
-###############################################################################
-# Dash                                                                        #
-###############################################################################
-
-# Start at login
-defaults write com.kapeli.dashdoc shouldStartAtLogin -bool true
-
-# Show icon in menu bar
-defaults write com.kapeli.dashdoc shouldShowStatusIcon -bool true
-
-# Menu bar icon click toggles menu
-defaults write com.kapeli.dashdoc shouldToggleMethods -bool true
-
-# Do not show in dock
-defaults write com.kapeli.dashdoc showInDock -bool false
-
-# Sync the bookmarks
-defaults write com.kapeli.dashdoc shouldSyncBookmarks -bool true
-
-# Sync the docsets
-defaults write com.kapeli.dashdoc shouldSyncDocsets -bool true
-
-# Sync general settings
-defaults write com.kapeli.dashdoc shouldSyncGeneral -bool true
-
-# Sync view settings
-defaults write com.kapeli.dashdoc shouldSyncView -bool true
-
-# Set the sync folder path
-defaults write com.kapeli.dashdoc syncFolderPath -string "$HOME/Dropbox/Library/Dash"
-
-# Set the Snippets library path
-defaults write com.kapeli.dashdoc snippetSQLPath -string "$HOME/Dropbox/Library/Dash/library.dash"
-
-###############################################################################
 # iStat Menus                                                                 #
 ###############################################################################
 
-# Green graphs
-defaults write com.bjango.istatmenus5.extras MenubarSkinColor -int 3
-
-# White graph backgrounds
-defaults write com.bjango.istatmenus5.extras MenubarTheme -int 0
+# Orange graphs
+defaults write com.bjango.istatmenus6.extras MenubarSkinColor-Dark -int 1
 
 # Black dropdown theme
-defaults write com.bjango.istatmenus5.extras DropdownTheme -int 1
+defaults write com.bjango.istatmenus6.extras DropdownTheme-Dark -int 1
 
 # Slow update frequency
-defaults write com.bjango.istatmenus5.extras TimerFrequency -int 0
+defaults write com.bjango.istatmenus6.extras TimerFrequency -int 0
+
+# White graph backgrounds
+#defaults write com.bjango.istatmenus5.extras MenubarTheme -int 0
 
 # Setting the following defaults prevents iStat from starting for some reason...
 
@@ -902,6 +768,8 @@ defaults write "com.todoist.mac.Todoist" ShowTodoistMenuBar -bool false
 # Don't show the warning when closing Little Snitch configuration
 defaults write "at.obdev.LittleSnitchConfiguration" ShowTerminationAlert -int 0
 
+#TODO: disable default keyboard shortcut
+
 # Set Micro Snitch to open at login
 defaults write "at.obdev.MicroSnitch" OpenAtLogin -int 1
 
@@ -919,7 +787,9 @@ defaults write com.adobe.Lightroom6 recentLibraryBehavior20 -string "AlwaysPromp
 # Arduino                                                                     #
 ###############################################################################
 
-sed -i "s|sketchbook.path=.*|sketchbook.path=${HOME}/Projects/arduino|g" ${HOME}/Library/Arduino15/preferences.txt
+if [ -f ${HOME}/Library/Arduino15/preferences.txt ]; then
+    sed -i "s|sketchbook.path=.*|sketchbook.path=${HOME}/Projects/arduino|g" ${HOME}/Library/Arduino15/preferences.txt
+fi
 
 ###############################################################################
 # Visual Studio Code                                                          #
@@ -941,7 +811,6 @@ done
 # ...and add those I want
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Alfred 3.app", name:"Alfred 3", hidden:false}'
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Caffeine.app", name:"Caffeine", hidden:false}'
-osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Dash.app", name:"Dash", hidden:false}'
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Dropbox.app", name:"Dropbox", hidden:false}'
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Spectacle.app", name:"Spectacle", hidden:false}'
 
@@ -951,7 +820,7 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Google Chrome" "Mail" "Messages" "Safari" "Spectacle" \
-    "SystemUIServer" "Alfred 3" "Dash" "Terminal" "iCal" "Transmit"; do
+    "SystemUIServer" "Alfred 3" "Terminal" "iCal"; do
 	killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

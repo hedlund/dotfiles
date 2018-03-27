@@ -42,12 +42,3 @@ case "$(uname -s)" in
         exit 1
         ;;
 esac
-
-
-##############################################################################
-# Common stuff                                                               #
-##############################################################################
-
-$CURRENT/install-npm.sh
-$CURRENT/install-code.sh
-$CURRENT/install-go.sh

@@ -23,8 +23,10 @@ done;
 # Symlink the .editorconfig explicitly
 ln -sf $DOTFILES/.editorconfig $HOME/.editorconfig
 
+#-------------------------------------------------------------------------------
 # Create GPG directory and symlink its files explicitly
 if [ ! -d $HOME/.gnupg ]; then
+    echo "Creating GPG directory; will ask for password..."
     mkdir $HOME/.gnupg && sudo chmod 700 $HOME/.gnupg
 fi
 ln -sf $DOTFILES/gnupg/gpg.conf $HOME/.gnupg/gpg.conf
@@ -33,6 +35,12 @@ ln -sf $DOTFILES/gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 #-------------------------------------------------------------------------------
 # Ensure we have the local git config file
 touch $HOME/.gitconfig.local
+
+#-------------------------------------------------------------------------------
+# Create a Projects folder
+[ ! -d "$HOME/Projects/arduino" ] && mkdir -p $HOME/Projects/arduino
+[ ! -d "$HOME/Projects/golang/src" ] && mkdir -p $HOME/Projects/golang/src
+
 
 #-------------------------------------------------------------------------------
 # Install hey

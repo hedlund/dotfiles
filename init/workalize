@@ -4,13 +4,6 @@
 # Mac OS X                                                                    #
 ###############################################################################
 if [[ "$(uname -s)" == "Darwin" ]]; then
-
-    # Install software
-    brew install maven
-    brew cask install skype
-    brew cask install skype-for-business
-    brew cask install java
-
 fi
 
 ###############################################################################
@@ -18,4 +11,4 @@ fi
 ###############################################################################
 
 git config --file ~/.gitconfig.local user.name "Henrik Hedlund"
-git config --file ~/.gitconfig.local user.email "henrik.hedlund@knowit.no"
+git config --file ~/.gitconfig.local user.email "henrik.hedlund@remarkable.no"

@@ -10,13 +10,7 @@ else
     }
 fi
 
-# Typescript stuff
 ninst typescript
-ninst typings
-
-# Node development
 ninst yo
-ninst nodemon
-ninst http-server
-
-#ninst hpm-cli
+ninst serve
+ninst depcheck

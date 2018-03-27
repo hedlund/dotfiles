@@ -10,14 +10,3 @@ case "$(uname -s)" in
     CYGWIN*|MINGW*|MSYS*) $CURRENT/setup-win.sh ;;
     *) echo "Running on unknown OS. Aborting!" ; exit 1 ;;
 esac
-
-#-------------------------------------------------------------------------------
-# Create a Projects folder
-
-if [ ! -d "$HOME/Projects/arduino" ]; then
-	mkdir -p $HOME/Projects/arduino
-fi
-
-if [ ! -d "$HOME/Projects/golang/src" ]; then
-    mkdir -p $HOME/Projects/golang/src
-fi

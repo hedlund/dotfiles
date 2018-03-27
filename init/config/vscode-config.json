@@ -1,0 +1,7 @@
+{
+    "workbench.colorTheme": "Atom One Dark",
+    "workbench.iconTheme": "file-icons",
+    "editor.fontSize": 14,
+    "editor.minimap.renderCharacters": false,
+    "gitlens.keymap": "alternate"
+}

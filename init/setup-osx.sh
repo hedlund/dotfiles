@@ -758,7 +758,6 @@ defaults write com.bjango.istatmenus6.extras TimerFrequency -int 0
 
 # Show in Dock, but not in the menubar
 defaults write "com.todoist.mac.Todoist" ShowInDock -bool true
-defaults write "com.todoist.mac.Todoist" ShowQuickAddExpandInfo -bool false
 defaults write "com.todoist.mac.Todoist" ShowTodoistMenuBar -bool false
 
 ###############################################################################
@@ -796,6 +795,14 @@ fi
 ###############################################################################
 
 ln -sf $DOTFILES/init/config/vscode-config.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+
+###############################################################################
+# Dash                                                                        #
+###############################################################################
+
+defaults write com.kapeli.dashdoc syncFolderPath -string "${HOME}/Dropbox/Library/Dash"
+defaults write com.kapeli.dashdoc snippetSQLPath -string "${HOME}/Dropbox/Library/Dash/Snippets.dash"
 
 ###############################################################################
 # Login Items                                                                 #

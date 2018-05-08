@@ -68,3 +68,9 @@ fi
 if [ -d $HOME/.1password ]; then
     eval "$($HOME/.1password/bin/1p init -)"
 fi
+
+# Enable direnv
+eval "$(direnv hook bash)"
+
+# Alias hub to git
+eval "$(hub alias -s)"

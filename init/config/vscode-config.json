@@ -3,5 +3,21 @@
     "workbench.iconTheme": "file-icons",
     "editor.fontSize": 14,
     "editor.minimap.renderCharacters": false,
-    "gitlens.keymap": "alternate"
+    "gitlens.keymap": "chorded",
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true
+    },
+    "go.inferGopath": true,
+    "telemetry.enableTelemetry": false,
+    "go.buildOnSave": "workspace",
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false
+    }
 }

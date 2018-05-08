@@ -41,13 +41,16 @@ brew cask install etcher
 # Install internet-related applications.
 brew cask install google-chrome
 brew cask install firefox-developer-edition
+brew cask install mailspring
 
 # Install developments tools.
+brew cask install dash
 brew cask install visual-studio-code
 brew cask install arduino
 brew cask install now
 brew cask install postman
 brew cask install google-cloud-sdk
+brew cask install boostnote
 
 # Install some Docker & virtualization things.
 brew cask install virtualbox
@@ -64,7 +67,6 @@ brew cask install font-inconsolata
 brew cleanup && brew cask cleanup
 
 # Things that have been removed from these lists for now
-#brew cask install dash
 #brew cask install hyper
 #brew cask install transmit
 #brew cask install android-studio
@@ -76,6 +78,7 @@ open -a "1Password 6"
 open -a "iStat Menus"
 open -a "Micro Snitch"
 open -a Arduino
+open -a Dash
 
 # Open up the Little Snitch installer
 LITTLESNITCH_PATH="$CASKROOM_PATH/little-snitch"

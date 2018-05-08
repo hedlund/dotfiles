@@ -19,6 +19,7 @@ code --install-extension cssho.vscode-svgviewer
 code --install-extension bierner.color-info
 code --install-extension mitchdenny.ecdc
 code --install-extension flesler.url-encode
+code --install-extension deerawan.vscode-dash
 
 # ...a bunch of JavaScript stuff...
 code --install-extension dbaeumer.vscode-eslint

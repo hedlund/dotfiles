@@ -75,9 +75,13 @@ sudo ln -s /usr/local/bin/pinentry-mac /usr/local/bin/pinentry-yubikey
 # Install some development things.
 brew install node
 brew install go
+brew install dep
 brew install scons
 brew install yarn
 brew install firebase-cli
+brew install telnet
+brew install hub
+brew install envchain
 
 # Remove outdated versions from the cellar.
 brew cleanup

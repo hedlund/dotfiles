@@ -4,6 +4,11 @@
 # Mac OS X                                                                    #
 ###############################################################################
 if [[ "$(uname -s)" == "Darwin" ]]; then
+
+    brew install blackbox
+    brew cask install google-cloud-sdk
+
+    gcloud components install core app-engine-go app-engine-python beta gsutil bq
 fi
 
 ###############################################################################

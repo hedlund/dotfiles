@@ -1,7 +1,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,dockerfunc,localfunc}; do
+for file in ~/.{path,exports,bash_prompt,aliases,functions,extra,dockerfunc,localfunc}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -67,6 +67,11 @@ fi
 # Add the 1p command
 if [ -d $HOME/.1password ]; then
     eval "$($HOME/.1password/bin/1p init -)"
+fi
+
+# Add the re command
+if [ -d $PROJECTS/reMarkable/re ]; then
+    eval "$($PROJECTS/reMarkable/re/bin/re init -)"
 fi
 
 # Enable direnv

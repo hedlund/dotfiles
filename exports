@@ -33,6 +33,5 @@ export MANPAGER='less -X';
 
 # Setup a few useful environment variables
 export PROJECTS=$HOME/Projects
-export PUBLIC_GPG_KEY=93B0E5FD
 export HOMEBREW_CELLAR=/usr/local/Cellar/
 export HOMEBREW_CASKROOM=/usr/local/Caskroom/

@@ -22,4 +22,5 @@
     },
     "gitlens.historyExplorer.enabled": true,
     "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.renderWhitespace": "boundary",
 }

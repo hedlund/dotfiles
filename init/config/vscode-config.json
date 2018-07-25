@@ -19,5 +19,7 @@
     "go.buildOnSave": "workspace",
     "[markdown]": {
         "files.trimTrailingWhitespace": false
-    }
+    },
+    "gitlens.historyExplorer.enabled": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
 }

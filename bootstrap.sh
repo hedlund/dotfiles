@@ -45,6 +45,13 @@ fi
 ###############################################################################
 
 touch "$HOME/.gitconfig.local"
+git config --file ~/.gitconfig.local user.name "Henrik Hedlund"
+if confirm "Configure Git for personal use?"; then
+    git config --file ~/.gitconfig.local user.email "henrik@hedlund.im"
+else
+    git config --file ~/.gitconfig.local user.email "henrik.hedlund@remarkable.no"
+fi
+
 sed -i "s|https://github.com/hedlund/dotfiles.git|git@github.com:hedlund/dotfiles.git|g" "$CURRENT/.git/config"
 
 ###############################################################################
@@ -80,7 +87,12 @@ if [ $PLATFORM == "Darwin" ]; then
 
 elif [ $PLATFORM == "Linux" ]; then
 
-    echo "Linux"
+    # Make sure nano config is available where expected
+    if [ ! -d /usr/local/share/nano ]; then
+        if [ -d /usr/share/nano ]; then
+            sudo ln -s /usr/share/nano /usr/local/share/nano
+        fi
+    fi
 
 else
     echo "Running on unknown OS."

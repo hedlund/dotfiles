@@ -31,7 +31,7 @@ fi;
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
 # Add tab completion for many Bash commands
-if command -v brew >/dev/null 2>&1 && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+if exists brew && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
 	source "$(brew --prefix)/share/bash-completion/bash_completion";
 elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
@@ -46,7 +46,7 @@ if [[ $OSTYPE =~ darwin* ]]; then
 	complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
 	# Move next only if `homebrew` is installed
-	if command -v brew >/dev/null 2>&1; then
+	if exists brew; then
 	    # Load rupa's z if installed
 	    [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
 	fi
@@ -75,7 +75,12 @@ if [ -d $PROJECTS/reMarkable/re ]; then
 fi
 
 # Enable direnv
-eval "$(direnv hook bash)"
+if exists direnv; then
+    eval "$(direnv hook bash)"
+fi
 
 # Alias hub to git
-eval "$(hub alias -s)"
+if exists hub; then
+    eval "$(hub alias -s)"
+fi
+

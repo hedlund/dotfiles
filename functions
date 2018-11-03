@@ -227,7 +227,7 @@ function sshfix() {
     eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
   elif [ -f $WEASEL_PAGEANT ]; then
     # On WSL, start weasel-pageant
-    eval $($WEASEL_PAGEANT -r)
+    eval $($WEASEL_PAGEANT -r) &>/dev/null
   else
     # On *nix, replace ssh-agent with gpg-agent
     pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)

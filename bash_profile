@@ -1,7 +1,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,exports,bash_prompt,aliases,functions,extra,dockerfunc,localfunc}; do
+for file in ~/.{functions,path,exports,bash_prompt,aliases,extra,dockerfunc,localfunc}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -37,7 +37,8 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
-if [[ $OSTYPE =~ darwin* ]]; then
+if is_mac; then
+
 	# Add tab completion for `defaults read|write NSGlobalDomain`
 	# You could just use `-g` instead, but I like being explicit
 	complete -W "NSGlobalDomain" defaults;
@@ -53,6 +54,11 @@ if [[ $OSTYPE =~ darwin* ]]; then
 
 	# Enable iTerm 2 shell integration
 	test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+elif is_lxss; then
+
+	# Make Docker CLI connect to Docker for Windows
+	export DOCKER_HOST=tcp://localhost:2375
 
 fi
 

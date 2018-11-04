@@ -5,7 +5,7 @@ export PATH="$HOME/.bin:$PATH";
 export PATH="/usr/local/sbin:$PATH";
 
 # Add Go
-if [[ $OSTYPE =~ linux* ]]; then
+if is_linux; then
     export PATH=$PATH:$HOME/.local/share/umake/go/go-lang/bin
 fi
 export GOPATH=$HOME/Projects/golang

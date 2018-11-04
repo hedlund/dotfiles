@@ -1,5 +1,22 @@
 WEASEL_PAGEANT="/mnt/c/tools/weasel-pageant/weasel-pageant"
 
+# Functions to check which environment we are running in...
+function is_mac() {
+    [[ $OSTYPE =~ darwin* ]]
+}
+
+function is_windows() {
+    [[ $OSTYPE =~ msys* ]]
+}
+
+function is_linux() {
+	[[ $OSTYPE =~ linux* ]]
+}
+
+function is_lxss() {
+    [[ $OSTYPE =~ linux* ]] && [[ "$(uname -r)" == *Microsoft ]]
+}
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_";
@@ -222,10 +239,10 @@ function colorize() {
 
 # Enable GPG for SSH
 function sshfix() {
-  if [[ $OSTYPE =~ msys* ]]; then
+  if is_windows; then
     # On win, make sure we start ssh-pageant
     eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
-  elif [ -f $WEASEL_PAGEANT ]; then
+  elif is_lxss && [ -f $WEASEL_PAGEANT ]; then
     # On WSL, start weasel-pageant
     eval $($WEASEL_PAGEANT -r) &>/dev/null
   else

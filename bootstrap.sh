@@ -3,6 +3,7 @@
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 PLATFORM="$(uname -s)"
 PUBLIC_GPG_KEY="93B0E5FD"
+PINENTRY_YUBIKEY="/usr/local/bin/pinentry-yubikey"
 
 source ./functions
 
@@ -85,6 +86,11 @@ if [ $PLATFORM == "Darwin" ]; then
     # Configure VS Code
     ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 
+    # Make sure we have a common link to a pinentry
+    if [ ! -f $PINENTRY_YUBIKEY ]; then
+        sudo ln -s /usr/local/bin/pinentry-mac $PINENTRY_YUBIKEY
+    fi
+
 elif [ $PLATFORM == "Linux" ]; then
 
     # Make sure nano config is available where expected
@@ -92,6 +98,12 @@ elif [ $PLATFORM == "Linux" ]; then
         if [ -d /usr/share/nano ]; then
             sudo ln -s /usr/share/nano /usr/local/share/nano
         fi
+    fi
+
+    # Make sure we have a common link to a pinentry
+    if [ ! -f $PINENTRY_YUBIKEY ]; then
+        PINENTRY=$(which pinentry-qt)
+        sudo ln -s ${PINENTRY:-$(which pinentry-gnome3)} $PINENTRY_YUBIKEY
     fi
 
 else

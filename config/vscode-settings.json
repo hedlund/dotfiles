@@ -1,7 +1,9 @@
 {
     "workbench.colorTheme": "Atom One Dark",
     "workbench.iconTheme": "file-icons",
+    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
     "editor.fontSize": 14,
+    "editor.fontLigatures": true,
     "editor.minimap.renderCharacters": false,
     "gitlens.keymap": "chorded",
     "gitlens.advanced.messages": {
@@ -23,4 +25,8 @@
     "gitlens.historyExplorer.enabled": true,
     "javascript.updateImportsOnFileMove.enabled": "always",
     "editor.renderWhitespace": "boundary",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
 }

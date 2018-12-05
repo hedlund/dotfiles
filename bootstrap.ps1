@@ -10,12 +10,14 @@ Function ForceLink([string] $Source, [string] $Target) {
 
 # Symlink the few files that makes sense in Windows into place...
 ForceLink -Source "$PSScriptRoot\gitconfig" -Target "$HOME\.gitconfig"
-ForceLink -Source "$PSScriptRoot\hyper.js" -Target "$HOME\.hyper.js"
+ForceLink -Source "$PSScriptRoot\hyper.win.js" -Target "$HOME\.hyper.js"
 ForceLink -Source "$PSScriptRoot\config\vscode-settings.json" -Target "$HOME\AppData\Roaming\Code\User\settings.json"
 
 # Configure Git
 git config --file "$HOME/.gitconfig.local" credential.helper "manager"
 git config --file "$HOME/.gitconfig.local" user.name "Henrik Hedlund"
+#git config --file "$HOME/.gitconfig.local" core.fileMode false
+#git config --file "$HOME/.gitconfig.local" core.autocrlf true
 
 $confirm = Read-Host -Prompt "Configure Git for personal use? [Y/n]"
 $confirm = $confirm.Trim().ToLower()

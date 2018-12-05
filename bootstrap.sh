@@ -103,7 +103,12 @@ elif [ $PLATFORM == "Linux" ]; then
     # Make sure we have a common link to a pinentry
     if [ ! -f $PINENTRY_YUBIKEY ]; then
         PINENTRY=$(which pinentry-qt)
-        sudo ln -s ${PINENTRY:-$(which pinentry-gnome3)} $PINENTRY_YUBIKEY
+        PINENTRY=${PINENTRY:-$(which pinentry-gnome3)}
+        if [ ! -z "$PINENTRY" ]; then
+            sudo ln -s ${PINENTRY:-$(which pinentry-gnome3)} $PINENTRY_YUBIKEY
+        else
+            echo "Unable to find a pinentry app to symlink..."
+        fi
     fi
 
 else

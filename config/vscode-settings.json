@@ -1,8 +1,8 @@
 {
-    "workbench.colorTheme": "Atom One Dark",
-    "workbench.iconTheme": "file-icons",
+    "workbench.colorTheme": "Material Theme",
+    "workbench.iconTheme": "eq-material-theme-icons",
     "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
-    "editor.fontSize": 14,
+    "editor.fontSize": 16,
     "editor.fontLigatures": true,
     "editor.minimap.renderCharacters": false,
     "gitlens.keymap": "chorded",
@@ -29,4 +29,9 @@
     "files.eol": "\n",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "breadcrumbs.enabled": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.tabSize": 2,
+    "terraform.codelens.enabled": false,
+    "window.zoomLevel": 0,
 }

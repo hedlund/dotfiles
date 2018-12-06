@@ -13,7 +13,7 @@ source ./functions
 
 dotfiles=(
     aliases bash_profile bash_prompt bashrc curlrc dockerfunc exports functions gdbinit gitattributes
-    gitconfig gitignore gvimrc hgignore hushlogin hyper.js inputrc nanorc path screenrc wgetrc
+    gitconfig gitignore gvimrc hgignore hushlogin hyper.js inputrc nanorc path screenrc wgetrc npmrc
 )
 for file in "${dotfiles[@]}"; do
     ln -sf "$CURRENT/$file" "$HOME/.$file"
@@ -54,6 +54,12 @@ else
 fi
 
 sed -i "s|https://github.com/hedlund/dotfiles.git|git@github.com:hedlund/dotfiles.git|g" "$CURRENT/.git/config"
+
+###############################################################################
+# Configure NPM                                                               #
+###############################################################################
+
+mkdir -p ${HOME}/.npm-packages
 
 ###############################################################################
 # Platform specific config                                                    #

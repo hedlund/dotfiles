@@ -16,8 +16,6 @@ ForceLink -Source "$PSScriptRoot\config\vscode-settings.json" -Target "$HOME\App
 # Configure Git
 git config --file "$HOME/.gitconfig.local" credential.helper "manager"
 git config --file "$HOME/.gitconfig.local" user.name "Henrik Hedlund"
-#git config --file "$HOME/.gitconfig.local" core.fileMode false
-#git config --file "$HOME/.gitconfig.local" core.autocrlf true
 
 $confirm = Read-Host -Prompt "Configure Git for personal use? [Y/n]"
 $confirm = $confirm.Trim().ToLower()

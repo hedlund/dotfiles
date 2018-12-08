@@ -121,6 +121,9 @@
 	# Yes, I am a n00b :(
 	editor = nano
 
+	# Make sure we do not mess with the line endings on any platform
+	autocrlf = false
+
 [color]
 
 	# Use colors in Git commands that are capable of colored output when

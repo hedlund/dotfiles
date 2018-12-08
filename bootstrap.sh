@@ -106,12 +106,6 @@ elif [ $PLATFORM == "Linux" ]; then
         fi
     fi
 
-    # This makes it less painful to go between Windows and LXSS
-    if is_lxss; then
-        #git config --file ~/.gitconfig.local core.fileMode false
-        git config --file ~/.gitconfig.local core.autocrlf true
-    fi
-
     # Make sure we have a common link to a pinentry
     if [ ! -f $PINENTRY_YUBIKEY ]; then
         PINENTRY=$(which pinentry-qt)

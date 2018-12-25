@@ -158,3 +158,6 @@ if is_lxss; then
   alias powershell="powershell.exe"
   alias posh="powershell.exe"
 fi
+
+# Terraform stüff
+alias tf="terraform"

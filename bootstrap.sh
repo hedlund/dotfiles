@@ -117,6 +117,23 @@ elif [ $PLATFORM == "Linux" ]; then
         fi
     fi
 
+
+    # If we're on Manjaro/Arch, we need to get a few extra things into place...
+    if [[ "$(uname -r)" =~ "MANJARO" ]]; then
+
+        # I'm not a 100% certain, but this *might* be necessary for the Yubikey
+        sudo systemctl start pcscd.socket
+        sudo systemctl enable pcscd.socket
+
+        # In order to use GPG with SSH, we need to stop the systemd gpg-agent service
+        systemctl --user disable gpg-agent
+
+        # But that is not enough if the damn gpg-agent socket files present
+        if [ -f /etc/systemd/user/sockets.target.wants/gpg-agent.socket ]; then
+            sudo rm /etc/systemd/user/sockets.target.wants/gpg*.socket
+        fi
+    fi
+
 else
     echo "Running on unknown OS."
 fi

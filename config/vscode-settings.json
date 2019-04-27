@@ -1,7 +1,7 @@
 {
     "workbench.colorTheme": "Material Theme",
-    "workbench.iconTheme": "eq-material-theme-icons",
-    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.fontFamily": "'Fira Code', Consolas, 'Droid Sans Mono', 'Courier New', monospace",
     "editor.fontSize": 16,
     "editor.fontLigatures": true,
     "editor.minimap.renderCharacters": false,
@@ -34,4 +34,5 @@
     "editor.tabSize": 2,
     "terraform.codelens.enabled": false,
     "window.zoomLevel": 0,
+    "window.titleBarStyle": "custom",
 }

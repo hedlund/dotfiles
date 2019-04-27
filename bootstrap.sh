@@ -132,6 +132,9 @@ elif [ $PLATFORM == "Linux" ]; then
         if [ -f /etc/systemd/user/sockets.target.wants/gpg-agent.socket ]; then
             sudo rm /etc/systemd/user/sockets.target.wants/gpg*.socket
         fi
+
+        # Configure VS Code
+        ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
     fi
 
 else

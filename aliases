@@ -161,3 +161,7 @@ fi
 
 # Terraform stüff
 alias tf="terraform"
+
+# Fix rotation on the GPD Pocket
+alias gpdfix="orientation-helper -r right-up"
+

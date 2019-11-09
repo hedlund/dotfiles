@@ -165,3 +165,7 @@ alias tf="terraform"
 # Fix rotation on the GPD Pocket
 alias gpdfix="orientation-helper -r right-up"
 
+# On Linux, Visual Studio Code is often installed as code-oss
+if ! exists code; then
+  alias code="code-oss"
+fi

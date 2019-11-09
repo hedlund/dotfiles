@@ -3,7 +3,7 @@
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 PLATFORM="$(uname -s)"
 PUBLIC_GPG_KEY="93B0E5FD"
-PINENTRY_YUBIKEY="/usr/local/bin/pinentry-yubikey"
+PINENTRY_YUBIKEY="/usr/bin/pinentry-yubikey"
 
 source ./functions
 
@@ -53,7 +53,7 @@ else
     git config --file ~/.gitconfig.local user.email "henrik.hedlund@remarkable.no"
 fi
 
-sed -i "s|https://github.com/hedlund/dotfiles.git|git@github.com:hedlund/dotfiles.git|g" "$CURRENT/.git/config"
+sed -i "s|https://github.com/hedlund/dotfiles\(.git\)\?|git@github.com:hedlund/dotfiles.git|g" "$CURRENT/.git/config"
 
 ###############################################################################
 # Configure NPM                                                               #
@@ -100,7 +100,7 @@ if [ $PLATFORM == "Darwin" ]; then
 elif [ $PLATFORM == "Linux" ]; then
 
     # Make sure nano config is available where expected
-    if [ ! -d /usr/local/share/nano ]; then
+    if [ -d /usr/local/share ] && [ ! -d /usr/local/share/nano ]; then
         if [ -d /usr/share/nano ]; then
             sudo ln -s /usr/share/nano /usr/local/share/nano
         fi
@@ -108,20 +108,23 @@ elif [ $PLATFORM == "Linux" ]; then
 
     # Make sure we have a common link to a pinentry
     if [ ! -f $PINENTRY_YUBIKEY ]; then
-        PINENTRY=$(which pinentry-qt)
-        PINENTRY=${PINENTRY:-$(which pinentry-gnome3)}
+        PINENTRY=$(which pinentry-qt 2>/dev/null)
+        PINENTRY=${PINENTRY:-$(which pinentry-gnome3 2>/dev/null)}
+        PINENTRY=${PINENTRY:-$(which pinentry-gtk-2 2>/dev/null)}
+        PINENTRY=${PINENTRY:-$(which pinentry 2>/dev/null)}
         if [ ! -z "$PINENTRY" ]; then
-            sudo ln -s ${PINENTRY:-$(which pinentry-gnome3)} $PINENTRY_YUBIKEY
+            sudo ln -s $PINENTRY $PINENTRY_YUBIKEY
         else
             echo "Unable to find a pinentry app to symlink..."
         fi
     fi
 
+    # Configure VS Code
+    ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
 
     # If we're on Manjaro/Arch, we need to get a few extra things into place...
     if [[ "$(uname -r)" =~ "MANJARO" ]]; then
-
-        # I'm not a 100% certain, but this *might* be necessary for the Yubikey
+    
         sudo systemctl start pcscd.socket
         sudo systemctl enable pcscd.socket
 
@@ -132,9 +135,13 @@ elif [ $PLATFORM == "Linux" ]; then
         if [ -f /etc/systemd/user/sockets.target.wants/gpg-agent.socket ]; then
             sudo rm /etc/systemd/user/sockets.target.wants/gpg*.socket
         fi
+    
+    # If we're on Solus, there are some things we need to do as well..
+    elif command -v "eopkg" >/dev/null 2>&1; then
+    
+        sudo systemctl start pcscd
+        sudo systemctl enable pcsc
 
-        # Configure VS Code
-        ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
     fi
 
 else

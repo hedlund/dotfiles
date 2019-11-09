@@ -22,8 +22,14 @@ for option in autocd globstar; do
 	shopt -s "$option" 2> /dev/null;
 done;
 
+# Bash completions may live in different places, figure out where
+BASH_COMPLETION=/usr/local/etc/bash_completion.d
+if [ ! -d "$BASH_COMPLETION" ]; then
+	BASH_COMPLETION=/etc/bash_completion.d
+fi
+
 # Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+if type _git &> /dev/null && [ -f "${BASH_COMPLETION}/git-completion.bash" ]; then
 	complete -o default -o nospace -F _git g;
 fi;
 
@@ -89,4 +95,3 @@ fi
 if exists hub; then
     eval "$(hub alias -s)"
 fi
-

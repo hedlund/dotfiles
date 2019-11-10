@@ -119,8 +119,13 @@ elif [ $PLATFORM == "Linux" ]; then
         fi
     fi
 
-    # Configure VS Code
-    ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
+    # If we're NOT in WSL, do this...
+    if [[ ! "$(uname -r)" =~ "Microsoft" ]]; then
+
+        # Configure VS Code
+        ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
+
+    fi
 
     # If we're on Manjaro/Arch, we need to get a few extra things into place...
     if [[ "$(uname -r)" =~ "MANJARO" ]]; then

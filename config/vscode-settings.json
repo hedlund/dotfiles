@@ -35,4 +35,6 @@
     "terraform.codelens.enabled": false,
     "window.zoomLevel": 0,
     "window.titleBarStyle": "custom",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDelete": false,
 }

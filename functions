@@ -13,7 +13,7 @@ function is_linux() {
 	[[ $OSTYPE =~ linux* ]]
 }
 
-function is_lxss() {
+function is_wsl() {
     [[ $OSTYPE =~ linux* ]] && [[ "$(uname -r)" == *Microsoft ]]
 }
 
@@ -242,7 +242,7 @@ function sshfix() {
   if is_windows; then
     # On win, make sure we start ssh-pageant
     eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
-  elif is_lxss && [ -f $WEASEL_PAGEANT ]; then
+  elif is_wsl && [ -f $WEASEL_PAGEANT ]; then
     # On WSL, start weasel-pageant
     eval $($WEASEL_PAGEANT -r) &>/dev/null
   else
@@ -269,4 +269,3 @@ function confirm() {
 function prompt() {
     read -s -p "${1:-Press ENTER to continue}"; echo
 }
-

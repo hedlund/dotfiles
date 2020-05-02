@@ -61,7 +61,7 @@ if is_mac; then
 	# Enable iTerm 2 shell integration
 	test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-elif is_lxss; then
+elif is_wsl; then
 
 	# Make Docker CLI connect to Docker for Windows
 	export DOCKER_HOST=tcp://localhost:2375

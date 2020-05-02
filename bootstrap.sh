@@ -59,7 +59,7 @@ sed -i "s|https://github.com/hedlund/dotfiles\(.git\)\?|git@github.com:hedlund/d
 # Platform specific config                                                    #
 ###############################################################################
 
-if [ $PLATFORM == "Darwin" ]; then
+if is_mac; then
 
     # Add the new bash version to /etc/shells (if needed)
     if [ -f /usr/local/bin/bash ]; then
@@ -91,7 +91,7 @@ if [ $PLATFORM == "Darwin" ]; then
         sudo ln -s /usr/local/bin/pinentry-mac $PINENTRY_YUBIKEY
     fi
 
-elif [ $PLATFORM == "Linux" ]; then
+elif is_linux; then
 
     # Make sure nano config is available where expected
     if [ -d /usr/local/share ] && [ ! -d /usr/local/share/nano ]; then
@@ -114,19 +114,23 @@ elif [ $PLATFORM == "Linux" ]; then
     fi
 
     # If we're NOT in WSL, do this...
-    if [[ ! "$(uname -r)" =~ "Microsoft" ]]; then
+    if ! is_wsl; then
 
-        # Configure VS Code
-        ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
+        # Symlink the VS Code configuration. We have a couple of options here...
+        if [ -d "$HOME/.config/Code - OSS" ]; then
+            ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
+        elif [ -d "$HOME/.config/Code" ]; then
+            ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code/User/settings.json"
+        else
+            echo "ERROR! Unable to find VS Code config folder. Skipping!"
+        fi
 
     fi
 
-    # If we're on Manjaro/Arch, we need to get a few extra things into place...
-    if [[ "$(uname -r)" =~ "MANJARO" ]]; then
+    # There are some things we need to tweak in order the get the Yubikey to work...
+    # On Manjaro and Pop!_OS (and probably more), we need to tweak the gpg-agent
+    if [[ "$(uname -r)" =~ "MANJARO" ]] || [[ "$(uname -a)" =~ "pop-os" ]]; then
     
-        sudo systemctl start pcscd.socket
-        sudo systemctl enable pcscd.socket
-
         # In order to use GPG with SSH, we need to stop the systemd gpg-agent service
         systemctl --user disable gpg-agent
 
@@ -134,10 +138,17 @@ elif [ $PLATFORM == "Linux" ]; then
         if [ -f /etc/systemd/user/sockets.target.wants/gpg-agent.socket ]; then
             sudo rm /etc/systemd/user/sockets.target.wants/gpg*.socket
         fi
-    
-    # If we're on Solus, there are some things we need to do as well..
+    fi
+
+    # On Manjaro/Arch, we also need to start the pcscd socket
+    if [[ "$(uname -r)" =~ "MANJARO" ]]; then
+
+        sudo systemctl start pcscd.socket
+        sudo systemctl enable pcscd.socket
+
+    # On Solus, we need to do the same, but the command is slightly different
     elif command -v "eopkg" >/dev/null 2>&1; then
-    
+
         sudo systemctl start pcscd
         sudo systemctl enable pcsc
 

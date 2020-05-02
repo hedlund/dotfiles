@@ -37,4 +37,6 @@ fi
 
 # Add n
 export N_PREFIX="$HOME/.n"
-export PATH="$PATH:$N_PREFIX/bin"
+if [ -d $N_PREFIX ]; then
+    export PATH="$N_PREFIX/bin:$PATH"
+fi

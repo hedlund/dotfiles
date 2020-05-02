@@ -152,8 +152,8 @@ alias mcint="mvn clean install -Dmaven.test.skip=true"
 # Git stüff
 alias gst="git status"
 
-# LXSS stüff
-if is_lxss; then
+# WSL stüff
+if is_wsl; then
   alias cmd="cmd.exe"
   alias powershell="powershell.exe"
   alias posh="powershell.exe"

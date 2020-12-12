@@ -12,7 +12,7 @@ Function ForceLink([string] $Source, [string] $Target) {
 ForceLink -Source "$PSScriptRoot\gitconfig" -Target "$HOME\.gitconfig"
 ForceLink -Source "$PSScriptRoot\hyper.win.js" -Target "$HOME\.hyper.js"
 ForceLink -Source "$PSScriptRoot\config\vscode-settings.json" -Target "$HOME\AppData\Roaming\Code\User\settings.json"
-ForceLink -Source "$PSScriptRoot\config\windows-terminal-profiles.json" -Target "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json"
+ForceLink -Source "$PSScriptRoot\config\windows-terminal-settings.json" -Target "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 
 # Configure Git
 git config --file "$HOME/.gitconfig.local" credential.helper "manager"

@@ -15,7 +15,7 @@ ForceLink -Source "$PSScriptRoot\config\vscode-settings.json" -Target "$HOME\App
 ForceLink -Source "$PSScriptRoot\config\windows-terminal-settings.json" -Target "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 
 # Configure Git
-git config --file "$HOME/.gitconfig.local" credential.helper "manager"
+git config --file "$HOME/.gitconfig.local" credential.helper "manager-core"
 git config --file "$HOME/.gitconfig.local" user.name "Henrik Hedlund"
 
 $confirm = Read-Host -Prompt "Configure Git for personal use? [Y/n]"

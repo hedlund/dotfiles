@@ -1,11 +1,14 @@
 {
-  "workbench.colorTheme": "Material Theme",
+  "workbench.colorTheme": "Spacemacs - dark",
   "workbench.iconTheme": "material-icon-theme",
   "editor.fontFamily": "'Fira Code', Consolas, 'Droid Sans Mono', 'Courier New', monospace",
   "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "editor.minimap.renderCharacters": false,
-  "editor.rulers": [80, 120],
+  "editor.rulers": [
+    80,
+    120
+  ],
   "gitlens.keymap": "chorded",
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
@@ -17,6 +20,7 @@
     "suppressResultsExplorerNotice": false,
     "suppressShowKeyBindingsNotice": true
   },
+  "gitlens.historyExplorer.enabled": true,
   "go.inferGopath": true,
   "telemetry.enableTelemetry": false,
   "go.buildOnSave": "workspace",
@@ -27,7 +31,6 @@
     "editor.insertSpaces": false,
     "editor.tabSize": 4
   },
-  "gitlens.historyExplorer.enabled": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "editor.renderWhitespace": "boundary",
   "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe",
@@ -37,11 +40,12 @@
   "breadcrumbs.enabled": true,
   "explorer.confirmDragAndDrop": false,
   "editor.tabSize": 2,
+  "editor.formatOnSave": true,
   "terraform.codelens.enabled": false,
-  "window.zoomLevel": 0,
   "window.titleBarStyle": "custom",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDelete": false,
-  "editor.formatOnSave": true,
+  "window.zoomLevel": 0,
+  "go.formatTool": "goimports",
   "go.useLanguageServer": true
 }

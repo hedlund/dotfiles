@@ -15,3 +15,6 @@ Thumbs.db
 
 # Ignore Visual Studio Code symlink on Ubuntu
 bin/code
+
+# Ignore Visual Studio Code project settings
+.vscode

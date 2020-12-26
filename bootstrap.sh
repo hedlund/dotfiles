@@ -127,6 +127,16 @@ elif is_linux; then
 
     fi
 
+    # However, if we ARE in WSL, we need to do this...
+    if is_wsl; then
+        # Update the Git submodule to pull the wsl2-ssh-pageant repo
+        git submodule init
+        git submodule update
+        
+        # Build and install the Pageant tunnel...
+        (cd "$CURRENT/wsl2-ssh-pageant" && make install)
+    fi
+
     # There are some things we need to tweak in order the get the Yubikey to work...
     # On Manjaro and Pop!_OS (and probably more), we need to tweak the gpg-agent
     if [[ "$(uname -r)" =~ "MANJARO" ]] || [[ "$(uname -a)" =~ "pop-os" ]]; then

@@ -63,9 +63,6 @@ if is_mac; then
 
 elif is_wsl; then
 
-	# Make Docker CLI connect to Docker for Windows
-	export DOCKER_HOST=tcp://localhost:2375
-
 	# Make Vagrant use Windows Hyper-V
 	export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 	export VAGRANT_DEFAULT_PROVIDER="hyperv"

@@ -35,3 +35,6 @@ export MANPAGER='less -X';
 export PROJECTS=$HOME/Projects
 export HOMEBREW_CELLAR=/usr/local/Cellar/
 export HOMEBREW_CASKROOM=/usr/local/Caskroom/
+
+# Configure private Go modules
+export GOPRIVATE=github.com/psychocosm

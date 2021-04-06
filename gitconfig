@@ -200,6 +200,10 @@
 
 	insteadOf = "gist:"
 
+[url "git@github.com:psychocosm"]
+
+	insteadOf = https://github.com/psychocosm
+
 [filter "lfs"]
 
 	required = true

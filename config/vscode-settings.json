@@ -1,0 +1,51 @@
+{
+  "workbench.colorTheme": "Spacemacs - dark",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.fontFamily": "'Fira Code', Consolas, 'Droid Sans Mono', 'Courier New', monospace",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "gitlens.keymap": "chorded",
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": false,
+    "suppressShowKeyBindingsNotice": true
+  },
+  "gitlens.historyExplorer.enabled": true,
+  "go.inferGopath": true,
+  "telemetry.enableTelemetry": false,
+  "go.buildOnSave": "workspace",
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.renderWhitespace": "boundary",
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "breadcrumbs.enabled": true,
+  "explorer.confirmDragAndDrop": false,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "terraform.codelens.enabled": false,
+  "window.titleBarStyle": "custom",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDelete": false,
+  "window.zoomLevel": 0,
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true
+}

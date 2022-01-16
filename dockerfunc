@@ -1,0 +1,97 @@
+###############################################################################
+# Docker stuff                                                                #
+###############################################################################
+
+# Initiate environment
+function denv() {
+	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	eval "$(docker-machine env $MACHINE)"
+}
+
+# Start machine
+function dstart() {
+	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	docker-machine start $MACHINE
+	denv $MACHINE
+}
+
+# Restart machine
+function drest() {
+	[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	docker-machine restart $MACHINE
+	denv $MACHINE
+}
+
+# Create a typical machine
+function dcreate() {
+ [[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+ docker-machine create -d virtualbox --virtualbox-memory 2048 $MACHINE
+ denv $MACHINE
+}
+
+# Sync time with docker machine
+function dclock() {
+[[ -z "$1" ]] && MACHINE="default" || MACHINE="$1"
+	docker-machine ssh $MACHINE "sudo date -u $(date -u +%m%d%H%M%Y)"
+}
+
+# Shorthand to check which machine we're running against
+function dwhich() {
+	docker-machine active
+}
+
+# Shorthand for docker ps
+function dps() {
+	docker ps $@
+}
+
+# Delete all exited containers
+function drm() {
+	docker rm $(docker ps -a -q --filter "status=exited")
+}
+
+# Delete all dangling images
+function dri() {
+	docker rmi $(docker images -q --filter "dangling=true")
+}
+
+# Run a daemonized container
+function dkd() {
+	docker run -d -P $@
+}
+complete -F _docker_run dkd
+
+# Run an interactive container
+function dki() {
+	docker run -it -P $@
+}
+complete -F _docker_run dki
+
+# Enter into a running container
+function dent() {
+	if [ $# -eq 1 ]; then
+		docker exec -it $1 /bin/bash -c "export TERM=xterm; exec bash"
+	else
+		printf "Usage:\tdent <container name/hash>\n"
+	fi
+}
+complete -F _docker_exec dent
+
+# Run a bash shell for an image
+function dbash() {
+	if [ $# -eq 1 ]; then
+		docker run --rm -i -t -e TERM=xterm --entrypoint /bin/bash $1
+	else
+		printf "Usage:\tdbash <image name/hash>\n"
+	fi
+}
+complete -F _docker_images dbash
+
+# Add a file or folder to a running container
+function dadd() {
+	if [ $# -eq 3 ]; then
+		(cd $(dirname "$1") && tar -cf - $(basename "$1")|docker exec -i $2 /bin/tar -C $3 -xf -)
+	else
+		printf "Usage:\tdockeradd <folder/file> <container name/hash> <target dir>\n"
+	fi
+}

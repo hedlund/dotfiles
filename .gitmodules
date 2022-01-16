@@ -1,0 +1,3 @@
+[submodule "wsl2-ssh-pageant"]
+	path = wsl2-ssh-pageant
+	url = https://github.com/hedlund/wsl2-ssh-pageant.git

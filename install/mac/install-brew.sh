@@ -36,6 +36,7 @@ brew install envchain
 brew install fzf
 brew install gh
 brew install go
+brew install golangci-lint
 brew install gpg pinentry-mac
 brew install httpie
 brew install node

@@ -67,6 +67,11 @@ elif is_wsl; then
 	export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 	export VAGRANT_DEFAULT_PROVIDER="hyperv"
 
+elif is_linux; then
+
+	# Connect to rootless Docker daemon
+	export DOCKER_HOST=unix:///run/user/1000/docker.sock
+
 fi
 
 # Enable GPG for SSH

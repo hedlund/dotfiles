@@ -13,6 +13,9 @@ sudo apt-get install -y gnome-sushi
 #sudo apt-get install -y slack-desktop
 sudo apt-get install -y spotify-client
 
+# The following is needed to run the Docker daemon as non-root
+sudo apt-get install -y dbus-user-session uidmap
+
 if ! exists balena-etcher-electron; then
   echo "Installing Balena Etcher..."
   curl -1sLf "https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key" | sudo apt-key add -

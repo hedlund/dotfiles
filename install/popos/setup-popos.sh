@@ -29,7 +29,7 @@ dconf write /org/gtk/settings/file-chooser/clock-format "'24h'"
 # Add week numbers to calendar
 dconf write /org/gnome/desktop/calendar/show-weekdate true
 
-# Add Sound Ouput extension
+# Add Sound Output extension
 if [ ! -d "${HOME}/.local/share/gnome-shell/extensions/sound-output-device-chooser@kgshank.net" ]; then
   SOUND_OUTPUT_EXTENSION="sound-output-device-chooserkgshank.net.v40.shell-extension.zip"
   wget -P /tmp "https://extensions.gnome.org/extension-data/${SOUND_OUTPUT_EXTENSION}"
@@ -39,4 +39,14 @@ if [ ! -d "${HOME}/.local/share/gnome-shell/extensions/sound-output-device-choos
   # Restart shell to update extensions info
   gnome-shell --replace
   gnome-extensions enable sound-output-device-chooser@kgshank.net
+fi
+
+# Configure Docker daemon to run as non-root user
+if systemctl is-active --quiet docker.service; then
+  echo "Disabling system-wide Docker daemon..."
+  sudo systemctl disable --now docker.service docker.socket
+fi
+if ! systemctl is-active --user --quiet docker.service; then
+  echo "Enabling rootless Docker daemon..."
+  dockerd-rootless-setuptool.sh install
 fi

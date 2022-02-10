@@ -58,9 +58,6 @@ if is_mac; then
 	    [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
 	fi
 
-	# Enable iTerm 2 shell integration
-	test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
 elif is_wsl; then
 
 	# Make Vagrant use Windows Hyper-V
@@ -77,27 +74,7 @@ fi
 # Enable GPG for SSH
 sshfix
 
-# Add the hey command
-if [ -d $HOME/.hey ]; then
-    eval "$($HOME/.hey/bin/hey init -)"
-fi
-
-# Add the 1p command
-if [ -d $HOME/.1password ]; then
-    eval "$($HOME/.1password/bin/1p init -)"
-fi
-
-# Add the re command
-if [ -d $PROJECTS/reMarkable/re ]; then
-    eval "$($PROJECTS/reMarkable/re/bin/re init -)"
-fi
-
 # Enable direnv
 if exists direnv; then
     eval "$(direnv hook bash)"
-fi
-
-# Alias hub to git
-if exists hub; then
-    eval "$(hub alias -s)"
 fi

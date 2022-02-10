@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 # Enable U2F devices
 if [ ! -f /etc/udev/rules.d/70-u2f.rules ]; then
   echo "Copying U2F udev rules (requires sudo)..."

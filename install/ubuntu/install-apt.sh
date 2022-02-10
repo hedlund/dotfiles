@@ -43,7 +43,8 @@ if [ "$1" != "--no-docker" ]; then
     echo "Installing Docker..."
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
-    sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io 
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io 
   fi
 
   if ! exists docker-compose; then
@@ -58,7 +59,8 @@ if ! exists yarn; then
   echo "Installing Yarn..."
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list >/dev/null
-  sudo apt-get update && sudo apt-get install -y yarn
+  sudo apt-get update
+  sudo apt-get install -y yarn
 fi
 
 # Install Google Cloud SDK
@@ -66,7 +68,8 @@ if ! exists gcloud; then
   echo "Installing Google Cloud SDK..."
   curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/google-cloud-keyring.gpg >/dev/null
   echo "deb [signed-by=/usr/share/keyrings/google-cloud-keyring.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
-  sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+  sudo apt-get update
+  sudo apt-get install -y google-cloud-sdk
 fi
 
 # Install Github CLI
@@ -74,7 +77,8 @@ if ! exists gh; then
   echo "Installing Github CLI..."
   curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
-  sudo apt-get update && sudo apt-get install -y gh
+  sudo apt-get update
+  sudo apt-get install -y gh
 fi
 
 # Cleanup

@@ -20,14 +20,16 @@ if ! exists balena-etcher-electron; then
   echo "Installing Balena Etcher..."
   curl -1sLf "https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key" | sudo apt-key add -
   echo 'deb https://dl.cloudsmith.io/public/balena/etcher/deb/ubuntu impish main' | sudo tee //etc/apt/sources.list.d/balena-etcher.list >/dev/null
-  sudo apt-get update && sudo apt-get install -y balena-etcher-electron
+  sudo apt-get update
+  sudo apt-get install -y balena-etcher-electron
 fi
 
 if ! exists code; then
   echo "Installing Visual Studio Code..."
   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --batch --yes --dearmor --output /usr/share/keyrings/microsoft-packages-archive-keyring.gpg
   echo 'deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-packages-archive-keyring.gpg] https://packages.microsoft.com/repos/code stable main' | sudo tee /etc/apt/sources.list.d/vscode.list >/dev/null
-  sudo apt-get update && sudo apt-get install -y code
+  sudo apt-get update
+  sudo apt-get install -y code
 fi
 
 if ! exists 1password; then
@@ -38,7 +40,8 @@ if ! exists 1password; then
   curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol >/dev/null
   sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
   curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --batch --yes --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
-  sudo apt-get update && sudo apt-get install -y 1password
+  sudo apt-get update
+  sudo apt-get install -y 1password
 fi
 
 # This is interactive, so put it at the end

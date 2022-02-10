@@ -77,13 +77,5 @@ if ! exists gh; then
   sudo apt-get update && sudo apt-get install -y gh
 fi
 
-# Install Packer
-if ! exists packer; then
-  echo "Installing Packer..."
-  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo tee /usr/share/keyrings/packer-archive-keyring.gpg >/dev/null
-  sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-  sudo apt-get update && sudo apt-get -y install packer
-fi
-
 # Cleanup
 sudo apt-get autoremove -y

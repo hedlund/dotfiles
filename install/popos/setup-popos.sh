@@ -31,6 +31,11 @@ dconf write /org/gtk/settings/file-chooser/clock-format "'24h'"
 # Add week numbers to calendar
 dconf write /org/gnome/desktop/calendar/show-weekdate true
 
+# Configure dock to auto hide on the left
+dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
+dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position "'LEFT'"
+dconf write /org/gnome/shell/extensions/dash-to-dock/intellihide false
+
 # Add Sound Output extension
 if [ ! -d "${HOME}/.local/share/gnome-shell/extensions/sound-output-device-chooser@kgshank.net" ]; then
   SOUND_OUTPUT_EXTENSION="sound-output-device-chooserkgshank.net.v40.shell-extension.zip"

@@ -20,6 +20,7 @@ sudo apt-get install -y ack
 sudo apt-get install -y direnv
 sudo apt-get install -y httpie
 sudo apt-get install -y kpartx
+sudo apt-get install -y lua5.4
 sudo apt-get install -y nodejs npm
 sudo apt-get install -y protobuf-compiler
 sudo apt-get install -y qemu-user-static

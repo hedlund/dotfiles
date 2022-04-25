@@ -44,5 +44,10 @@ if ! exists 1password; then
   sudo apt-get install -y 1password
 fi
 
+if ! exists love; then
+  sudo add-apt-repository -y ppa:bartbes/love-stable
+  sudo apt-get install -y love
+fi
+
 # This is interactive, so put it at the end
 sudo apt-get install -y ttf-mscorefonts-installer

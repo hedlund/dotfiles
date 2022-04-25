@@ -18,7 +18,6 @@ sudo apt-get install -y software-properties-common lsb-release
 sudo apt-get install -y ack
 #sudo apt-get install -y default-jdk
 sudo apt-get install -y direnv
-sudo apt-get install -y golang
 sudo apt-get install -y httpie
 sudo apt-get install -y kpartx
 sudo apt-get install -y nodejs npm

@@ -69,6 +69,9 @@ elif is_linux; then
 	# Connect to rootless Docker daemon
 	export DOCKER_HOST=unix:///run/user/1000/docker.sock
 
+	# Add Go to path
+	export PATH=$PATH:/usr/local/go/bin
+
 fi
 
 # Enable GPG for SSH

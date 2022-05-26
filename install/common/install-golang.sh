@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+GOLANGCI_LINT_VERSION="1.46.2"
+
 if [ -z "$(which go)" ]; then
   echo "Golang not available. Skipping!"
   exit 0
@@ -14,5 +16,5 @@ export GOPATH="$HOME/Projects/golang"
 
 if ! exists golangci-lint; then
   echo "Installing golangci-lint..."
-  go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0
+  go install "github.com/golangci/golangci-lint/cmd/golangci-lint@v${GOLANGCI_LINT_VERSION}"
 fi

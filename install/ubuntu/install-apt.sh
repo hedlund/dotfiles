@@ -3,6 +3,8 @@
 # As this script not only is used for native OS installations,
 # but also WSL, it should avoid installing desktop apps.
 
+DOCKER_COMPOSE_VERSION="2.5.1"
+
 # Import helpers
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "${SCRIPT_DIR}/../common/helpers.sh"
@@ -33,6 +35,11 @@ sudo apt-get install -y tree
 sudo apt-get install -y whois
 sudo apt-get install -y xsel
 
+# If the repositories are updated enough to contain the latest version,
+# use this, otherwise run the `install-go.sh` script to manually download the
+# latest version instead.
+sudo apt-get install -y golang
+
 # Some libraries that are needed down the line
 sudo apt-get install -y libreadline-dev
 sudo apt-get install -y libsecret-1-dev
@@ -49,7 +56,7 @@ if [ "$1" != "--no-docker" ]; then
 
   if ! exists docker-compose; then
     echo "Installing Docker Compose..."
-    sudo curl -L "https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
   fi
 fi

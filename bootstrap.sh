@@ -53,7 +53,7 @@ else
     git config --file ~/.gitconfig.local user.email "henrik.hedlund@remarkable.no"
 fi
 
-sed -i "s|https://github.com/hedlund/dotfiles\(.git\)\?|git@github.com:hedlund/dotfiles.git|g" "$CURRENT/.git/config"
+sed -i "s|https://github.com/hedlund/.dotfiles\(.git\)\?|git@github.com:hedlund/.dotfiles.git|g" "$CURRENT/.git/config"
 
 ###############################################################################
 # Platform specific config                                                    #
@@ -133,6 +133,8 @@ elif is_linux; then
         # Update the Git submodule to pull the wsl2-ssh-pageant repo
         git submodule init
         git submodule update
+
+        mkdir -p "${HOME}/.ssh"
         
         # Build and install the Pageant tunnel...
         (cd "$CURRENT/wsl2-ssh-pageant" && make install)

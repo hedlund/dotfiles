@@ -5,9 +5,6 @@ SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # Install the Ubuntu basics
 ${SCRIPT_DIR}/ubuntu/install-apt.sh
 
-# Install some snaps
-${SCRIPT_DIR}/ubuntu/install-snap.sh
-
 # Install stuff from the Pop OS repos
 ${SCRIPT_DIR}/popos/install-apt.sh
 

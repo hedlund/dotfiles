@@ -18,3 +18,8 @@ if ! exists golangci-lint; then
   echo "Installing golangci-lint..."
   go install "github.com/golangci/golangci-lint/cmd/golangci-lint@v${GOLANGCI_LINT_VERSION}"
 fi
+
+if ! exists task; then
+  echo "Installing taskfile..."
+  go install github.com/go-task/task/v3/cmd/task@latest
+fi

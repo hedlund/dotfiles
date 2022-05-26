@@ -11,6 +11,7 @@ sudo apt-get install -y gnome-shell-extensions
 sudo apt-get install -y gnome-sushi
 #sudo apt-get install -y gnome-tweak-tool
 #sudo apt-get install -y slack-desktop
+sudo apt-get install -y snapd
 sudo apt-get install -y spotify-client
 
 # The following is needed to run the Docker daemon as non-root

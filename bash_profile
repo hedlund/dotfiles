@@ -1,7 +1,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{functions,path,exports,bash_prompt,aliases,extra,dockerfunc,localfunc}; do
+for file in ~/.{functions,path,exports,bash_prompt,aliases,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -74,10 +74,5 @@ elif is_linux; then
 
 fi
 
-# Enable GPG for SSH
-sshfix
-
 # Enable direnv
-if exists direnv; then
-    eval "$(direnv hook bash)"
-fi
+command -v direnv > /dev/null && eval "$(direnv hook bash)"

@@ -9,7 +9,7 @@ sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 sudo ln -s /usr/local/bin/gmktemp /usr/local/bin/mktemp
 
 # Link pinentry to common name
-sudo ln -s /usr/local/bin/pinentry-mac /usr/local/bin/pinentry-yubikey
+sudo ln -s /usr/local/bin/pinentry-mac /usr/local/bin/pinentry
 
 # Add the new bash version to /etc/shells (if needed)
 if [ -f /usr/local/bin/bash ]; then

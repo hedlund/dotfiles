@@ -1,10 +1,10 @@
 # Functions to check which environment we are running in...
 function is_mac() {
-    [[ $OSTYPE =~ darwin* ]]
+  [[ $OSTYPE =~ darwin* ]]
 }
 
 function is_windows() {
-    [[ $OSTYPE =~ msys* ]]
+  [[ $OSTYPE =~ msys* ]]
 }
 
 function is_linux() {
@@ -12,17 +12,16 @@ function is_linux() {
 }
 
 function is_wsl() {
-    [[ $OSTYPE =~ linux* ]] && [[ "$(uname -r)" == *microsoft* ]]
+  [[ $OSTYPE =~ linux* ]] && [[ "$(uname -r)" == *microsoft* ]]
+}
+
+function is_distrobox() {
+  [[ $OSTYPE =~ linux* ]] && [[ "$DISTROBOX_ENTER_PATH" != "" ]]
 }
 
 # Create a new directory and enter it
 function mkd() {
   mkdir -p "$@" && cd "$_";
-}
-
-# Change working directory to the top-most Finder window location
-function cdf() { # short for `cdfinder`
-  cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
 }
 
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
@@ -82,15 +81,6 @@ function dataurl() {
     mimeType="${mimeType};charset=utf-8";
   fi
   echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
-}
-
-# Create a git.io short URL
-function gitio() {
-  if [ -z "${1}" -o -z "${2}" ]; then
-    echo "Usage: \`gitio slug url\`";
-    return 1;
-  fi;
-  curl -i http://git.io/ -F "url=${2}" -F "code=${1}";
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
@@ -236,39 +226,39 @@ function colorize() {
 }
 
 # Enable GPG for SSH
-function sshfix() {
-  if is_windows; then
-    # On win, make sure we start ssh-pageant
-    eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
-  elif is_wsl; then
-    export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
-    if ! ss -a | grep -q "$SSH_AUTH_SOCK"; then
-      rm -f "$SSH_AUTH_SOCK"
-      wsl2_ssh_pageant_bin="$HOME/.ssh/wsl2-ssh-pageant.exe"
-      if test -x "$wsl2_ssh_pageant_bin"; then
-        (setsid nohup socat UNIX-LISTEN:"$SSH_AUTH_SOCK,fork" EXEC:"$wsl2_ssh_pageant_bin" >/dev/null 2>&1 &)
-      else
-        echo >&2 "WARNING: $wsl2_ssh_pageant_bin is not executable."
-      fi
-      unset wsl2_ssh_pageant_bin
-    fi
+# function sshfix() {
+#   if is_windows; then
+#     # On win, make sure we start ssh-pageant
+#     eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
+#   elif is_wsl; then
+#     export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+#     if ! ss -a | grep -q "$SSH_AUTH_SOCK"; then
+#       rm -f "$SSH_AUTH_SOCK"
+#       wsl2_ssh_pageant_bin="$HOME/.ssh/wsl2-ssh-pageant.exe"
+#       if test -x "$wsl2_ssh_pageant_bin"; then
+#         (setsid nohup socat UNIX-LISTEN:"$SSH_AUTH_SOCK,fork" EXEC:"$wsl2_ssh_pageant_bin" >/dev/null 2>&1 &)
+#       else
+#         echo >&2 "WARNING: $wsl2_ssh_pageant_bin is not executable."
+#       fi
+#       unset wsl2_ssh_pageant_bin
+#     fi
 
-    export GPG_AGENT_SOCK="$HOME/.gnupg/S.gpg-agent"
-    if ! ss -a | grep -q "$GPG_AGENT_SOCK"; then
-      rm -rf "$GPG_AGENT_SOCK"
-      wsl2_ssh_pageant_bin="$HOME/.ssh/wsl2-ssh-pageant.exe"
-      if test -x "$wsl2_ssh_pageant_bin"; then
-        (setsid nohup socat UNIX-LISTEN:"$GPG_AGENT_SOCK,fork" EXEC:"$wsl2_ssh_pageant_bin --gpg S.gpg-agent" >/dev/null 2>&1 &)
-      else
-        echo >&2 "WARNING: $wsl2_ssh_pageant_bin is not executable."
-      fi
-      unset wsl2_ssh_pageant_bin
-    fi
-  else
-    # On *nix, replace ssh-agent with gpg-agent
-    pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)
-  fi
-}
+#     export GPG_AGENT_SOCK="$HOME/.gnupg/S.gpg-agent"
+#     if ! ss -a | grep -q "$GPG_AGENT_SOCK"; then
+#       rm -rf "$GPG_AGENT_SOCK"
+#       wsl2_ssh_pageant_bin="$HOME/.ssh/wsl2-ssh-pageant.exe"
+#       if test -x "$wsl2_ssh_pageant_bin"; then
+#         (setsid nohup socat UNIX-LISTEN:"$GPG_AGENT_SOCK,fork" EXEC:"$wsl2_ssh_pageant_bin --gpg S.gpg-agent" >/dev/null 2>&1 &)
+#       else
+#         echo >&2 "WARNING: $wsl2_ssh_pageant_bin is not executable."
+#       fi
+#       unset wsl2_ssh_pageant_bin
+#     fi
+#   else
+#     # On *nix, replace ssh-agent with gpg-agent
+#     pkill ssh-agent ; pkill gpg-agent ; eval $(gpg-agent --daemon --enable-ssh-support --log-file $HOME/.gnupg/gpg-agent.log)
+#   fi
+# }
 
 # Check if a command exists
 function exists() {

@@ -1,9 +1,11 @@
 #!/bin/bash
+set -euo pipefail
 
 CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-PLATFORM="$(uname -s)"
-PUBLIC_GPG_KEY="93B0E5FD"
-PINENTRY_YUBIKEY="/usr/bin/pinentry-yubikey"
+GIT_NAME="Henrik Hedlund"
+GIT_EMAIL_PERSONAL="henrik@hedlund.im"
+GIT_EMAIL_WORK="henrik.hedlund@remarkable.no"
+GPG_PUBLIC_KEY="93B0E5FD"
 
 source ./functions
 
@@ -12,11 +14,11 @@ source ./functions
 ###############################################################################
 
 dotfiles=(
-    aliases bash_profile bash_prompt bashrc curlrc dockerfunc exports functions gdbinit gitattributes
-    gitconfig gitignore gvimrc hgignore hushlogin hyper.js inputrc nanorc path screenrc wgetrc npmrc
+  aliases bash_profile bash_prompt bashrc curlrc exports functions
+  gitconfig gitignore gvimrc hushlogin inputrc nanorc path screenrc wgetrc
 )
 for file in "${dotfiles[@]}"; do
-    ln -sf "$CURRENT/$file" "$HOME/.$file"
+  ln -sf "$CURRENT/$file" "$HOME/.$file"
 done;
 
 ###############################################################################
@@ -24,8 +26,8 @@ done;
 ###############################################################################
 
 if [ ! -d "$HOME/.gnupg" ]; then
-    echo "Creating GPG directory; will ask for password..."
-    mkdir "$HOME/.gnupg" && sudo chmod 700 "$HOME/.gnupg"
+  echo "Creating GPG directory; will ask for password..."
+  mkdir "$HOME/.gnupg" && sudo chmod 700 "$HOME/.gnupg"
 fi
 ln -sf "$CURRENT/gnupg/gpg.conf" "$HOME/.gnupg/gpg.conf"
 ln -sf "$CURRENT/gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
@@ -34,11 +36,8 @@ ln -sf "$CURRENT/gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
 # Configure GPG                                                               #
 ###############################################################################
 
-if [[ ! $(gpg --list-keys) =~ $PUBLIC_GPG_KEY ]]; then
-    gpg --import < "$CURRENT/config/pubkey.txt"
-
-    prompt "Insert your Yubikey and press ENTER to continue!"
-    gpg --card-status
+if [[ ! $(gpg --list-keys) =~ $GPG_PUBLIC_KEY ]]; then
+  gpg --import < "$CURRENT/config/pubkey.txt"
 fi
 
 ###############################################################################
@@ -46,14 +45,23 @@ fi
 ###############################################################################
 
 touch "$HOME/.gitconfig.local"
-git config --file ~/.gitconfig.local user.name "Henrik Hedlund"
+git config --file ~/.gitconfig.local user.name "$GIT_NAME"
 if confirm "Configure Git for personal use?"; then
-    git config --file ~/.gitconfig.local user.email "henrik@hedlund.im"
+  git config --file ~/.gitconfig.local user.email "$GIT_EMAIL_PERSONAL"
 else
-    git config --file ~/.gitconfig.local user.email "henrik.hedlund@remarkable.no"
+  git config --file ~/.gitconfig.local user.email "$GIT_EMAIL_WORK"
 fi
 
-sed -i "s|https://github.com/hedlund/.dotfiles\(.git\)\?|git@github.com:hedlund/.dotfiles.git|g" "$CURRENT/.git/config"
+###############################################################################
+# Add fonts                                                                   #
+###############################################################################
+
+LOCAL_FONTS="$HOME/.local/share/fonts"
+if [ ! -L "$LOCAL_FONTS" ]; then
+  rm -rf "$LOCAL_FONTS"
+  mkdir -p "$HOME/.local/share"
+  ln -sf "$CURRENT/fonts" "$LOCAL_FONTS"
+fi
 
 ###############################################################################
 # Platform specific config                                                    #
@@ -61,112 +69,84 @@ sed -i "s|https://github.com/hedlund/.dotfiles\(.git\)\?|git@github.com:hedlund/
 
 if is_mac; then
 
-    # Add the new bash version to /etc/shells (if needed)
-    if [ -f /usr/local/bin/bash ]; then
-        if ! grep -q "/usr/local/bin/bash" /etc/shells; then
-            read -r -p "Install new bash version to /etc/shells? [y/N] " response
-            if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-                sudo bash -c 'echo "/usr/local/bin/bash" >> /etc/shells'
-                chsh -s /usr/local/bin/bash
-            fi
-        fi
+  # Add the new bash version to /etc/shells (if needed)
+  if [ -f /usr/local/bin/bash ]; then
+    if ! grep -q "/usr/local/bin/bash" /etc/shells; then
+      read -r -p "Install new bash version to /etc/shells? [y/N] " response
+      if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        sudo bash -c 'echo "/usr/local/bin/bash" >> /etc/shells'
+        chsh -s /usr/local/bin/bash
+      fi
     fi
+  fi
 
-    # Configure Git
-    git config --file ~/.gitconfig.local credential.helper "osxkeychain"
+  # Configure Git
+  git config --file ~/.gitconfig.local credential.helper "osxkeychain"
 
-    # Install terminal colors
-    $CURRENT/config/install-terminal-colors.sh
+  # Install terminal colors
+  $CURRENT/config/install-terminal-colors.sh
 
-    # Configure Spectacle
-    SPECTACLE_DIR="$HOME/Library/Application Support/Spectacle"
-    mkdir -p "$SPECTACLE_DIR"
-    \cp "$CURRENT/config/spectacle-shortcuts.json" "$SPECTACLE_DIR/Shortcuts.json"
+  # Configure Spectacle
+  SPECTACLE_DIR="$HOME/Library/Application Support/Spectacle"
+  mkdir -p "$SPECTACLE_DIR"
+  \cp "$CURRENT/config/spectacle-shortcuts.json" "$SPECTACLE_DIR/Shortcuts.json"
 
-    # Configure VS Code
-    ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+  # Configure VS Code
+  ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 
-    # Make sure we have a common link to a pinentry
-    if [ ! -f $PINENTRY_YUBIKEY ]; then
-        sudo ln -s /usr/local/bin/pinentry-mac $PINENTRY_YUBIKEY
-    fi
+  # Make sure we have a common link to a pinentry
+  # if [ ! -f $PINENTRY_YUBIKEY ]; then
+  #     sudo ln -s /usr/local/bin/pinentry-mac $PINENTRY_YUBIKEY
+  # fi
+
+elif is_distrobox; then
+
+  if ! exists podman; then
+    echo "Linking podman to container..."
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman
+  fi
+  
+  if ! exists docker; then
+    echo "Linking docker to container..."
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker
+  fi
+
+  if ! exists docker-compose; then
+    echo "Linking docker-compose to container..."
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker-compose
+  fi
+
+  if exists code; then
+    echo "Exporting Visual Studio Code to the host..."
+    distrobox-export --app code
+  fi
+
+elif is_wsl; then
+
+  # Update the Git submodule to pull the wsl2-ssh-pageant repo
+  git submodule init
+  git submodule update
+
+  mkdir -p "${HOME}/.ssh"
+  
+  # Build and install the Pageant tunnel...
+  (cd "$CURRENT/wsl2-ssh-pageant" && make install)
 
 elif is_linux; then
 
-    # Make sure nano config is available where expected
-    if [ -d /usr/local/share ] && [ ! -d /usr/local/share/nano ]; then
-        if [ -d /usr/share/nano ]; then
-            sudo ln -s /usr/share/nano /usr/local/share/nano
-        fi
+  # There are some things we need to tweak in order the get the Yubikey to work...
+  # On Manjaro and Pop!_OS (and probably more), we need to tweak the gpg-agent
+  if [[ "$(uname -r)" =~ "MANJARO" ]] || [[ "$(uname -a)" =~ "pop-os" ]]; then
+  
+    # In order to use GPG with SSH, we need to stop the systemd gpg-agent service
+    systemctl --user disable gpg-agent
+
+    # But that is not enough if the damn gpg-agent socket files present
+    if [ -f /etc/systemd/user/sockets.target.wants/gpg-agent.socket ]; then
+      sudo rm /etc/systemd/user/sockets.target.wants/gpg*.socket
     fi
-
-    # Make sure we have a common link to a pinentry
-    if [ ! -f $PINENTRY_YUBIKEY ]; then
-        PINENTRY=$(which pinentry-gnome3 2>/dev/null)
-        PINENTRY=${PINENTRY:-$(which pinentry-qt 2>/dev/null)}
-        PINENTRY=${PINENTRY:-$(which pinentry-gtk-2 2>/dev/null)}
-        PINENTRY=${PINENTRY:-$(which pinentry 2>/dev/null)}
-        if [ ! -z "$PINENTRY" ]; then
-            sudo ln -s $PINENTRY $PINENTRY_YUBIKEY
-        else
-            echo "Unable to find a pinentry app to symlink..."
-        fi
-    fi
-
-    # If we're NOT in WSL, do this...
-    if ! is_wsl; then
-
-        # Symlink the VS Code configuration. We have a couple of options here...
-        # if [ -d "$HOME/.config/Code - OSS" ]; then
-        #     ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code - OSS/User/settings.json"
-        # elif [ -d "$HOME/.config/Code" ]; then
-        #     ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/.config/Code/User/settings.json"
-        # else
-        #     echo "ERROR! Unable to find VS Code config folder. Skipping!"
-        # fi
-        echo "Skip"
-
-    fi
-
-    # However, if we ARE in WSL, we need to do this...
-    if is_wsl; then
-        # Update the Git submodule to pull the wsl2-ssh-pageant repo
-        git submodule init
-        git submodule update
-
-        mkdir -p "${HOME}/.ssh"
-        
-        # Build and install the Pageant tunnel...
-        (cd "$CURRENT/wsl2-ssh-pageant" && make install)
-    fi
-
-    # There are some things we need to tweak in order the get the Yubikey to work...
-    # On Manjaro and Pop!_OS (and probably more), we need to tweak the gpg-agent
-    if [[ "$(uname -r)" =~ "MANJARO" ]] || [[ "$(uname -a)" =~ "pop-os" ]]; then
-    
-        # In order to use GPG with SSH, we need to stop the systemd gpg-agent service
-        systemctl --user disable gpg-agent
-
-        # But that is not enough if the damn gpg-agent socket files present
-        if [ -f /etc/systemd/user/sockets.target.wants/gpg-agent.socket ]; then
-            sudo rm /etc/systemd/user/sockets.target.wants/gpg*.socket
-        fi
-    fi
-
-    # On Manjaro/Arch, we also need to start the pcscd socket
-    if [[ "$(uname -r)" =~ "MANJARO" ]]; then
-
-        sudo systemctl start pcscd.socket
-        sudo systemctl enable pcscd.socket
-
-    # On Solus, we need to do the same, but the command is slightly different
-    elif command -v "eopkg" >/dev/null 2>&1; then
-
-        sudo systemctl start pcscd
-        sudo systemctl enable pcsc
-
-    fi
+  fi
 
 else
-    echo "Running on unknown OS."
+  echo "Running on unknown OS."
 fi

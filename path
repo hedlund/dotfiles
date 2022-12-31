@@ -8,32 +8,10 @@ export PATH="/usr/local/sbin:$PATH";
 export GOPATH=$HOME/Projects/golang
 export PATH=$PATH:$GOPATH/bin
 
-# Add environment variables for Godot Engine
-export GODOT_ROOT=$HOME/Projects/godot/godot-master
-
-# Add Google Cloud SDK
-GOOGLE_CLOUD_SDK_PATH=/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk
-if [ -d $GOOGLE_CLOUD_SDK_PATH/bin ]; then
-    export PATH=$PATH:$GOOGLE_CLOUD_SDK_PATH/bin
-fi
-if [ -d $GOOGLE_CLOUD_SDK_PATH/platform/google_appengine ]; then
-    export PATH=$PATH:$GOOGLE_CLOUD_SDK_PATH/platform/google_appengine
-fi
-
-# Add Flutter
-FLUTTER_PATH="$HOME/Projects/flutter/flutter/bin"
-if [ -d $FLUTTER_PATH ]; then
-    export PATH="$PATH:$FLUTTER_PATH"
-fi
-
-# Add Android SDK
-ANDROID_HOME="$HOME/Library/Android/sdk"
-if [ -d $ANDROID_HOME ]; then
-    export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
-fi
-
-# Add n
-export N_PREFIX="$HOME/.n"
-if [ -d $N_PREFIX ]; then
-    export PATH="$N_PREFIX/bin:$PATH"
+# Add n (if needed)
+if [ -z "${N_PREFIX}" ]; then
+  export N_PREFIX="$HOME/.n"
+  if [ -d $N_PREFIX ]; then
+   export PATH="$N_PREFIX/bin:$PATH"
+  fi
 fi

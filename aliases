@@ -122,6 +122,3 @@ fi
 
 # Terraform stüff
 alias tf="terraform"
-
-# On Linux, Visual Studio Code is often installed as code-oss
-command -v code > /dev/null || alias code="code-oss"

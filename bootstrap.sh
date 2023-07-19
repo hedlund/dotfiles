@@ -21,6 +21,8 @@ for file in "${dotfiles[@]}"; do
   ln -sf "$CURRENT/$file" "$HOME/.$file"
 done;
 
+ln -sf "$CURRENT/config/starship.toml" "$HOME/.config/starship.toml"
+
 ###############################################################################
 # Create GPG directory and symlink its files explicitly                       #
 ###############################################################################
@@ -116,10 +118,14 @@ elif is_distrobox; then
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker-compose
   fi
 
-  if exists code; then
-    echo "Exporting Visual Studio Code to the host..."
-    distrobox-export --app code
-  fi
+  # if exists code; then
+  #   echo "Exporting Visual Studio Code to the host..."
+  #   distrobox-export --app code
+  # fi
+
+  # Symlink podman host to get VS Code working with Distrobox
+  mkdir -p "$HOME/.local/bin"
+  ln -sf "$CURRENT/bin/podman-host" "$HOME/.local/bin/podman-host"
 
 elif is_wsl; then
 

@@ -15,6 +15,7 @@ alias g="git"
 alias h="history"
 alias j="jobs"
 alias cdp="cd ~/Projects"
+alias cdr="cd ~/Projects/reMarkable"
 alias cdd="cd ~/.dotfiles"
 
 # Detect which `ls` flavor is in use

@@ -193,6 +193,10 @@
 
 	insteadOf = https://github.com/bloodypixels
 
+[url "git@github.com:reMarkable"]
+
+  insteadOf = https://github.com/reMarkable
+
 [filter "lfs"]
 
 	required = true

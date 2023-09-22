@@ -21,6 +21,7 @@ for file in "${dotfiles[@]}"; do
   ln -sf "$CURRENT/$file" "$HOME/.$file"
 done;
 
+ln -sf "$CURRENT/justfile" "$HOME/justfile"
 ln -sf "$CURRENT/config/starship.toml" "$HOME/.config/starship.toml"
 
 ###############################################################################

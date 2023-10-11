@@ -25,6 +25,12 @@ ln -sf "$CURRENT/justfile" "$HOME/justfile"
 ln -sf "$CURRENT/config/starship.toml" "$HOME/.config/starship.toml"
 
 ###############################################################################
+# Create projects directory                                                   #
+###############################################################################
+
+mkdir -p "$HOME/Projects"
+
+###############################################################################
 # Create GPG directory and symlink its files explicitly                       #
 ###############################################################################
 

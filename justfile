@@ -5,11 +5,15 @@ install-flatpaks:
   flatpak install --user --noninteractive flathub com.raggesilver.BlackBox
   flatpak install --user --noninteractive flathub org.gnome.Boxes
   flatpak install --user --noninteractive flathub com.mattjakeman.ExtensionManager
+  flatpak install --user --noninteractive flathub org.mozilla.firefox
   flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
+  flatpak install --user --noninteractive flathub io.github.giantpinkrobots.flatsweep
   flatpak install --user --noninteractive flathub org.gustavoperedo.FontDownloader
   flatpak install --user --noninteractive flathub com.spotify.Client
   flatpak install --user --noninteractive flathub com.visualstudio.code
   flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref
+  flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/22.08
+  flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
 
 configure-gnome:
   # Enable dark mode

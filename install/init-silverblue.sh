@@ -48,6 +48,7 @@ if ! exists distrobox; then
   rpm-ostree install \
     distrobox \
     fira-code-fonts \
+    go-task \
     gnome-shell-extension-pop-shell \
     gnome-tweaks \
     just \

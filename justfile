@@ -42,7 +42,44 @@ configure-gnome:
   # Configure interface
   gsettings set org.gnome.desktop.a11y always-show-universal-access-status true
   gsettings set org.gnome.desktop.interface show-battery-percentage true
+
+install-surface-linux:
+  #!/usr/bin/env bash
+  if [ ! -f /etc/yum.repos.d/linux-surface.repo ]; then
+    echo "Installing Surface linux repository..."
+    sudo wget -O /etc/yum.repos.d/linux-surface.repo https://pkg.surfacelinux.com/fedora/linux-surface.repo
+  fi
+  echo "Create temporary directory..."
+  TEMP_DIR=`mktemp -d`
+  cd "$TEMP_DIR"
+
+  echo "Download and install kernel dummy package..."
+  curl -O -L https://github.com/linux-surface/linux-surface/releases/download/silverblue-20201215-1/kernel-20201215-1.x86_64.rpm
+  rpm-ostree override replace ./*.rpm \
+    --remove kernel-core \
+    --remove kernel-modules \
+    --remove kernel-modules-extra \
+    --remove libwacom \
+    --remove libwacom-data \
+    --install kernel-surface \
+    --install iptsd \
+    --install libwacom-surface \
+    --install libwacom-surface-data
+
+  echo "Cleanup temporary directory..."
+  rm -rf "$TEMP_DIR"
+
+  echo "Installing Surface Secureboot..."
+  rpm-ostree install surface-secureboot
   
+  echo "Reboot your PC, and disable Secure Boot..."
+  echo "After reboot, run 'just enable-surface-secureboot'"
+  
+enable-surface-secureboot:
+  echo "Remember the password you specify, you need to enter it after reboot..."
+  sudo mokutil --import /usr/share/surface-secureboot/surface.cer
+  echo "Reboot now to finalize imprting certificate. Then re-enable Secure Boot..."
+
 generate-ssh-key:
   ssh-keygen -t ed25519-sk -C "henrik@hedlund.im"
   ssh-add -t 10m "$HOME/.ssh/id_ed25519_sk"

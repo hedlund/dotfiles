@@ -76,40 +76,7 @@ fi
 # Platform specific config                                                    #
 ###############################################################################
 
-if is_mac; then
-
-  # Add the new bash version to /etc/shells (if needed)
-  if [ -f /usr/local/bin/bash ]; then
-    if ! grep -q "/usr/local/bin/bash" /etc/shells; then
-      read -r -p "Install new bash version to /etc/shells? [y/N] " response
-      if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-        sudo bash -c 'echo "/usr/local/bin/bash" >> /etc/shells'
-        chsh -s /usr/local/bin/bash
-      fi
-    fi
-  fi
-
-  # Configure Git
-  git config --file ~/.gitconfig.local credential.helper "osxkeychain"
-
-  # Install terminal colors
-  $CURRENT/config/install-terminal-colors.sh
-
-  # Configure Spectacle
-  SPECTACLE_DIR="$HOME/Library/Application Support/Spectacle"
-  mkdir -p "$SPECTACLE_DIR"
-  \cp "$CURRENT/config/spectacle-shortcuts.json" "$SPECTACLE_DIR/Shortcuts.json"
-
-  # Configure VS Code
-  ln -sf "$CURRENT/config/vscode-settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-
-  # Make sure we have a common link to a pinentry
-  # if [ ! -f $PINENTRY_YUBIKEY ]; then
-  #     sudo ln -s /usr/local/bin/pinentry-mac $PINENTRY_YUBIKEY
-  # fi
-
-elif is_distrobox; then
-
+if is_distrobox; then
   if ! exists podman; then
     echo "Linking podman to container..."
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman
@@ -144,22 +111,6 @@ elif is_wsl; then
   
   # Build and install the Pageant tunnel...
   (cd "$CURRENT/wsl2-ssh-pageant" && make install)
-
-elif is_linux; then
-
-  # There are some things we need to tweak in order the get the Yubikey to work...
-  # On Manjaro and Pop!_OS (and probably more), we need to tweak the gpg-agent
-  if [[ "$(uname -r)" =~ "MANJARO" ]] || [[ "$(uname -a)" =~ "pop-os" ]]; then
-  
-    # In order to use GPG with SSH, we need to stop the systemd gpg-agent service
-    systemctl --user disable gpg-agent
-
-    # But that is not enough if the damn gpg-agent socket files present
-    if [ -f /etc/systemd/user/sockets.target.wants/gpg-agent.socket ]; then
-      sudo rm /etc/systemd/user/sockets.target.wants/gpg*.socket
-    fi
-  fi
-
 else
   echo "Running on unknown OS."
 fi

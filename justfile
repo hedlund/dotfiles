@@ -9,8 +9,10 @@ install-flatpaks:
   flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
   flatpak install --user --noninteractive flathub io.github.giantpinkrobots.flatsweep
   flatpak install --user --noninteractive flathub org.gustavoperedo.FontDownloader
+  flatpak install --user --noninteractive flathub net.nokyan.Resources
   flatpak install --user --noninteractive flathub com.spotify.Client
   flatpak install --user --noninteractive flathub com.visualstudio.code
+  flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
   flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref
   flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/22.08
   flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
@@ -74,7 +76,7 @@ install-surface-linux:
   
   echo "Reboot your PC, and disable Secure Boot..."
   echo "After reboot, run 'just enable-surface-secureboot'"
-  
+
 enable-surface-secureboot:
   echo "Remember the password you specify, you need to enter it after reboot..."
   sudo mokutil --import /usr/share/surface-secureboot/surface.cer
@@ -84,3 +86,6 @@ generate-ssh-key:
   ssh-keygen -t ed25519-sk -C "henrik@hedlund.im"
   ssh-add -t 10m "$HOME/.ssh/id_ed25519_sk"
 
+reset-ostree-overrides:
+  rpm-ostree uninstall --all
+  rpm-ostree override reset --all

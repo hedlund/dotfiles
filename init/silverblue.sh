@@ -75,10 +75,10 @@ if ! exists distrobox; then
     podman-compose \
     podman-docker
 
-  if exists firefox; then
-    echo "Remove Firefox..."
-    rpm-ostree override remove firefox firefox-langpacks
-  fi
+  # if exists firefox; then
+  #   echo "Remove Firefox..."
+  #   rpm-ostree override remove firefox firefox-langpacks
+  # fi
 
   echo "Rebooting..."
   systemctl reboot

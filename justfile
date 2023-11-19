@@ -88,6 +88,15 @@ enable-surface-secureboot:
   sudo mokutil --import /usr/share/surface-secureboot/surface.cer
   echo "Reboot now to finalize imprting certificate. Then re-enable Secure Boot..."
 
+remove-surface-linux:
+  #!/usr/bin/env bash
+  rpm-ostree remove kernel-surface surface-secureboot iptsd libwacom-surface libwacom-surface-data \
+    --install kernel-core \
+    --install kernel-modules \
+    --install kernel-modules-extra \
+    --install libwacom \
+    --install libwacom-data
+
 generate-ssh-key:
   ssh-keygen -t ed25519-sk -C "henrik@hedlund.im"
   ssh-add -t 10m "$HOME/.ssh/id_ed25519_sk"

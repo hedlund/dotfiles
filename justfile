@@ -14,12 +14,14 @@ install-flatpaks:
   flatpak install --user --noninteractive flathub com.visualstudio.code
   flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
   flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/22.08
+  flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
+  # flatpak install --user --noninteractive flathub org.mozilla.firefox
   if ! $(flatpak info com.onepassword.OnePassword >/dev/null 2>&1); then
     flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref
   fi
-  flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
-  # flatpak install --user --noninteractive flathub org.mozilla.firefox
-  flatpak uninstall --user --noninteractive org.gnome.eog
+  if $(flatpak info org.gnome.eog >/dev/null 2>&1); then
+    flatpak uninstall --user --noninteractive org.gnome.eog
+  fi
 
 configure-gnome:
   # Enable dark mode

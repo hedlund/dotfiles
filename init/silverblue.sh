@@ -31,7 +31,7 @@ function has_flag() {
 if [ ! -f "/etc/distrobox/distrobox.conf" ]; then
   echo "Write distrobox global config..."
   sudo mkdir -p /etc/distrobox
-  sudo cat <<EOT > /etc/distrobox/distrobox.conf
+  sudo tee -a /etc/distrobox/distrobox.conf > /dev/null <<EOT
 container_always_pull="1"
 container_generate_entry=1
 container_manager="podman"

@@ -22,6 +22,9 @@ install-flatpaks:
   if $(flatpak info org.gnome.eog >/dev/null 2>&1); then
     flatpak uninstall --user --noninteractive org.gnome.eog
   fi
+  if ! $(flatpak info org.gnome.Prompt.Devel >/dev/null 2>&1); then
+    flatpak install --user --noninteractive --from https://nightly.gnome.org/repo/appstream/org.gnome.Prompt.Devel.flatpakref
+  fi
 
 configure-gnome:
   # Enable dark mode

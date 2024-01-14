@@ -54,6 +54,12 @@ configure-gnome:
   gsettings set org.gnome.desktop.a11y always-show-universal-access-status true
   gsettings set org.gnome.desktop.interface show-battery-percentage true
 
+install-nvidia-drivers:
+  #!/usr/bin/env bash
+  rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia
+  rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
+  #systemctl reboot
+
 install-surface-linux:
   #!/usr/bin/env bash
   if [ ! -f /etc/yum.repos.d/linux-surface.repo ]; then

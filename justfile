@@ -3,7 +3,6 @@ default:
 
 install-flatpaks:
   #!/usr/bin/env bash
-  flatpak install --user --noninteractive flathub com.raggesilver.BlackBox
   flatpak install --user --noninteractive flathub org.gnome.Boxes
   flatpak install --user --noninteractive flathub com.mattjakeman.ExtensionManager
   flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
@@ -15,7 +14,6 @@ install-flatpaks:
   flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
   flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/22.08
   flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
-  # flatpak install --user --noninteractive flathub org.mozilla.firefox
   if ! $(flatpak info com.onepassword.OnePassword >/dev/null 2>&1); then
     flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref
   fi

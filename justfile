@@ -12,7 +12,7 @@ install-flatpaks:
   flatpak install --user --noninteractive flathub com.spotify.Client
   flatpak install --user --noninteractive flathub com.visualstudio.code
   flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
-  flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/22.08
+  flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/23.08
   flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
   if ! $(flatpak info com.onepassword.OnePassword >/dev/null 2>&1); then
     flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref

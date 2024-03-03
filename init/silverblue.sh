@@ -71,7 +71,9 @@ if ! exists distrobox; then
     go-task \
     gnome-shell-extension-pop-shell \
     gnome-tweaks \
+    gstreamer1-plugin-openh264 \
     just \
+    mozilla-openh264 \
     podman-compose \
     podman-docker
 

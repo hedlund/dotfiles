@@ -5,7 +5,7 @@ CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 GIT_NAME="Henrik Hedlund"
 GIT_EMAIL_PERSONAL="henrik@hedlund.im"
 GIT_EMAIL_WORK="henrik.hedlund@remarkable.no"
-GPG_PUBLIC_KEY="93B0E5FD"
+GPG_PUBLIC_KEY="FAD687729644C886"
 
 source ./functions
 
@@ -46,7 +46,7 @@ ln -sf "$CURRENT/gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
 ###############################################################################
 
 if [[ ! $(gpg --list-keys) =~ $GPG_PUBLIC_KEY ]]; then
-  gpg --import < "$CURRENT/config/pubkey.txt"
+  gpg --import < "$CURRENT/config/public.gpg.txt"
 fi
 
 ###############################################################################

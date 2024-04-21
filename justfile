@@ -4,10 +4,12 @@ default:
 install-flatpaks:
   #!/usr/bin/env bash
   flatpak install --user --noninteractive flathub org.gnome.Boxes
+  flatpak install --user --noninteractive flathub ca.desrt.dconf-editor
   flatpak install --user --noninteractive flathub com.mattjakeman.ExtensionManager
   flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
   flatpak install --user --noninteractive flathub io.github.giantpinkrobots.flatsweep
   flatpak install --user --noninteractive flathub org.gustavoperedo.FontDownloader
+  flatpak install --user --noninteractive flathub io.podman_desktop.PodmanDesktop
   flatpak install --user --noninteractive flathub net.nokyan.Resources
   flatpak install --user --noninteractive flathub com.spotify.Client
   flatpak install --user --noninteractive flathub com.visualstudio.code
@@ -20,8 +22,8 @@ install-flatpaks:
   if $(flatpak info org.gnome.eog >/dev/null 2>&1); then
     flatpak uninstall --user --noninteractive org.gnome.eog
   fi
-  if ! $(flatpak info org.gnome.Prompt.Devel >/dev/null 2>&1); then
-    flatpak install --user --noninteractive --from https://nightly.gnome.org/repo/appstream/org.gnome.Prompt.Devel.flatpakref
+  if ! $(flatpak info org.gnome.Ptyxis.Devel >/dev/null 2>&1); then
+    flatpak install --user --noninteractive --from https://nightly.gnome.org/repo/appstream/org.gnome.Ptyxis.Devel.flatpakref
   fi
 
 configure-gnome:
@@ -51,6 +53,19 @@ configure-gnome:
   # Configure interface
   gsettings set org.gnome.desktop.a11y always-show-universal-access-status true
   gsettings set org.gnome.desktop.interface show-battery-percentage true
+
+  # Configure Gnome Terminal
+  default_profile=$(dconf list /org/gnome/terminal/legacy/profiles:/)
+  dconf write "/org/gnome/terminal/legacy/profiles:/${default_profile}font" "'FiraCode Nerd Font Mono 12'"
+  dconf write "/org/gnome/terminal/legacy/profiles:/${default_profile}use-system-font" "false"
+
+install-gaming:
+  #!/usr/bin/env bash
+  flatpak install --user --noninteractive flathub page.kramo.Cartridges
+  flatpak install --user --noninteractive flathub org.godotengine.Godot
+  flatpak install --user --noninteractive flathub com.heroicgameslauncher.hgl
+  flatpak install --user --noninteractive flathub io.itch.itch
+  flatpak install --user --noninteractive flathub com.valvesoftware.Steam
 
 install-nvidia-drivers:
   #!/usr/bin/env bash

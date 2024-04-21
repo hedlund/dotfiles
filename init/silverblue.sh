@@ -27,16 +27,6 @@ function has_flag() {
 }
 
 #-------------------------------------------------------------------------------
-# CONFIGURE U2F DEVICES
-#-------------------------------------------------------------------------------
-
-if [ ! -f "/etc/udev/rules.d/70-u2f.rules" ]; then
-  echo "Copy U2F udev rules..."
-  sudo mkdir -p /etc/udev/rules.d
-  sudo cp "$CURRENT/../config/70-u2f.rules" /etc/udev/rules.d/70-u2f.rules
-fi
-
-#-------------------------------------------------------------------------------
 # CONFIGURE DISTROBOX
 #-------------------------------------------------------------------------------
 
@@ -80,7 +70,6 @@ if ! exists distrobox; then
   rpm-ostree install \
     distrobox \
     fira-code-fonts \
-    go-task \
     gnome-shell-extension-pop-shell \
     gnome-tweaks \
     gstreamer1-plugin-openh264 \
@@ -88,11 +77,6 @@ if ! exists distrobox; then
     mozilla-openh264 \
     podman-compose \
     podman-docker
-
-  # if exists firefox; then
-  #   echo "Remove Firefox..."
-  #   rpm-ostree override remove firefox firefox-langpacks
-  # fi
 
   echo "Rebooting..."
   systemctl reboot

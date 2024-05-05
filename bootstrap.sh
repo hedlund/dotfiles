@@ -14,14 +14,13 @@ source ./functions
 ###############################################################################
 
 dotfiles=(
-  aliases bash_profile bash_prompt bashrc curlrc exports functions
-  gitconfig gitignore gvimrc hushlogin inputrc nanorc path screenrc wgetrc
+  aliases bash_profile bash_prompt bashrc curlrc exports functions gitconfig
+  gitignore gvimrc hushlogin inputrc justfile nanorc path screenrc wgetrc
 )
 for file in "${dotfiles[@]}"; do
   ln -sf "$CURRENT/$file" "$HOME/.$file"
 done;
 
-ln -sf "$CURRENT/justfile" "$HOME/justfile"
 ln -sf "$CURRENT/config/starship.toml" "$HOME/.config/starship.toml"
 
 ###############################################################################

@@ -67,16 +67,16 @@ fi
 
 if ! exists distrobox; then
   echo "Install OSTree layers..."
-  rpm-ostree install \
-    distrobox \
-    fira-code-fonts \
-    gnome-shell-extension-pop-shell \
-    gnome-tweaks \
-    gstreamer1-plugin-openh264 \
-    just \
-    mozilla-openh264 \
-    podman-compose \
-    podman-docker
+  rpm-ostree override remove noopenh264 \
+    --install openh264 \
+    --install mozilla-openh264 \
+    --install distrobox \
+    --install fira-code-fonts \
+    --install gnome-shell-extension-pop-shell \
+    --install gnome-tweaks \
+    --install just \
+    --install podman-compose \
+    --install podman-docker
 
   echo "Rebooting..."
   systemctl reboot

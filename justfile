@@ -33,13 +33,13 @@ configure-gnome:
   # Configure theme
   gsettings set org.gnome.desktop.background color-shading-type 'solid'
   gsettings set org.gnome.desktop.background picture-options 'zoom'
-  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/gnome/drool-l.svg'
-  gsettings set org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/gnome/drool-d.svg'
+  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/gnome/blobs-l.svg'
+  gsettings set org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/gnome/blobs-d.svg'
   gsettings set org.gnome.desktop.background primary-color '#86b6ef'
   gsettings set org.gnome.desktop.background secondary-color '#000000'
   gsettings set org.gnome.desktop.screensaver color-shading-type 'solid'
   gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
-  gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/gnome/drool-l.svg'
+  gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/gnome/blobs-l.svg'
   gsettings set org.gnome.desktop.screensaver primary-color '#86b6ef'
   gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
   

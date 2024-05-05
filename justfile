@@ -108,7 +108,7 @@ install-surface-linux:
 enable-surface-secureboot:
   echo "Remember the password you specify, you need to enter it after reboot..."
   sudo mokutil --import /usr/share/surface-secureboot/surface.cer
-  echo "Reboot now to finalize imprting certificate. Then re-enable Secure Boot..."
+  echo "Reboot now to finalize importing certificate. Then re-enable Secure Boot..."
 
 remove-surface-linux:
   #!/usr/bin/env bash
@@ -124,5 +124,13 @@ generate-ssh-key:
   ssh-add -t 10m "$HOME/.ssh/id_ed25519_sk"
 
 reset-ostree-overrides:
+  #!/usr/bin/env bash
   rpm-ostree uninstall --all
   rpm-ostree override reset --all
+  
+  # Also remove any custom repository config installed
+  source /etc/os-release
+  if [ -f "/etc/yum.repos.d/secureblue-bubblejail-fedora-${VERSION_ID}.repo" ]; then
+    echo "Delete bubblejail COPR repository..."
+    sudo rm "/etc/yum.repos.d/secureblue-bubblejail-fedora-${VERSION_ID}.repo"
+  fi

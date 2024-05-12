@@ -59,6 +59,9 @@ configure-gnome:
   dconf write "/org/gnome/terminal/legacy/profiles:/${default_profile}font" "'FiraCode Nerd Font Mono 12'"
   dconf write "/org/gnome/terminal/legacy/profiles:/${default_profile}use-system-font" "false"
 
+  # Configure Files
+  dconf write "/org/gtk/gtk4/settings/file-chooser/sort-directories-first" "true"
+
 install-gaming:
   #!/usr/bin/env bash
   flatpak install --user --noninteractive flathub page.kramo.Cartridges

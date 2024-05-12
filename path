@@ -18,3 +18,8 @@ if [ -z "${N_PREFIX}" ]; then
    export PATH="$N_PREFIX/bin:$PATH"
   fi
 fi
+
+# If the Playdate SDK is installed, export it's path
+if [ -d "${HOME}/Applications/PlaydateSDK" ]; then
+  export PLAYDATE_SDK_PATH="${HOME}/Applications/PlaydateSDK"
+fi

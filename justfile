@@ -108,6 +108,27 @@ install-surface-linux:
   echo "Reboot your PC, and disable Secure Boot..."
   echo "After reboot, run 'just enable-surface-secureboot'"
 
+install-syncthing:
+  #!/usr/bin/env bash
+  
+  # Create relevant folders
+  mkdir -p "${HOME}/.config/syncthing"
+  mkdir -p "${HOME}/.config/containers/systemd"
+  mkdir -p "${HOME}/.var/app/org.gnome.Shotwell/data"
+  
+  # Link config file
+  ln -sf "${HOME}/.dotfiles/config/syncthing.container" "${HOME}/.config/containers/systemd/syncthing.container"
+
+  # Start service if needed
+  if [ "$(systemctl --user is-enabled syncthing.service)" = "not-found" ]; then
+    echo "Starting syncthing service..."
+    systemctl --user daemon-reload
+    systemctl --user start syncthing.service
+  fi
+
+enable-podman-auto-update:
+  systemctl enable --user --now podman-auto-update.timer
+
 enable-surface-secureboot:
   echo "Remember the password you specify, you need to enter it after reboot..."
   sudo mokutil --import /usr/share/surface-secureboot/surface.cer

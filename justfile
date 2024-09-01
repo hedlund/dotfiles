@@ -126,6 +126,25 @@ install-syncthing:
     systemctl --user start syncthing.service
   fi
 
+install-playdate:
+  #!/usr/bin/env bash
+  PLAYDATE_DIR="$HOME/Applications/PlaydateSDK"
+  TEMP_DIR=`mktemp -d`
+  echo "Downloading latest Playdate SDK..."
+  curl -sL "https://download.panic.com/playdate_sdk/Linux/PlaydateSDK-latest.tar.gz" | tar -xz -C "$TEMP_DIR"
+  UNPACKED_FILES=($TEMP_DIR/*)
+  DOWNLOADED_DIR="${UNPACKED_FILES[0]}"
+  if [ -d "$PLAYDATE_DIR" ]; then
+    if cmp -s "$PLAYDATE_DIR/VERSION.txt" "$DOWNLOADED_DIR/VERSION.txt"; then
+      echo "Latest version already installed..."
+      rm -rf "$DOWNLOADED_DIR"
+      exit 0
+    fi
+    echo "Removing old version..."s
+    rm -rf "$PLAYDATE_DIR"
+  fi
+  mv "$DOWNLOADED_DIR" "$PLAYDATE_DIR"
+
 enable-podman-auto-update:
   systemctl enable --user --now podman-auto-update.timer
 

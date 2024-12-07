@@ -80,21 +80,13 @@ fi
 # CONFIGURE RPM-OSTREE
 #-------------------------------------------------------------------------------
 
-BUBBLEJAIL_REPO="secureblue-bubblejail-fedora-${FEDORA_VERSION}.repo"
-if [ ! -f "/etc/yum.repos.d/${BUBBLEJAIL_REPO}" ]; then
-  echo "Install bubblejail COPR repository..."
-  #curl -fsSL "https://copr.fedorainfracloud.org/coprs/secureblue/bubblejail/repo/fedora-${FEDORA_VERSION}/${BUBBLEJAIL_REPO}" | sudo tee "/etc/yum.repos.d/${BUBBLEJAIL_REPO}" >/dev/null
-fi
-
 if ! exists distrobox; then
   echo "Install OSTree layers..."
   rpm-ostree override remove noopenh264 \
     --install openh264 \
     --install mozilla-openh264 \
-    --install bubblejail \
     --install distrobox \
     --install fira-code-fonts \
-    --install gnome-shell-extension-pop-shell \
     --install gnome-tweaks \
     --install just \
     --install podman-compose \

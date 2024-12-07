@@ -14,16 +14,13 @@ install-flatpaks:
   flatpak install --user --noninteractive flathub com.spotify.Client
   flatpak install --user --noninteractive flathub com.visualstudio.code
   flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
-  flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/23.08
+  flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/24.08
   flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
   if ! $(flatpak info com.onepassword.OnePassword >/dev/null 2>&1); then
     flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref
   fi
   if $(flatpak info org.gnome.eog >/dev/null 2>&1); then
     flatpak uninstall --user --noninteractive org.gnome.eog
-  fi
-  if ! $(flatpak info org.gnome.Ptyxis.Devel >/dev/null 2>&1); then
-    flatpak install --user --noninteractive --from https://nightly.gnome.org/repo/appstream/org.gnome.Ptyxis.Devel.flatpakref
   fi
 
 configure-gnome:
@@ -45,6 +42,8 @@ configure-gnome:
   
   # Automatic timezone
   gsettings set org.gnome.desktop.datetime automatic-timezone true
+  gsettings set org.gnome.desktop.interface clock-format '24h'
+
 
   # Configure touchpad
   gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
@@ -54,13 +53,14 @@ configure-gnome:
   gsettings set org.gnome.desktop.a11y always-show-universal-access-status true
   gsettings set org.gnome.desktop.interface show-battery-percentage true
 
-  # Configure Gnome Terminal
-  default_profile=$(dconf list /org/gnome/terminal/legacy/profiles:/)
-  dconf write "/org/gnome/terminal/legacy/profiles:/${default_profile}font" "'FiraCode Nerd Font Mono 12'"
-  dconf write "/org/gnome/terminal/legacy/profiles:/${default_profile}use-system-font" "false"
+  # Configure Ptyxis Terminal
+  default_profile=$(gsettings get org.gnome.Ptyxis default-profile-uuid)
+  gsettings set org.gnome.Ptyxis font-name 'FiraCode Nerd Font Mono 12'
+  gsettings set org.gnome.Ptyxis use-system-font false
 
   # Configure Files
   dconf write "/org/gtk/gtk4/settings/file-chooser/sort-directories-first" "true"
+  dconf write "/org/gtk/settings/file-chooser/clock-format" "'24h'"
 
 install-gaming:
   #!/usr/bin/env bash

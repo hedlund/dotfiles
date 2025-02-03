@@ -77,6 +77,12 @@ if [ -z "$(flatpak remotes --user | grep flathub)" ]; then
 fi
 
 #-------------------------------------------------------------------------------
+# ENABLE PODMAN SOCKET
+#-------------------------------------------------------------------------------
+
+systemctl --user enable podman.socket
+
+#-------------------------------------------------------------------------------
 # CONFIGURE RPM-OSTREE
 #-------------------------------------------------------------------------------
 
@@ -90,7 +96,9 @@ if ! exists distrobox; then
     --install gnome-tweaks \
     --install just \
     --install podman-compose \
-    --install podman-docker
+    --install podman-docker \
+    --install chromium \
+    --install google-cloud-cli
 
   echo "Rebooting..."
   systemctl reboot

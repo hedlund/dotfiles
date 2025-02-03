@@ -14,9 +14,9 @@ export PATH=$PATH:$GOPATH/bin
 # Add n (if needed)
 if [ -z "${N_PREFIX}" ]; then
   export N_PREFIX="$HOME/.n"
-  if [ -d $N_PREFIX ]; then
-   export PATH="$N_PREFIX/bin:$PATH"
-  fi
+fi
+if [ -d $N_PREFIX ]; then
+  export PATH="$N_PREFIX/bin:$PATH"
 fi
 
 # If the Playdate SDK is installed, export it's path

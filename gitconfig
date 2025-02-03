@@ -213,6 +213,9 @@
 
 [user]
 	name = Henrik Hedlund
+	signingkey = /var/home/henrik/.ssh/id_ed25519_sk.pub
 
 [include]
 	path = ~/.gitconfig.local
+[gpg]
+	format = ssh

@@ -67,10 +67,13 @@ elif is_wsl; then
 elif is_linux; then
 
 	# Connect to rootless Docker daemon
-	export DOCKER_HOST=unix:///run/user/1000/docker.sock
+	export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
 
 	# Add Go to path
 	export PATH=$PATH:/usr/local/go/bin
+
+	# https://java.testcontainers.org/features/configuration/
+	export TESTCONTAINERS_RYUK_DISABLED=true
 
 fi
 

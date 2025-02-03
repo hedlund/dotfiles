@@ -72,7 +72,7 @@ install-gaming:
 
 install-nvidia-drivers:
   #!/usr/bin/env bash
-  rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia
+  rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia
   rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
   #systemctl reboot
 
@@ -165,6 +165,13 @@ remove-surface-linux:
 generate-ssh-key:
   ssh-keygen -t ed25519-sk -C "henrik@hedlund.im"
   ssh-add -t 10m "$HOME/.ssh/id_ed25519_sk"
+
+enable-chromium-wayland:
+  #!/usr/bin/env bash
+  if [ ! -f "${HOME}/.local/share/applications/chromium-browser.desktop" ]; then
+    cp /usr/share/applications/chromium-browser.desktop "${HOME}/.local/share/applications/chromium-browser.desktop"
+    #TODO sed the file...
+  fi
 
 reset-ostree-overrides:
   #!/usr/bin/env bash

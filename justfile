@@ -127,23 +127,60 @@ install-syncthing:
   fi
 
 install-playdate:
-  #!/usr/bin/env bash
-  PLAYDATE_DIR="$HOME/Applications/PlaydateSDK"
-  TEMP_DIR=`mktemp -d`
-  echo "Downloading latest Playdate SDK..."
-  curl -sL "https://download.panic.com/playdate_sdk/Linux/PlaydateSDK-latest.tar.gz" | tar -xz -C "$TEMP_DIR"
-  UNPACKED_FILES=($TEMP_DIR/*)
-  DOWNLOADED_DIR="${UNPACKED_FILES[0]}"
-  if [ -d "$PLAYDATE_DIR" ]; then
-    if cmp -s "$PLAYDATE_DIR/VERSION.txt" "$DOWNLOADED_DIR/VERSION.txt"; then
-      echo "Latest version already installed..."
-      rm -rf "$DOWNLOADED_DIR"
-      exit 0
-    fi
-    echo "Removing old version..."s
-    rm -rf "$PLAYDATE_DIR"
-  fi
-  mv "$DOWNLOADED_DIR" "$PLAYDATE_DIR"
+	#!/usr/bin/env bash
+	PLAYDATE_SDK_PATH="$HOME/Applications/PlaydateSDK"
+	TEMP_DIR=`mktemp -d`
+	echo "Downloading latest Playdate SDK..."
+	curl -sL "https://download.panic.com/playdate_sdk/Linux/PlaydateSDK-latest.tar.gz" | tar -xz -C "$TEMP_DIR"
+	UNPACKED_FILES=($TEMP_DIR/*)
+	DOWNLOADED_DIR="${UNPACKED_FILES[0]}"
+	if [ -d "$PLAYDATE_SDK_PATH" ]; then
+		if cmp -s "$PLAYDATE_SDK_PATH/VERSION.txt" "$DOWNLOADED_DIR/VERSION.txt"; then
+			echo "Latest version already installed..."
+			rm -rf "$DOWNLOADED_DIR"
+			exit 0
+		fi
+		echo "Removing old version..."s
+		rm -rf "$PLAYDATE_SDK_PATH"
+	fi
+	mv "$DOWNLOADED_DIR" "$PLAYDATE_SDK_PATH"
+	
+	if [ ! -f "/etc/udev/rules.d/50-playdate.rules" ]; then
+		echo "Install Playdate udev rule..."
+		sudo cp "$PLAYDATE_SDK_PATH/Resources/50-playdate.rules" /etc/udev/rules.d/
+		sudo udevadm control --reload-rules
+		sudo udevadm trigger
+	fi
+	
+	if [ ! -f "$HOME/.local/share/icons/date.play.simulator.svg" ]; then
+		echo "Installing Playdate icon..."
+		cp "$PLAYDATE_SDK_PATH/Resources/date.play.simulator.svg" "$HOME/.local/share/icons/date.play.simulator.svg"
+	fi
+	
+	if [ ! -f "$HOME/.local/share/applications/ubuntu-date.play.simulator.desktop" ]; then
+		echo "Installing Playdate desktop shortcut..."
+		cat <<-EOF > "$HOME/.local/share/applications/ubuntu-date.play.simulator.desktop"
+			[Desktop Entry]
+			Name=Playdate Simulator (on ubuntu)
+			Exec=/usr/bin/distrobox-enter  -n ubuntu  --   $PLAYDATE_SDK_PATH/Applications/PlaydateSDK/bin/PlaydateSimulator  %u 
+			Icon=$HOME/.local/share/icons/date.play.simulator.svg
+			Terminal=false
+			Type=Application
+			MimeType=application/x-playdate-game;x-scheme-handler/playdate-simulator
+			StartupWMClass=PlaydateSimulator
+			Categories=Development;
+			StartupNotify=true
+		EOF
+	fi
+	
+	if [ ! -f "$HOME/.local/share/mime/application/x-playdate.xml" ]; then
+		echo "Creating mime info..."
+		xdg-mime install --mode user "$PLAYDATE_SDK_PATH/Resources/playdate-types.xml"
+		xdg-icon-resource install --mode user --context mimetypes --size 16 "$PLAYDATE_SDK_PATH/Resources/file-icon/data-16.png" application-x-playdate
+		xdg-icon-resource install --mode user --context mimetypes --size 32 "$PLAYDATE_SDK_PATH/Resources/file-icon/data-32.png" application-x-playdate
+		xdg-icon-resource install --mode user --context mimetypes --size 48 "$PLAYDATE_SDK_PATH/Resources/file-icon/data-48.png" application-x-playdate
+		xdg-icon-resource install --mode user --context mimetypes --size 512 "$PLAYDATE_SDK_PATH/Resources/file-icon/data-512.png" application-x-playdate
+	fi
 
 enable-podman-auto-update:
   systemctl enable --user --now podman-auto-update.timer
@@ -184,3 +221,7 @@ reset-ostree-overrides:
     echo "Delete bubblejail COPR repository..."
     sudo rm "/etc/yum.repos.d/secureblue-bubblejail-fedora-${VERSION_ID}.repo"
   fi
+  
+upgrade-silverblue:
+  # sudo ostree admin pin 0
+  rpm-ostree rebase fedora:fedora/41/x86_64/silverblue

@@ -14,7 +14,7 @@ source ./functions
 ###############################################################################
 
 dotfiles=(
-  aliases bash_profile bash_prompt bashrc curlrc exports functions gitconfig
+  aliases bash_profile bash_prompt bashrc bin curlrc exports functions gitconfig
   gitignore gvimrc hushlogin inputrc justfile nanorc path screenrc wgetrc
 )
 for file in "${dotfiles[@]}"; do

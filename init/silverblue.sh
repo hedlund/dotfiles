@@ -89,16 +89,13 @@ systemctl --user enable podman.socket
 if ! exists distrobox; then
   echo "Install OSTree layers..."
   rpm-ostree override remove noopenh264 \
-    --install openh264 \
-    --install mozilla-openh264 \
     --install distrobox \
     --install fira-code-fonts \
     --install gnome-tweaks \
-    --install just \
+    --install mozilla-openh264 \
+    --install openh264 \
     --install podman-compose \
-    --install podman-docker \
-    --install chromium \
-    --install google-cloud-cli
+    --install podman-docker
 
   echo "Rebooting..."
   systemctl reboot

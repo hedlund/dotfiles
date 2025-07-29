@@ -18,7 +18,16 @@ function task-install-flatpaks() {
   flatpak install --user --noninteractive flathub com.visualstudio.code
   flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
   flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/24.08
+
+  # Enable Go SDK extension for VS Code
   flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
+
+  # Enable access to /tmp for VS Code in order for devcontainers to work
+  flatpak override --user --filesystem=/tmp com.visualstudio.code
+
+  # Use Wayland for VS Code
+  flatpak override --user --socket=wayland com.visualstudio.code
+  flatpak override --user --env=ELECTRON_OZONE_PLATFORM_HINT=auto com.visualstudio.code
 
   if ! $(flatpak info com.onepassword.OnePassword >/dev/null 2>&1); then
     flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref

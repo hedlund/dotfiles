@@ -331,6 +331,10 @@ function run_task() {
     fi
 }
 
+if [[ -n "${CONTAINER_ID:-}" ]]; then
+  printf "⚠️ Running in a container, some tasks might not work as intended...\n\n"
+fi
+
 # Main execution
 if [ $# -eq 0 ]; then
     help

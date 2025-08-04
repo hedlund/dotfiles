@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source "${CURRENT}/../functions"
+
 #-------------------------------------------------------------------------------
 # Install flatpaks
 #-------------------------------------------------------------------------------
@@ -272,6 +275,41 @@ function task-enable-chromium-wayland() {
     cp /usr/share/applications/chromium-browser.desktop "${HOME}/.local/share/applications/chromium-browser.desktop"
     #TODO sed the file...
   fi
+}
+
+#-------------------------------------------------------------------------------
+# Setup LUKS with Yubikey
+#-------------------------------------------------------------------------------
+
+function task-setup-luks-yubikey() {
+  local device=$(lsblk --fs --output=name,fstype --json |jq -r '.. | select(.fstype? == "crypto_LUKS") | .name')
+  if [ -z "$device" ]; then
+    echo "No LUKS device found, exiting..."
+    return 1
+  fi
+  device="/dev/$device"
+
+  if ! confirm "Setting up LUKS device $device. Do you want to continue?"; then
+    echo "Aborting LUKS setup..."
+    return 1
+  fi
+
+  prompt "Please insert your Yubikey and press ENTER to continue..."
+  sudo systemd-cryptenroll "$device" --fido2-device=auto --fido2-with-client-pin=yes
+
+  echo
+  echo "Yubikey has been enrolled for LUKS device $device."
+  if ! confirm "Do you want to create a recover key?"; then
+    echo "Skipping recovery key creation..."
+    return 0
+  fi
+
+  sudo systemd-cryptenroll "$device" --recovery-key
+  if ! confirm "Do you want to remove password?"; then
+    echo "Skipping password removal..."
+    return 0
+  fi
+  sudo systemd-cryptenroll "$device" --wipe-slot=password
 }
 
 #-------------------------------------------------------------------------------

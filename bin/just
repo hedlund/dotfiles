@@ -278,10 +278,10 @@ function task-enable-chromium-wayland() {
 }
 
 #-------------------------------------------------------------------------------
-# Setup LUKS with Yubikey
+# Configure LUKS
 #-------------------------------------------------------------------------------
 
-function task-setup-luks-yubikey() {
+function task-configure-luks() {
   local device=$(lsblk --fs --output=name,fstype --json |jq -r '.. | select(.fstype? == "crypto_LUKS") | .name')
   if [ -z "$device" ]; then
     echo "No LUKS device found, exiting..."
@@ -294,22 +294,19 @@ function task-setup-luks-yubikey() {
     return 1
   fi
 
-  prompt "Please insert your Yubikey and press ENTER to continue..."
-  sudo systemd-cryptenroll "$device" --fido2-device=auto --fido2-with-client-pin=yes
-
-  echo
-  echo "Yubikey has been enrolled for LUKS device $device."
-  if ! confirm "Do you want to create a recover key?"; then
-    echo "Skipping recovery key creation..."
-    return 0
+  if confirm "Do you want to enroll a Yubikey?"; then
+    prompt "Please insert your Yubikey and press ENTER to continue..."
+    sudo systemd-cryptenroll "$device" --fido2-device=auto --fido2-with-client-pin=yes
+    echo
   fi
 
-  sudo systemd-cryptenroll "$device" --recovery-key
-  if ! confirm "Do you want to remove password?"; then
-    echo "Skipping password removal..."
-    return 0
+  if confirm "Do you want to create a recovery key?"; then
+    sudo systemd-cryptenroll "$device" --recovery-key
   fi
-  sudo systemd-cryptenroll "$device" --wipe-slot=password
+
+  if confirm "Do you want to remove passwords?"; then
+    sudo systemd-cryptenroll "$device" --wipe-slot=password
+  fi
 }
 
 #-------------------------------------------------------------------------------

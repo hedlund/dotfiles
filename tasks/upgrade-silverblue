@@ -1,17 +1,16 @@
 #!/bin/bash
+set -euo pipefail
 
-function task-upgrade-silverblue() {
-  source /etc/os-release
-  if [ "$ID" != "fedora" ] || [ "$VARIANT_ID" != "silverblue" ]; then
-    echo "Not running on Fedora Silverblue... Aborting!"
-    exit 1
-  fi
+source /etc/os-release
+if [ "$ID" != "fedora" ] || [ "$VARIANT_ID" != "silverblue" ]; then
+  echo "Not running on Fedora Silverblue... Aborting!"
+  exit 1
+fi
 
-  # Get the current version of Fedora Silverblue and increment it
-  local fedora_version="${VERSION_ID%%.*}"
-  ((fedora_version++))
+# Get the current version of Fedora Silverblue and increment it
+local fedora_version="${VERSION_ID%%.*}"
+((fedora_version++))
 
-  echo "Rebasing to Fedora Silverblue ${fedora_version}..."
-  sudo ostree admin pin 0
-  rpm-ostree rebase fedora:fedora/${fedora_version}/x86_64/silverblue
-}
+echo "Rebasing to Fedora Silverblue ${fedora_version}..."
+sudo ostree admin pin 0
+rpm-ostree rebase fedora:fedora/${fedora_version}/x86_64/silverblue

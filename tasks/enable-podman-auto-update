@@ -1,5 +1,4 @@
 #!/bin/bash
+set -euo pipefail
 
-function task-enable-podman-auto-update() {
-  systemctl enable --user --now podman-auto-update.timer
-}
+systemctl enable --user --now podman-auto-update.timer

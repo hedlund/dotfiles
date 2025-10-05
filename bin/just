@@ -30,17 +30,8 @@ function run_task() {
   shift
 
   if [ -f "$task_file" ]; then
-    # Source the task file and run the task function
-    source "$task_file"
-
-    # Convert hyphens to underscores for function names
-    local func_name="task_${task_name//-/_}"
-    if type -t "$func_name" &>/dev/null; then
-      "$func_name" "$@"
-    else
-      echo "Function '$func_name' not found in task file '$task_name'"
-      exit 1
-    fi
+    # Execute the task file directly as a script
+    exec bash "$task_file" "$@"
   else
     printf "❌ Task '$task_name' not found!\n\n"
     help

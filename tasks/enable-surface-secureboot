@@ -1,7 +1,6 @@
 #!/bin/bash
+set -euo pipefail
 
-function task-enable-surface-secureboot() {
-  echo "Remember the password you specify, you need to enter it after reboot..."
-  sudo mokutil --import /usr/share/surface-secureboot/surface.cer
-  echo "Reboot now to finalize importing certificate. Then re-enable Secure Boot..."
-}
+echo "Remember the password you specify, you need to enter it after reboot..."
+sudo mokutil --import /usr/share/surface-secureboot/surface.cer
+echo "Reboot now to finalize importing certificate. Then re-enable Secure Boot..."

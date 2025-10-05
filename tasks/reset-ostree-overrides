@@ -1,13 +1,12 @@
 #!/bin/bash
+set -euo pipefail
 
-function task-reset-ostree-overrides() {
-  rpm-ostree uninstall --all
-  rpm-ostree override reset --all
-  
-  # Also remove any custom repository config installed
-  source /etc/os-release
-  if [ -f "/etc/yum.repos.d/secureblue-bubblejail-fedora-${VERSION_ID}.repo" ]; then
-    echo "Delete bubblejail COPR repository..."
-    sudo rm "/etc/yum.repos.d/secureblue-bubblejail-fedora-${VERSION_ID}.repo"
-  fi
-}
+rpm-ostree uninstall --all
+rpm-ostree override reset --all
+
+# Also remove any custom repository config installed
+source /etc/os-release
+if [ -f "/etc/yum.repos.d/secureblue-bubblejail-fedora-${VERSION_ID}.repo" ]; then
+  echo "Delete bubblejail COPR repository..."
+  sudo rm "/etc/yum.repos.d/secureblue-bubblejail-fedora-${VERSION_ID}.repo"
+fi

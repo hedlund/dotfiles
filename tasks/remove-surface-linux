@@ -1,10 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 
-function task-remove-surface-linux() {
-  rpm-ostree remove kernel-surface surface-secureboot iptsd libwacom-surface libwacom-surface-data \
-    --install kernel-core \
-    --install kernel-modules \
-    --install kernel-modules-extra \
-    --install libwacom \
-    --install libwacom-data
-}
+rpm-ostree remove kernel-surface surface-secureboot iptsd libwacom-surface libwacom-surface-data \
+  --install kernel-core \
+  --install kernel-modules \
+  --install kernel-modules-extra \
+  --install libwacom \
+  --install libwacom-data

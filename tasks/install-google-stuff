@@ -1,5 +1,4 @@
 #!/bin/bash
+set -euo pipefail
 
-function task-install-google-stuff() {
-  rpm-ostree install chromium google-cloud-cli
-}
+rpm-ostree install chromium google-cloud-cli

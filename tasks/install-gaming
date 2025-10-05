@@ -1,9 +1,8 @@
 #!/bin/bash
+set -euo pipefail
 
-function task_install_gaming() {
-  flatpak install --user --noninteractive flathub page.kramo.Cartridges
-  flatpak install --user --noninteractive flathub org.godotengine.Godot
-  flatpak install --user --noninteractive flathub com.heroicgameslauncher.hgl
-  flatpak install --user --noninteractive flathub io.itch.itch
-  flatpak install --user --noninteractive flathub com.valvesoftware.Steam
-}
+flatpak install --user --noninteractive flathub page.kramo.Cartridges
+flatpak install --user --noninteractive flathub org.godotengine.Godot
+flatpak install --user --noninteractive flathub com.heroicgameslauncher.hgl
+flatpak install --user --noninteractive flathub io.itch.itch
+flatpak install --user --noninteractive flathub com.valvesoftware.Steam

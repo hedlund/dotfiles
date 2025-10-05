@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function task-enable-chromium-wayland() {
+  if [ ! -f "${HOME}/.local/share/applications/chromium-browser.desktop" ]; then
+    cp /usr/share/applications/chromium-browser.desktop "${HOME}/.local/share/applications/chromium-browser.desktop"
+    #TODO sed the file...
+  fi
+}

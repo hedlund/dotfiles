@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function task-install-surface-linux() {
+  if [ ! -f /etc/yum.repos.d/linux-surface.repo ]; then
+    echo "Installing Surface linux repository..."
+    sudo wget -O /etc/yum.repos.d/linux-surface.repo https://pkg.surfacelinux.com/fedora/linux-surface.repo
+  fi
+  echo "Create temporary directory..."
+  TEMP_DIR=`mktemp -d`
+  cd "$TEMP_DIR"
+
+  echo "Download and install kernel dummy package..."
+  curl -O -L https://github.com/linux-surface/linux-surface/releases/download/silverblue-20201215-1/kernel-20201215-1.x86_64.rpm
+  rpm-ostree override replace ./*.rpm \
+    --remove kernel-core \
+    --remove kernel-modules \
+    --remove kernel-modules-extra \
+    --remove libwacom \
+    --remove libwacom-data \
+    --install kernel-surface \
+    --install iptsd \
+    --install libwacom-surface \
+    --install libwacom-surface-data
+
+  echo "Cleanup temporary directory..."
+  rm -rf "$TEMP_DIR"
+
+  echo "Installing Surface Secureboot..."
+  rpm-ostree install surface-secureboot
+  
+  echo "Reboot your PC, and disable Secure Boot..."
+  echo "After reboot, run 'just enable-surface-secureboot'"
+}

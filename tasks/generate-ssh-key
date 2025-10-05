@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function task_generate_ssh_key() {
+  ssh-keygen -t ed25519-sk -C "henrik@hedlund.im"
+  ssh-add -t 10m "$HOME/.ssh/id_ed25519_sk"
+}

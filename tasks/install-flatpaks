@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function task_install_flatpaks() {
+  flatpak install --user --noninteractive flathub org.gnome.Boxes
+  flatpak install --user --noninteractive flathub ca.desrt.dconf-editor
+  flatpak install --user --noninteractive flathub com.mattjakeman.ExtensionManager
+  flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
+  flatpak install --user --noninteractive flathub io.github.giantpinkrobots.flatsweep
+  flatpak install --user --noninteractive flathub org.gustavoperedo.FontDownloader
+  flatpak install --user --noninteractive flathub io.podman_desktop.PodmanDesktop
+  flatpak install --user --noninteractive flathub net.nokyan.Resources
+  flatpak install --user --noninteractive flathub com.spotify.Client
+  flatpak install --user --noninteractive flathub com.visualstudio.code
+  flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
+  flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/24.08
+
+  # Enable Go SDK extension for VS Code
+  flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
+
+  # Enable access to /tmp for VS Code in order for devcontainers to work
+  flatpak override --user --filesystem=/tmp com.visualstudio.code
+
+  # Use Wayland for VS Code
+  flatpak override --user --socket=wayland com.visualstudio.code
+  flatpak override --user --env=ELECTRON_OZONE_PLATFORM_HINT=auto com.visualstudio.code
+
+  if ! $(flatpak info com.onepassword.OnePassword >/dev/null 2>&1); then
+    flatpak install --user --noninteractive https://downloads.1password.com/linux/flatpak/1Password.flatpakref
+  fi
+
+  if $(flatpak info org.gnome.eog >/dev/null 2>&1); then
+    flatpak uninstall --user --noninteractive org.gnome.eog
+  fi
+}

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function task-install-nvidia-drivers() {
+  rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia
+  rpm-ostree kargs --append=rd.driver.blacklist=nova_core --append=modprobe.blacklist=nova_core --append=nvidia-drm.modeset=1
+  #rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
+  #systemctl reboot
+}

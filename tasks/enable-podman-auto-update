@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function task-enable-podman-auto-update() {
+  systemctl enable --user --now podman-auto-update.timer
+}

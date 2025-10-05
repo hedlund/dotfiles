@@ -1,0 +1,29 @@
+#!/bin/bash
+
+function task-configure-luks() {
+  local device=$(lsblk --fs --output=name,fstype --json |jq -r '.. | select(.fstype? == "crypto_LUKS") | .name')
+  if [ -z "$device" ]; then
+    echo "No LUKS device found, exiting..."
+    return 1
+  fi
+  device="/dev/$device"
+
+  if ! confirm "Setting up LUKS device $device. Do you want to continue?"; then
+    echo "Aborting LUKS setup..."
+    return 1
+  fi
+
+  if confirm "Do you want to enroll a Yubikey?"; then
+    prompt "Please insert your Yubikey and press ENTER to continue..."
+    sudo systemd-cryptenroll "$device" --fido2-device=auto --fido2-with-client-pin=yes
+    echo
+  fi
+
+  if confirm "Do you want to create a recovery key?"; then
+    sudo systemd-cryptenroll "$device" --recovery-key
+  fi
+
+  if confirm "Do you want to remove passwords?"; then
+    sudo systemd-cryptenroll "$device" --wipe-slot=password
+  fi
+}

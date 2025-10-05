@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function task-install-google-stuff() {
+  rpm-ostree install chromium google-cloud-cli
+}

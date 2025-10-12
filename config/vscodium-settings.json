@@ -1,0 +1,78 @@
+{
+  "workbench.colorTheme": "Dracula Theme",
+  "breadcrumbs.enabled": true,
+  "editor.fontFamily": "'Fira Code', 'FiraCode NF', Consolas, 'Droid Sans Mono', monospace",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "explorer.confirmDragAndDrop": false,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
+  "go.toolsManagement.autoUpdate": true,
+  "redhat.telemetry.enabled": false,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "explorer.confirmDelete": false,
+  "dev.containers.dockerPath": "/var/home/henrik/.local/bin/podman-host",
+  "diffEditor.diffAlgorithm": "advanced",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/usr/bin/flatpak-spawn",
+      "args": [
+        "--host",
+        "--env=TERM=xterm-256color",
+        "distrobox",
+        "enter",
+        "ubuntu"
+      ],
+      "icon": "terminal-bash",
+      "overrideName": true
+    }
+  },
+  "terminal.integrated.automationProfile.linux": {
+    "path": "/usr/bin/flatpak-spawn",
+    "args": [
+      "--host",
+      "--env=TERM=xterm-256color",
+      "distrobox",
+      "enter",
+      "ubuntu",
+      "--",
+      "bash",
+      "-l"
+    ]
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "window.restoreWindows": "none",
+  "vsix.sources": {
+    "opn": {
+      "type": "marketplace",
+      "serviceUrl": "https://open-vsx.org/vscode/gallery"
+    }
+  },
+  "vsix.extensions": [
+    "opn:adamhartford.vscode-base64",
+    "opn:dracula-theme.theme-dracula",
+    "opn:golang.go",
+    "opn:hashicorp.terraform",
+    "opn:redhat.vscode-yaml",
+    "opn:redhat.vscode-xml",
+    "opn:sumneko.lua"
+  ]
+}

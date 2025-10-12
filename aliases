@@ -123,3 +123,7 @@ fi
 
 # Terraform stüff
 alias tf="terraform"
+
+# VS Code and VSCodium from Flatpak
+alias code="flatpak run com.visualstudio.code"
+alias codium="flatpak run com.vscodium.codium"

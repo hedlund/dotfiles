@@ -6,19 +6,27 @@ flatpak install --user --noninteractive flathub ca.desrt.dconf-editor
 flatpak install --user --noninteractive flathub com.mattjakeman.ExtensionManager
 flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
 flatpak install --user --noninteractive flathub io.github.giantpinkrobots.flatsweep
-flatpak install --user --noninteractive flathub org.gustavoperedo.FontDownloader
+flatpak install --user --noninteractive flathub be.alexandervanhee.gradia
+flatpak install --user --noninteractive flathub com.github.PintaProject.Pinta
 flatpak install --user --noninteractive flathub io.podman_desktop.PodmanDesktop
 flatpak install --user --noninteractive flathub net.nokyan.Resources
 flatpak install --user --noninteractive flathub com.spotify.Client
 flatpak install --user --noninteractive flathub com.visualstudio.code
+flatpak install --user --noninteractive com.vscodium.codium
 flatpak install --user --noninteractive flathub io.github.flattool.Warehouse
+flatpak install --user --noninteractive flathub app.zen_browser.zen
 flatpak install --user --noninteractive flathub runtime/org.freedesktop.Sdk.Extension.golang/x86_64/24.08
 
 # Enable Go SDK extension for VS Code
 flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.visualstudio.code
+flatpak override --user --env=FLATPAK_ENABLE_SDK_EXT=golang com.vscodium.codium
 
 # Enable access to /tmp for VS Code in order for devcontainers to work
 flatpak override --user --filesystem=/tmp com.visualstudio.code
+flatpak override --user --filesystem=/tmp com.vscodium.codium
+
+# Install the VSIX manager extension for VSCodium
+flatpak run com.vscodium.codium --install-extension zokugun.vsix-manager
 
 # Use Wayland for VS Code
 flatpak override --user --socket=wayland com.visualstudio.code

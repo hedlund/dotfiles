@@ -72,6 +72,16 @@ if [ ! -L "$LOCAL_FONTS" ]; then
 fi
 
 ###############################################################################
+# VS Codium                                                                   #
+###############################################################################
+
+VSCODIUM_CONFIG_PATH="$HOME/.var/app/com.vscodium.codium/config/VSCodium/User/"
+if [ ! -L "$VSCODIUM_CONFIG_PATH/settings.json" ]; then
+  mkdir -p "$VSCODIUM_CONFIG_PATH"
+  ln -sf "$CURRENT/config/vscodium-settings.json" "$VSCODIUM_CONFIG_PATH/settings.json"
+fi
+
+###############################################################################
 # Platform specific config                                                    #
 ###############################################################################
 

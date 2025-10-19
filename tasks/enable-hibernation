@@ -1,0 +1,93 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "${SCRIPT_DIR}/../functions"
+
+# Based on the following sources:
+#    https://fedoramagazine.org/update-on-hibernation-in-fedora-workstation/
+#    https://universal-blue.discourse.group/t/guide-set-up-suspend-then-hibernate/7193
+#    https://discussion.fedoraproject.org/t/setup-hibernation-on-fedora-atomic-desktops/121534/3
+#    https://xoid.net/2024/08/03/linux-laptop-hibernate.html
+
+SWAP_DIR="/var/swap"
+if [ -d "${SWAP_DIR}" ]; then
+  echo "Directory detected in ${SWAP_DIR}. Configuring hibernation might break things."
+  if ! confirm "Do you want to continue enabling hibernation?"; then
+    echo "Aborting hibernation setup..."
+    exit 1
+  fi
+fi
+
+# Get total physical and swap memory in GB
+MEM_GB=$(awk '/MemTotal/ {printf "%.0f", $2/1024/1024}' /proc/meminfo)
+SWAP_GB=$(awk '/SwapTotal/ {printf "%.f", $2/1024/1024}' /proc/meminfo)
+
+# Round the physical memory up to the nearest even number
+if (( $MEM_GB % 2 != 0 )); then
+  MEM_GB=$((MEM_GB + 1))
+fi
+
+HIBERNATE_GB=$((MEM_GB + SWAP_GB))
+
+echo "Memory discovered:"
+echo "  Physical Memory: ${MEM_GB} GB"
+echo "  Swap Memory: ${SWAP_GB} GB"
+echo "Hibernation swap file will be: ${HIBERNATE_GB} GB"
+echo ""
+
+if ! confirm "Do you want to continue to enable hibernation?"; then
+  echo "Aborting hibernation setup..."
+  exit 1
+fi
+
+SWAP_FILE="/${SWAP_DIR}/swapfile"
+echo "Creating btrfs subvolume for swap at ${SWAP_DIR}..."
+sudo btrfs subvolume create "${SWAP_DIR}"
+sudo chattr +C "${SWAP_DIR}"
+sudo restorecon "${SWAP_DIR}"
+sudo btrfs filesystem mkswapfile --size "${HIBERNATE_GB}g" --uuid clear "${SWAP_FILE}"
+
+# Add the kernel parameters for the swap file.
+# Does not seem necessary...
+# SWAP_FILE_UUID=$(sudo findmnt -no UUID -T "${SWAP_FILE}")
+# SWAP_FILE_OFFSET=$(sudo btrfs inspect-internal map-swapfile -r "${SWAP_FILE}")
+# sudo grubby --args="resume=UUID=${SWAP_FILE_UUID} resume_offset=${SWAP_FILE_OFFSET}" --update-kernel=ALL
+# rpm-ostree kargs --append=...
+
+# Add swapfile to fstab, but set priority as low as possible so it only
+# gets used if zram (pri=100) can't be
+sudo bash -c "echo ${SWAP_FILE} none swap defaults,pri=0 0 0 >>/etc/fstab"
+
+# Add SELinux labeling for swapfile
+sudo semanage fcontext -a -t swapfile_t '/var/swap(/.*)?'
+sudo restorecon -RF /var/swap
+
+# At this point, the guides suggest modifying the SELinux policy to allow
+# hibernation, but on my machine this seems to be allowed by default.
+
+# Configure Gnome to do nothing when inactive...
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+
+# ...instead configure systemd to do suspend-then-hibernate when either the lid
+# is closed or the system is idle for a while.
+sudo tee /etc/systemd/logind.conf > /dev/null <<EOF
+[Login]
+HandleLidSwitch=suspend-then-hibernate
+LidSwitchIgnoreInhibited=yes
+# How many seconds to wait after lid close to initiate HandleLidSwitch event
+HoldoffTimeoutSec=20s
+
+IdleAction=suspend-then-hibernate
+# How many seconds to wait after idle to initiate IdleAction
+IdleActionSec=30s
+EOF
+
+sudo tee /etc/systemd/sleep.conf > /dev/null <<EOF
+[Sleep]
+AllowHibernation=yes
+AllowSuspendThenHibernate=yes
+HibernateMode=shutdown
+HibernateDelaySec=300s
+EOF

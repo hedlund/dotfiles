@@ -60,8 +60,8 @@ sudo btrfs filesystem mkswapfile --size "${HIBERNATE_GB}g" --uuid clear "${SWAP_
 sudo bash -c "echo ${SWAP_FILE} none swap defaults,pri=0 0 0 >>/etc/fstab"
 
 # Add SELinux labeling for swapfile
-sudo semanage fcontext -a -t swapfile_t '/var/swap(/.*)?'
-sudo restorecon -RF /var/swap
+sudo semanage fcontext -a -t swapfile_t "${SWAP_DIR}(/.*)?"
+sudo restorecon -RF "${SWAP_DIR}"
 
 # At this point, the guides suggest modifying the SELinux policy to allow
 # hibernation, but on my machine this seems to be allowed by default.
@@ -88,6 +88,7 @@ sudo tee /etc/systemd/sleep.conf > /dev/null <<EOF
 [Sleep]
 AllowHibernation=yes
 AllowSuspendThenHibernate=yes
+HibernateOnACPower=no
 HibernateMode=shutdown
-HibernateDelaySec=300s
+HibernateDelaySec=900s
 EOF

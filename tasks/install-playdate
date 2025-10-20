@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "${SCRIPT_DIR}/../functions"
+
 PLAYDATE_SDK_PATH="$HOME/Applications/PlaydateSDK"
 TEMP_DIR=`mktemp -d`
 echo "Downloading latest Playdate SDK..."
@@ -35,7 +38,7 @@ if [ ! -f "$HOME/.local/share/applications/ubuntu-date.play.simulator.desktop" ]
   cat <<-EOF > "$HOME/.local/share/applications/ubuntu-date.play.simulator.desktop"
     [Desktop Entry]
     Name=Playdate Simulator (on ubuntu)
-    Exec=/usr/bin/distrobox-enter  -n ubuntu  --   $PLAYDATE_SDK_PATH/Applications/PlaydateSDK/bin/PlaydateSimulator  %u 
+    Exec=/usr/bin/distrobox-enter  -n ubuntu  --   $PLAYDATE_SDK_PATH/bin/PlaydateSimulator  %u 
     Icon=$HOME/.local/share/icons/date.play.simulator.svg
     Terminal=false
     Type=Application
@@ -53,4 +56,9 @@ if [ ! -f "$HOME/.local/share/mime/application/x-playdate.xml" ]; then
   xdg-icon-resource install --mode user --context mimetypes --size 32 "$PLAYDATE_SDK_PATH/Resources/file-icon/data-32.png" application-x-playdate
   xdg-icon-resource install --mode user --context mimetypes --size 48 "$PLAYDATE_SDK_PATH/Resources/file-icon/data-48.png" application-x-playdate
   xdg-icon-resource install --mode user --context mimetypes --size 512 "$PLAYDATE_SDK_PATH/Resources/file-icon/data-512.png" application-x-playdate
+fi
+
+if ! exists toybox; then
+  echo "Installing toybox..."
+  pipx install toyboxpy
 fi

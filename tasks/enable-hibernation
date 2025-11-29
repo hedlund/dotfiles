@@ -63,8 +63,19 @@ sudo bash -c "echo ${SWAP_FILE} none swap defaults,pri=0 0 0 >>/etc/fstab"
 sudo semanage fcontext -a -t swapfile_t "${SWAP_DIR}(/.*)?"
 sudo restorecon -RF "${SWAP_DIR}"
 
-# At this point, the guides suggest modifying the SELinux policy to allow
-# hibernation, but on my machine this seems to be allowed by default.
+# Modifying the SELinux policy to allow hibernation. The policy should *just* look something like:
+#   #============= systemd_logind_t ==============
+#   allow systemd_logind_t swapfile_t:dir search;
+# If there is anything else, you might want to edit the file before applying.
+pushd /tmp
+sudo audit2allow -b -M systemd_hibernate
+echo "----[SELinux Policy]-----------------------------------------------"
+cat systemd_hibernate.te
+echo "-------------------------------------------------------------------"
+if confirm "Do you want to apply SELinux policy?"; then
+  sudo semodule -i systemd_hibernate.pp
+fi
+popd
 
 # Configure Gnome to do nothing when inactive...
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'

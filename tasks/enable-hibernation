@@ -41,7 +41,7 @@ if ! confirm "Do you want to continue to enable hibernation?"; then
   exit 1
 fi
 
-SWAP_FILE="/${SWAP_DIR}/swapfile"
+SWAP_FILE="${SWAP_DIR}/swapfile"
 echo "Creating btrfs subvolume for swap at ${SWAP_DIR}..."
 sudo btrfs subvolume create "${SWAP_DIR}"
 sudo chattr +C "${SWAP_DIR}"

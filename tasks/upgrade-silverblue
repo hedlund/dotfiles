@@ -8,7 +8,7 @@ if [ "$ID" != "fedora" ] || [ "$VARIANT_ID" != "silverblue" ]; then
 fi
 
 # Get the current version of Fedora Silverblue and increment it
-local fedora_version="${VERSION_ID%%.*}"
+fedora_version="${VERSION_ID%%.*}"
 ((fedora_version++))
 
 echo "Rebasing to Fedora Silverblue ${fedora_version}..."
